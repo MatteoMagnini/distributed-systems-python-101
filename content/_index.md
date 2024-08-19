@@ -21,9 +21,9 @@ aliases = [
 
 **email:** {{<gc-address>}}
 
-**tutor:** {{mm}}, PhD student
+**tutor:** {{<mm>}}, PhD student
 
-**email:** {{mm-address}}
+**email:** {{<mm-address>}}
 
 <!-- **office hours** dynamic, email the teacher for an appointment -->
 

@@ -1,5 +1,5 @@
 # {{<course_name>}}
-### **(for Intelligent Distributed Systems)**
+### **(for Distributed Systems)**
 
 ## {{<academic_year>}}
 
