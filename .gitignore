@@ -1,8 +1,8 @@
 .idea/
 public/
 build/
+!content/build/
 _gen/
 *.pdf
 *.hprof
 *build.lock
-content/_index.md
