@@ -8,12 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reset.css">
 <link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reveal.css">
   <link rel="stylesheet" href="/distributed-systems-python-101/css/custom-theme.min.c0f7878dc8d1bf72f682bf675cb3aee36f75a07caeda734f3608c1221c238ecd.css" id="theme"><link rel="stylesheet" href="/distributed-systems-python-101/highlight-js/github.min.css">
-<link rel="stylesheet" href="https://gitcdn.link/repo/DanySK/css-blur-animation/master/blur.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script src="https://MatteoMagnini.github.io/distributed-systems-python-101//plantuml.js"></script>
 
   </head>
   <body>
@@ -23,6 +24,18 @@
   
 
     <section><h1 id="preliminary-notions-for-software-development">Preliminary notions for Software Development</h1>
+<p>&lt;br&gt;
+&lt;h2 id="hahahugoshortcode1s0hbhb"&gt;Python crash course&lt;/h2&gt;
+&lt;h3 id="for-distributed-systems"&gt;&lt;strong&gt;(for Distributed Systems)&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id="module-2"&gt;Module 2&lt;/h3&gt;
+&lt;h4 id="hahahugoshortcode1s1hbhb"&gt;A.Y. 2020/2021&lt;/h4&gt;
+&lt;h5 id="hahahugoshortcode1s2hbhb"&gt;&lt;a href="mailto:giovanni.ciatto@unibo.it"&gt;Giovanni Ciatto&lt;/a&gt;&lt;/h5&gt;
+&lt;h5 id="hahahugoshortcode1s3hbhb"&gt;&lt;a href="mailto:matteo.magnini@unibo.it"&gt;Matteo Magnini&lt;/a&gt;&lt;/h5&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;p&gt;Compiled on: 2024-08-19
+&amp;mdash; &lt;a href="?print-pdf&amp;amp;pdfSeparateFragments=false"&gt;&lt;i class="fa fa-print" aria-hidden="true"&gt;&lt;/i&gt; printable version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=".."&gt;&lt;i class="fa fa-undo" aria-hidden="true"&gt;&lt;/i&gt; back&lt;/a&gt;&lt;/p&gt;</p>
 </section><section>
 <h2 id="motivation-and-goals">Motivation and goals</h2>
 <ul>
@@ -1641,7 +1654,7 @@ or they may have a subset of the mechanisms available in Python</p>
 
 
 <div class="col "><p>Class diagram:</p>
-<figure id="plantuml-figure-1724062860782610064" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1724071894559566163" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Calculator {
 + expression: str
 - _ensure_is_digit(value: int | str) → int
@@ -1656,7 +1669,7 @@ or they may have a subset of the mechanisms available in Python</p>
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1724062860782610064");
+    handlePlantumlFigureByID("plantuml-figure-1724071894559566163");
 </script>
 </div>
 
@@ -1771,7 +1784,7 @@ or they may have a subset of the mechanisms available in Python</p>
 </span></span></code></pre></div></section><section>
 <h2 id="overview-on-code-organization-pt-1">Overview on code organization (pt. 1)</h2>
 
-<figure id="plantuml-figure-1724062860784391871" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1724071894560369837" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     
 
 package calculator {
@@ -1813,13 +1826,13 @@ package calculator {
 
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1724062860784391871");
+    handlePlantumlFigureByID("plantuml-figure-1724071894560369837");
 </script>
 </section><section>
 <h2 id="overview-on-code-organization-pt-2">Overview on code organization (pt. 2)</h2>
 <p>(including dependencies from Python and Kivy)</p>
 
-<figure id="plantuml-figure-1724062860784425033" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<figure id="plantuml-figure-1724071894560386649" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
     
 
 package "Python Standard Library" as Python {
@@ -1893,7 +1906,7 @@ calculator .left.&gt; Python: uses extensively
 
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1724062860784425033");
+    handlePlantumlFigureByID("plantuml-figure-1724071894560386649");
 </script>
 </section><section>
 <h2 id="many-hidden-concepts-in-this-example-1">Many hidden concepts in this example</h2>
@@ -2536,12 +2549,12 @@ It is far <em>more important</em> in SE to take care about the <strong>API</stro
 
     <script>
     MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      },
-      svg: {
-        fontCache: 'global'
-      }
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
     };
 </script>
 
@@ -2550,40 +2563,39 @@ It is far <em>more important</em> in SE to take care about the <strong>API</stro
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <script>
-  if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
-      var ytVideos = document.getElementsByTagName("iframe")
-      for (let i = 0; i < ytVideos.length; i++) {
-          var videoFrame = ytVideos[i]
-          var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
-          if (isYouTube) {
-              console.log(`Removing ${videoFrame.src}`)
-              var parent = videoFrame.parentElement
-              videoFrame.remove()
-              var p = document.createElement('p')
-              p.append(
-                  document.createTextNode(
-                      "There was an embedded video here, but it is disabled in the printed version of the slides."
-                  )
-              )
-              p.append(document.createElement('br'))
-              p.append(
-                  document.createTextNode(
-                      `Visit instead ${
-                          videoFrame.src
-                      } or ${
-                          videoFrame.src.replace(
-                              /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
-                              "https://www.youtube.com/watch?v=$4"
-                          )
-                      }`
-                  )
-              )
-              parent.appendChild(p)
-          }
-      }
-  }
+    if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+        var ytVideos = document.getElementsByTagName("iframe")
+        for (let i = 0; i < ytVideos.length; i++) {
+            var videoFrame = ytVideos[i]
+            var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+            if (isYouTube) {
+                console.log(`Removing ${videoFrame.src}`)
+                var parent = videoFrame.parentElement
+                videoFrame.remove()
+                var p = document.createElement('p')
+                p.append(
+                    document.createTextNode(
+                        "There was an embedded video here, but it is disabled in the printed version of the slides."
+                    )
+                )
+                p.append(document.createElement('br'))
+                p.append(
+                    document.createTextNode(
+                        `Visit instead ${
+                            videoFrame.src
+                        } or ${
+                            videoFrame.src.replace(
+                                /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                                "https://www.youtube.com/watch?v=$4"
+                            )
+                        }`
+                    )
+                )
+                parent.appendChild(p)
+            }
+        }
+    }
 </script>
-
 
     
   
