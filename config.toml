@@ -1,6 +1,6 @@
-baseURL = "https://danysk.github.io/Template-Hugo-Reveal-Slides"
+baseURL = "https://MatteoMagnini.github.io/distributed-systems-python-101"
 languageCode = "en-us"
-title = "A Hugo theme for creating Reveal.js presentations"
+title = "Python crash course, Module 2 of 'Distributed Systems'"
 disableKinds = ["sitemap", "RSS"]
 theme = "reveal-hugo"
 publishDir = "build"
