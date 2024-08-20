@@ -1,3 +1,15 @@
 {{ $_hugo_config := `{ "version": 1 }` }}
 
-<div class='short-code {{ .Get "class" }}'>{{ .Inner }}</div>
+<div style="
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+">
+    {{ .Inner }}
+</div>
