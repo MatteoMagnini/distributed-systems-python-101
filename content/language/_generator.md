@@ -48,7 +48,7 @@ outputs = ["Reveal"]
 - To run Python code interactively, you can use the Python command line.
 - Just type `python` in the terminal.
 
-{{<short_code>}}
+{{<short_code "python">}}
 ```python
 >>> print("Hello, World!")
 Hello, World!
@@ -66,7 +66,7 @@ Hello, World!
 - Create a file with a `.py` extension (e.g. `hello.py`).
 - Write your Python code in the file.
 
-{{<short_code>}}
+{{<short_code "python">}}
 ```python
 # hello.py
 print("Hello, World!")
