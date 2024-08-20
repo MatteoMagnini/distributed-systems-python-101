@@ -15,9 +15,17 @@ aliases = [
 
 # Teachers
 
-## Module 2
+## Module 1
+### (i.e., theory)
 
-**teacher:** {{<gc>}}, Junior assistant professor (RTD-A)
+**teacher:** {{<ao>}}, full professor
+
+**email:** {{<ao-address>}}
+
+## Module 2
+### (i.e., practice)
+
+**teacher:** {{<gc>}}, junior assistant professor (RTD-A)
 
 **email:** {{<gc-address>}}
 
@@ -31,7 +39,7 @@ aliases = [
 
 ## Virtuale
 
-### {{<vle_url>}}  
+### {{<vle_url>}} (old link!)  
 
 Students _must_ enroll
 
@@ -40,7 +48,7 @@ Students _must_ enroll
 
 ---
 
-## What is the Python crash course about? (pt. 1)
+## What is {{<course_name>}} about? (pt. 1)
 
 (Only insights here)
 
@@ -54,12 +62,12 @@ Students _must_ enroll
 
 - In particular, nowadays, software engineering must also deal with:
     + __distribution__, i.e. multiple software components interconnected over the _Internet_
-    + __artificial intelligence__, i.e. software components that may exhibit _human-like_ capabilities to some extent
+    + __artificial intelligence__ (not in this course), i.e. software components that may exhibit _human-like_ capabilities to some extent
         - e.g. understanding natural language, recognizing objects, making decisions, learning from data, etc. 
 
 ---
 
-## What is the Python crash course about? (pt. 2)
+## What is {{<course_name>}} about? (pt. 2)
 
 - At the end of the course...
     + ... you shall have a clear understanding on the __whole process__ of software engineering
@@ -81,7 +89,7 @@ Students _must_ enroll
     2. a _textual report_ describing the __design__ and __development processes__ of the artifact itself
 
 - The __report is more important than the source code__
-    + the code could be a simple, pissibly incomplete, prototype or stub
+    + the code could be a simple, possibly incomplete, prototype or stub
 
 - The project work can be done _individually_ or in _groups_ of __up to 4 students__
     + we _recommend_ doing it in _groups_, to practice with teamwork
@@ -327,11 +335,7 @@ and must feature appropriate automation (build) and get published on official di
 
 --- 
 
-# Module 2
-
-held by Prof. {{<gc>}}
-
-### Remarks
+# Module 2 remarks
 
 - Lectures are recorded by default
     + recordings will be available on {{<vle>}}
