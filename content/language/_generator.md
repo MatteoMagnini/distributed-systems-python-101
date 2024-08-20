@@ -30,8 +30,9 @@ outputs = ["Reveal"]
 ## Python
 
 - _Python_ is an _interpreted_, high-level, general-purpose programming language.
-- It is quite old (first released in 1991) and _very popular_.
-- Now it is one of the most popular programming languages in the world, especially in the field of _data science_ and _machine learning_.
+- It is quite old, the first release is in 1991 (currently in version 3).
+- Now it is one of the most popular programming languages in the world 
+  + especially in the field of _data science_ and _machine learning_.
 
 ---
 
@@ -47,11 +48,15 @@ outputs = ["Reveal"]
 - To run Python code interactively, you can use the Python command line.
 - Just type `python` in the terminal.
 
+{{<short-code>}}
 ```python
 >>> print("Hello, World!")
 Hello, World!
 ``` 
+{{</short-code>}}
+
 - To leave the Python command line, type `exit()` or press `Ctrl+D`.
+
 
 ---
 
@@ -61,10 +66,12 @@ Hello, World!
 - Create a file with a `.py` extension (e.g. `hello.py`).
 - Write your Python code in the file.
 
+{{<short-code>}}
 ```python
 # hello.py
 print("Hello, World!")
 ``` 
+{{</short-code>}}
 
 - Run the script with `python hello.py`.
 
