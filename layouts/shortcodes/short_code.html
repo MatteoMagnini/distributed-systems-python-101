@@ -10,4 +10,4 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
-">{{ .Inner | highlight .Page.Language }}</div>
+">{{ highlight .Inner (.Get 0 | default "plaintext") }}</div>
