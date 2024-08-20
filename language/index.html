@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>The Python Programming Language</title>
+<meta name="description" content="Introduction to the Python programming language">
+<meta name="author" content="Danilo Pianini">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/distributed-systems-python-101/css/custom-theme.min.c0f7878dc8d1bf72f682bf675cb3aee36f75a07caeda734f3608c1221c238ecd.css" id="theme"><link rel="stylesheet" href="/distributed-systems-python-101/highlight-js/github.min.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script src="https://MatteoMagnini.github.io/distributed-systems-python-101//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="the-python-programming-language">The Python Programming Language</h1>
+<br>
+<h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
+<h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
+<h3 id="module-2">Module 2</h3>
+<h4 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h4>
+<h5 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
+<h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
+<br>
+<br>
+<p>Compiled on: 2024-08-20 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
+</section><section>
+<h2 id="compiled-vs-interpreted-languages">Compiled vs Interpreted Languages</h2>
+<ul>
+<li><strong>Compiled languages</strong> are translated (i.e. compiled) into machine code before they are run.
+<ul>
+<li>usually <em>faster</em> (can also be optimised by the compiler) to execute than interpreted languages</li>
+<li><em>type checking</em> is done during compilation</li>
+<li><strong>less portable</strong> (need to recompile for different platforms)</li>
+<li>e.g. C, C++, Java</li>
+</ul>
+</li>
+<li><strong>Interpreted languages</strong> are the input of the interpreter, which executes the code directly.
+<ul>
+<li>usually <strong>slower to execute</strong> than compiled languages</li>
+<li>but they can be faster if we consider the whole compilation and execution process</li>
+<li>more <em>flexible</em> (e.g. dynamic typing, reflection)</li>
+<li>e.g. Python, Ruby, JavaScript</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="python">Python</h2>
+<ul>
+<li><em>Python</em> is an <em>interpreted</em>, high-level, general-purpose programming language.</li>
+<li>It is quite old (first released in 1991) and <em>very popular</em>.</li>
+<li>Now it is one of the most popular programming languages in the world, especially in the field of <em>data science</em> and <em>machine learning</em>.</li>
+</ul>
+</section><section>
+<h1 id="getting-started">Getting Started</h1>
+<p>(a.k.a. run a hello world program)</p>
+</section><section>
+<h2 id="python-command-line">Python Command Line</h2>
+<ul>
+<li>To run Python code interactively, you can use the Python command line.</li>
+<li>Just type <code>python</code> in the terminal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Hello, World!"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Hello</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">World</span><span style="color:#a40000">!</span>
+</span></span></code></pre></div><ul>
+<li>To leave the Python command line, type <code>exit()</code> or press <code>Ctrl+D</code>.</li>
+</ul>
+</section><section>
+<h2 id="python-scripts">Python Scripts</h2>
+<ul>
+<li>You can also write Python code in a file and run it.</li>
+<li>Create a file with a <code>.py</code> extension (e.g. <code>hello.py</code>).</li>
+<li>Write your Python code in the file.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># hello.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Hello, World!"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><ul>
+<li>Run the script with <code>python hello.py</code>.</li>
+</ul>
+</section><section>
+<h2 id="python-ides">Python IDEs</h2>
+<ul>
+<li>There are many <em>Integrated Development Environments</em> (IDEs) for Python.</li>
+<li>Some popular ones are:
+<ul>
+<li><em>PyCharm</em> (by JetBrains) [/Recommended/]</li>
+<li><em>Visual Studio Code</em> (by Microsoft)</li>
+</ul>
+</li>
+<li>In PyCharm, you can create a new Python file by right-clicking on the project and selecting <code>New -&gt; Python File</code>.</li>
+<li>You can run the script by right-clicking on the file and selecting <code>Run</code>.</li>
+</ul>
+</section><section>
+<h1 id="variables-data-types-functions-and-more">Variables, data types, functions and more</h1>
+</section><section>
+<h2 id="variables">Variables</h2>
+<ul>
+<li>In Python, you don’t need to declare the type of a variable.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">5</span>  <span style="color:#8f5902;font-style:italic"># x is an integer  </span>
+</span></span><span style="display:flex;"><span><span style="color:#000">pi</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">3.14159</span>  <span style="color:#8f5902;font-style:italic"># pi is a float</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">number_of_stars_in_the_galaxy</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10E11</span>  <span style="color:#8f5902;font-style:italic"># you can use scientific notation</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">true_value</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">True</span>  <span style="color:#8f5902;font-style:italic"># boolean</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">special_value</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">None</span>  <span style="color:#8f5902;font-style:italic"># None is a special value (similar to null in other languages)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">welcome_message</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"Hello, World!"</span>  <span style="color:#8f5902;font-style:italic"># string</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">course_teachers</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"Andrea Omicini"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"Giovanni Ciatto"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"Matteo Magnini"</span><span style="color:#000;font-weight:bold">]</span>  <span style="color:#8f5902;font-style:italic"># list (of strings)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">you_can_do_this</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">47521</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"Cesena"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">True</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">None</span><span style="color:#000;font-weight:bold">]</span>  <span style="color:#8f5902;font-style:italic"># list (of mixed types)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">one_digits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">5</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">6</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">7</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">8</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">9</span><span style="color:#000;font-weight:bold">}</span>  <span style="color:#8f5902;font-style:italic"># set (non-repeating elements)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">booleans</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">True</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">False</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># tuple (immutable list)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">emails</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">"Andrea"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"andrea.omicini@unibo.it"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">"Giovanni"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"giovanni.ciatto@unibo.it"</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">"Matteo"</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">"matteo.magnini@unibo.it"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>  <span style="color:#8f5902;font-style:italic"># dictionary (key-value pairs, keys must be unique and immutable)</span>
+</span></span></code></pre></div></section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/distributed-systems-python-101/reveal-hugo/object-assign.js"></script>
+
+<a href="/distributed-systems-python-101/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"github","history":true,"mermaid":[{"gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"useMaxWidth":false}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/distributed-systems-python-101/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = { 
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+    if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+        var ytVideos = document.getElementsByTagName("iframe")
+        for (let i = 0; i < ytVideos.length; i++) {
+            var videoFrame = ytVideos[i]
+            var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+            if (isYouTube) {
+                console.log(`Removing ${videoFrame.src}`)
+                var parent = videoFrame.parentElement
+                videoFrame.remove()
+                var p = document.createElement('p')
+                p.append(
+                    document.createTextNode(
+                        "There was an embedded video here, but it is disabled in the printed version of the slides."
+                    )
+                )
+                p.append(document.createElement('br'))
+                p.append(
+                    document.createTextNode(
+                        `Visit instead ${
+                            videoFrame.src
+                        } or ${
+                            videoFrame.src.replace(
+                                /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                                "https://www.youtube.com/watch?v=$4"
+                            )
+                        }`
+                    )
+                )
+                parent.appendChild(p)
+            }
+        }
+    }
+</script>
+
+    
+  
+
+</body></html>
