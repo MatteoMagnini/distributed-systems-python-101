@@ -1,3 +1,5 @@
+{{ $_hugo_config := `{ "version": 1 }` }}
+
 <div style="
     max-width: 600px;
     margin: 20px auto;
@@ -8,6 +10,4 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
-">
-    {{ .Inner }}
-</div>
+">{{ .Inner | highlight .Page.Language }}</div>
