@@ -49,10 +49,8 @@ outputs = ["Reveal"]
 - Just type `python` in the terminal.
 
 {{<short_code "python">}}
-```python
 >>> print("Hello, World!")
 Hello, World!
-``` 
 {{</short_code>}}
 
 - To leave the Python command line, type `exit()` or press `Ctrl+D`.
@@ -67,10 +65,8 @@ Hello, World!
 - Write your Python code in the file.
 
 {{<short_code "python">}}
-```python
 # hello.py
 print("Hello, World!")
-``` 
 {{</short_code>}}
 
 - Run the script with `python hello.py`.
