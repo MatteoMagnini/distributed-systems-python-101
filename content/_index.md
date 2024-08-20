@@ -15,15 +15,13 @@ aliases = [
 
 # Teachers
 
-## Module 1
-### (i.e., theory)
+## Module 1 (i.e., theory)
 
 **teacher:** {{<ao>}}, full professor
 
 **email:** {{<ao-address>}}
 
-## Module 2
-### (i.e., practice)
+## Module 2 (i.e., practice)
 
 **teacher:** {{<gc>}}, junior assistant professor (RTD-A)
 
@@ -345,7 +343,6 @@ and must feature appropriate automation (build) and get published on official di
     + they are produced along the way, so they may not be available in advance
     + also, please re-download / re-load them before each class
 
----
 <!--
 
 # Module contents and action plan
