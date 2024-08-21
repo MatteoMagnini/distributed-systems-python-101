@@ -275,6 +275,73 @@ numbers = (x for x in range(10) if x % 2 == 0)  # (0, 2, 4, 6, 8)
 
 ---
 
+# Control Structures
+
+---
+
+## If-Else Statements
+
+```python
+# You can use the if-else statement
+traffic_light = "red"
+if traffic_light == "red":
+    action = "stop"
+elif traffic_light == "yellow":
+    action = "slow down"
+else:
+    action = "go"
+    
+# You can also use the ternary operator
+action = "stop" if traffic_light == "red" else "go"
+```
+
+- From Python 3.10, you can use the `match` statement, which is similar to the `switch` statement in other languages.
+
+```python
+# You can use the match statement
+traffic_light = "red"
+action = match traffic_light:
+    case "red":
+        "stop"
+    case "yellow":
+        "slow down"
+    case _:
+        "go"
+```
+
+---
+
+## Loops
+
+```python
+# You can use the for loop
+numbers = [1, 2, 3, 4, 5]
+for number in numbers:
+    print(number)
+    
+# You can also use the range function
+for number in range(5):
+    print(number)
+    
+# You can also use the enumerate function
+for index, number in enumerate(numbers):
+    print(index, number)
+    
+# You can also use the zip function
+names = ["Andrea", "Giovanni", "Matteo"]
+ages = [59, 31, 29]
+for name, age in zip(names, ages):
+    print(name, age)
+
+# You can use the while loop
+x = 0
+while x < 5:
+    print(x)
+    x += 1
+```
+
+---
+
 # Object-Oriented Programming
 
 ---
