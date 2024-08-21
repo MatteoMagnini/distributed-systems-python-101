@@ -1,12 +1,12 @@
 +++
 
-title = "The Python Programming Language"
+title = "Introduction to the Python programming language"
 description = "Introduction to the Python programming language"
 outputs = ["Reveal"]
 
 +++
 
-# The Python Programming Language
+# Introduction to the Python programming language
 
 {{% import path="reusable/header.md" %}}
 
