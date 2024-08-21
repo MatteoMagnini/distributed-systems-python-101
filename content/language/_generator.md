@@ -84,7 +84,7 @@ print("Hello, World!")
 
 ---
 
-# Variables, data types, functions and more
+# Variables, data types, functions
 
 ---
 
@@ -137,7 +137,7 @@ z = x // y  # 2 (integer division)
 
 Why on Earth they decided to use `//` for integer division if `**` is for exponentiation?
 
-One would have expected `//` to be for root extraction, right?
+One would have expected `//` to be for root extraction, but it is not.
 
 ---
 
@@ -275,7 +275,7 @@ numbers = (x for x in range(10) if x % 2 == 0)  # (0, 2, 4, 6, 8)
 
 ---
 
-# Object-Oriented Programming in Python
+# Object-Oriented Programming
 
 ---
 
@@ -309,3 +309,144 @@ student = Student("Giovanni", 25, 12345)
 study = student.study()  # "Giovanni is studying!"
 ```
 
+---
+
+## Magic Methods (1)
+
+- Python has many _magic methods_ that you can implement or override.
+- You can easily recognize them because they start and end with two underscores `__method__`.
+- A good practice is to implement the `__repr__` method for debugging purposes.
+- The `__str__` method is used when you want to print the object.
+- The `__add__` method is used when you want to add two objects, and you can use the `+` operator.
+
+```python
+# Python has many magic methods that you can override
+
+class Euro:
+    def __init__(self, amount):
+        self.amount = amount
+
+    def __add__(self, other):
+        return Euro(self.amount + other.amount)
+
+    def __str__(self):
+        return "€" + str(self.amount)
+    
+    def __repr__(self):
+        return "Euro(" + str(self.amount) + ")"
+
+# You can use the magic methods
+euro1 = Euro(10)
+euro2 = Euro(20)
+euro3 = euro1 + euro2  # €30
+print(euro3)  # €30
+print(repr(euro3))  # Euro(30)
+``` 
+
+---
+
+## Magic Methods (2)
+
+- It is also good to implement the `__eq__` method to compare two objects.
+- Of course, there are many other magic methods that you can implement (see the [official documentation](https://docs.python.org/3/reference/datamodel.html#special-method-names)).
+
+```python
+# Here an example of the __eq__ with the Car class
+
+class Car:
+    def __init__(self, brand, model, plate):
+        self.brand = brand
+        self.model = model
+
+    def __eq__(self, other):
+        return self.brand == other.brand and self.model == other.model
+
+# You can use the magic methods
+car1 = Car("Fiat", "500")
+car2 = Car("Fiat", "500")
+car3 = Car("Fiat", "Panda")
+print(car1 == car2)  # True
+print(car1 == car3)  # False
+``` 
+
+---
+
+## Decorators
+
+- _Decorators_ are a way to modify or extend the behavior of functions or methods.
+- They are prefixed with the `@` symbol and are placed above the function definition.
+- They can be used for logging, timing, caching, etc.
+
+```python
+# Here an example of a simple decorator
+
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+```
+
+---
+
+## Decorators for getters and setters
+
+- You can also use decorators for getters and setters.
+- You can use the `@property` decorator for getters.
+- You can use the `@property_name.setter` decorator for setters.
+
+```python
+# Here an example of a property decorator
+
+class Person:
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+        
+# You can use the property
+person = Person("Andrea")
+name = person.name  # "Andrea"
+person.name = "Giovanni"
+name = person.name  # "Giovanni"
+```
+
+---
+
+## Decorators with Arguments
+
+- You can also define decorators with arguments.
+- You need to define a function that returns the decorator.
+
+```python
+# Here an example of a decorator with arguments
+
+def my_decorator_with_args(number):
+    def decorator(func):
+        def wrapper():
+            print("Something is happening before the function is called.")
+            func()
+            print("Something is happening after the function is called.")
+            print("The number is:", number)
+        return wrapper
+    return decorator
+
+@my_decorator_with_args(42)
+def say_hello():
+    print("Hello!")
+
+say_hello()
+```
