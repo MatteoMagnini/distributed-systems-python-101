@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
-<title>Managing a Python Project</title>
-<meta name="description" content="Introduction to managing a Python project">
+<title>How to manage a Python Project</title>
+<meta name="description" content="How to manage a Python Project">
 <meta name="author" content="Danilo Pianini">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -23,7 +23,20 @@
       <div class="slides">
   
 
-    <section><h1 id="modules-and-packages">Modules and Packages</h1>
+    <section><h1 id="how-to-manage-a-python-project">How to manage a Python Project</h1>
+<br>
+<h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
+<h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
+<h3 id="module-2">Module 2</h3>
+<h4 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h4>
+<h5 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
+<h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
+<br>
+<br>
+<p>Compiled on: 2024-08-21 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
+</section><section>
+<h1 id="software-organization">Software Organization</h1>
 </section><section>
 <h2 id="modules">Modules</h2>
 <ul>
@@ -63,35 +76,224 @@
 <li><code>numpy</code> is a third-party package in Python!</li>
 </ul>
 </section><section>
-<h2 id="project-structure">Project Structure</h2>
+<h2 id="dependency-management">Dependency Management</h2>
+<p>In the package example we used <code>numpy</code>, but because it is a third-party package, we need to install it first.
+In general, there could be many dependencies in a project, and it is hard to manage them manually.
+The need for build systems in Python emerged with more complex use cases.</p>
+<ul>
+<li>Since there were none, now there are several tools that do build-related jobs:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.anaconda.com/">Anaconda</a></td>
+<td><a href="https://docs.conda.io/en/latest/index.html">Conda</a></td>
+<td><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a></td>
+<td><a href="https://pypi.org/project/pip/">pip</a></td>
+</tr>
+<tr>
+<td><a href="https://python-poetry.org/">Poetry</a></td>
+<td><a href="https://pybuilder.io/">PyBuilder</a></td>
+<td><a href="https://github.com/pyenv/pyenv">PyEnv</a></td>
+<td><a href="https://virtualenv.pypa.io/en/latest/#">virtualenv</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The feature set varies wildly</li>
+<li>They are meant to solve different problems!</li>
+</ul>
+</section><section>
+<h2 id="pythons-conflicting-standards">Python’s conflicting standards</h2>
+<p><img src="https://imgs.xkcd.com/comics/python_environment.png" alt="xkcd"></p>
+<p>Since there were no standard management systems originally,
+multiple tools <em>proliferated</em></p>
+<ul>
+<li>
+<p>The Python Packaging Authority (PyPA) is inconsistent in its suggestions:</p>
+<ul>
+<li>Recommends <a href="https://docs.python.org/3/library/venv.html"><code>venv</code></a></li>
+<li>Also recommends <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> , which uses <a href="https://virtualenv.pypa.io/en/latest/"><code>virtualenv</code></a></li>
+<li>Also endorses <a href="https://python-poetry.org/">Poetry</a></li>
+</ul>
+</li>
+<li>
+<p>Many Python developers also exploit <a href="https://github.com/pyenv/pyenv">PyEnv</a></p>
+</li>
+<li>
+<p>Many data scientists use <a href="https://www.anaconda.com/">Anaconda</a></p>
+</li>
+</ul>
+</section><section>
+<h2 id="what-are-all-these-tools-pt-1">What are all these tools? (pt. 1)</h2>
+<ol>
+<li>
+<p>By default, Python is installed <em>system-wide</em></p>
+<ul>
+<li>i.e. there should be <em>one</em> (and <strong>only</strong> one) Python interpreter on the system</li>
+</ul>
+</li>
+<li>
+<p>All Python installations come with <code>pip</code>, the <em>package installer</em> for Python</p>
+</li>
+<li>
+<p>So, one may <strong>install</strong> Python packages <em>system-wide</em> with <code>pip install PACKAGE_NAME</code></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>One problem, many implications</strong>: the same package can be installed <em>only once</em> on the same Python installation</p>
+<ul>
+<li><strong>(a)</strong> what if two projects on the same system require <em>different versions</em> of the <em>same package</em> as dependencies?
+<ul>
+<li>say, <strong>project A</strong> requires <code>Kivy==2.3</code> and <strong>project B</strong> requires <code>Kivy==1.4</code></li>
+</ul>
+</li>
+<li><strong>(b)</strong> what if two projects on the same system require <em>different versions of Python</em>?
+<ul>
+<li>say, <strong>project A</strong> requires Python <code>3.8</code> and <strong>project B</strong> requires Python <code>3.10</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</section><section>
+<h2 id="what-are-all-these-tools-pt-2">What are all these tools? (pt. 2)</h2>
+<p>(consider reading this page for further details <a href="https://stackoverflow.com/a/41573588">https://stackoverflow.com/a/41573588</a>)</p>
+<ol start="4">
+<li>
+<p><code>virtualenv</code> and <code>venv</code> are tools to create <em>virtual</em> Python installations <em>on the same system</em></p>
+<ul>
+<li><code>virtualenv</code> is a <em>third-party</em> tool, <code>venv</code> is <em>built-in</em> in Python 3.3 and later</li>
+<li>let’s say you have Python <code>v. XXX</code> installed on your system…
+<ul>
+<li>… these tools let you create other <em>lightweight</em> <strong>copies</strong> of Python <code>v. XXX</code> in other folders
+<ul>
+<li>the copies are <strong>fresh</strong>, i.e. they <em>no package</em> installed</li>
+<li>but one may install <em>different</em> packages in <em>each</em> copy, via <code>pip</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>now you can solve problem <strong>(a)</strong></li>
+</ul>
+</li>
+<li>
+<p><code>PyEnv</code> is a tool to manage <em>multiple</em> Python <strong>installations</strong> <em>on the same system</em></p>
+<ul>
+<li>each installation may use a <em>different version</em> of Python</li>
+<li>now you can solve problem <strong>(b)</strong></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>New problem</strong>: many Python installations on the same system,
+<br> each one with a different version of Python, and different packages installed</p>
+</blockquote>
+<p>recall all the issues we had in previous lectures?</p>
+</section><section>
+<h2 id="what-are-all-these-tools-pt-3">What are all these tools? (pt. 3)</h2>
+<ol start="6">
+<li>
+<p>Smart and adequate <strong>convention</strong> to work with Python projects: <strong>1-project-1-Python-env</strong></p>
+<ul>
+<li>each Python project has its <em>own</em> Python environment …
+<ul>
+<li>be it virtual or not, as far as it uses the <em>same</em> Python version required by that project</li>
+</ul>
+</li>
+<li>… the environment <em>only</em> contains the packages required by that project</li>
+</ul>
+</li>
+<li>
+<p>Achieving this requires developers to be <em>disciplined</em> and <em>meticulous</em></p>
+<ul>
+<li>other than being proficient with the tools above</li>
+</ul>
+</li>
+<li>
+<p><code>Poetry</code> is a tool that aims to <em>automate</em> this process</p>
+</li>
+</ol>
+</section><section>
+<h2 id="from-now-on-lets-use-poetry">From now on, let’s use Poetry</h2>
+<blockquote>
+<p>Poetry is a <em>declarative</em> tool for <strong>dependency management</strong>, <strong>packaging</strong>, and <strong>release</strong> in Python</p>
+</blockquote>
+<ul>
+<li>
+<p>It handles both <em>dependencies</em> and <em>dev-dependencies</em></p>
+<ul>
+<li><em>replacing</em> <code>requirements.txt</code> and <code>requirements-dev.txt</code></li>
+</ul>
+</li>
+<li>
+<p>It <em>automates</em> the <strong>1-project-1-Python-env</strong> convention</p>
+</li>
+<li>
+<p>It simplifies the <em>packaging</em> process for the project</p>
+</li>
+<li>
+<p>It simplifies the <em>publication</em> process on PyPI (or other software repositories)</p>
+</li>
+</ul>
+</section><section>
+<h2 id="getting-started-with-poetry">Getting started with Poetry</h2>
+<ul>
+<li><code>Poetry</code> is a modern dependency management tool for Python.</li>
+<li>You can install <code>Poetry</code> with the following command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>curl -sSL https://install.python-poetry.org <span style="color:#000;font-weight:bold">|</span> python3 -
+</span></span></code></pre></div><ul>
+<li>You can create a new project with the following command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry new my_project 
+</span></span></code></pre></div><ul>
+<li>You can add a dependency with the following command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry add numpy
+</span></span></code></pre></div><ul>
+<li>You can install all dependencies with the following command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry install
+</span></span></code></pre></div><ul>
+<li>You can run a script with the following command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry run python my_script.py
+</span></span></code></pre></div></section><section>
+<h2 id="poetrys-canonical-project-structure">(Poetry’s canonical) Project Structure</h2>
 <ul>
 <li>A Python project typically has the following structure:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>&lt;root directory&gt;
-</span></span><span style="display:flex;"><span>├── &lt;package&gt;/
-</span></span><span style="display:flex;"><span>│   ├── __init__.py
-</span></span><span style="display:flex;"><span>│   └── &lt;module&gt;.py
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>&lt;root directory&gt;  <span style="color:#8f5902;font-style:italic"># main directory of the project</span>
+</span></span><span style="display:flex;"><span>├── &lt;package&gt;/  <span style="color:#8f5902;font-style:italic"># main package of the project (there can be multiple packages)</span>
+</span></span><span style="display:flex;"><span>│   ├── __init__.py  <span style="color:#8f5902;font-style:italic"># python package marker</span>
+</span></span><span style="display:flex;"><span>│   └── &lt;module&gt;.py  <span style="color:#8f5902;font-style:italic"># module in the package (there can be multiple modules)</span>
 </span></span><span style="display:flex;"><span>├── test/
-</span></span><span style="display:flex;"><span>│   └── test_&lt;module&gt;.py
+</span></span><span style="display:flex;"><span>│   └── test_&lt;module&gt;.py  <span style="color:#8f5902;font-style:italic"># test module for the module</span>
 </span></span><span style="display:flex;"><span>├── .github/
 </span></span><span style="display:flex;"><span>│   └── workflows/
-</span></span><span style="display:flex;"><span>│       └── check.yml
-</span></span><span style="display:flex;"><span>├──.gitignore
-</span></span><span style="display:flex;"><span>├──.gitattributes
-</span></span><span style="display:flex;"><span>├──__main__.py
-</span></span><span style="display:flex;"><span>├── LICENSE
-</span></span><span style="display:flex;"><span>├── pyproject.toml
-</span></span><span style="display:flex;"><span>├── poetry.toml
-</span></span><span style="display:flex;"><span>└── README.md
-</span></span></code></pre></div><ul>
-<li><code>&lt;root directory&gt;</code> is the main directory of the project.</li>
-<li><code>&lt;package&gt;</code> is the main package of the project.</li>
-<li><code>&lt;module&gt;</code> is a module in the package.</li>
-<li><code>__main__.py</code> is the application entry point.</li>
-<li><code>pyproject.toml</code> declares build dependencies.</li>
-<li><code>poetry.toml</code> is the Poetry settings file.</li>
-</ul>
-</section>
+</span></span><span style="display:flex;"><span>│       └── check.yml  <span style="color:#8f5902;font-style:italic"># some github action</span>
+</span></span><span style="display:flex;"><span>├──.gitignore  <span style="color:#8f5902;font-style:italic"># git ignore file</span>
+</span></span><span style="display:flex;"><span>├──.gitattributes  <span style="color:#8f5902;font-style:italic"># git attributes file (e.g., for line endings in different OS)</span>
+</span></span><span style="display:flex;"><span>├──__main__.py  <span style="color:#8f5902;font-style:italic"># application entry point</span>
+</span></span><span style="display:flex;"><span>├── LICENSE  <span style="color:#8f5902;font-style:italic"># license file (e.g., Apache 2.0)</span>
+</span></span><span style="display:flex;"><span>├── pyproject.toml  <span style="color:#8f5902;font-style:italic"># build dependencies</span>
+</span></span><span style="display:flex;"><span>├── poetry.toml  <span style="color:#8f5902;font-style:italic"># Poetry settings (we will see Poetry for dependency management)</span>
+</span></span><span style="display:flex;"><span>└── README.md  <span style="color:#8f5902;font-style:italic"># don't forget to write a README file</span>
+</span></span></code></pre></div></section>
 
   
 
