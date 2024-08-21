@@ -25,15 +25,15 @@
 
     <section><h1 id="the-python-programming-language">The Python Programming Language</h1>
 <br>
-<h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
+<h2 id="hahahugoshortcode2s0hbhb">Python 101</h2>
 <h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
 <h3 id="module-2">Module 2</h3>
-<h4 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h4>
-<h5 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
-<h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
+<h4 id="hahahugoshortcode2s1hbhb">A.Y. 2024/2025</h4>
+<h5 id="hahahugoshortcode2s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
+<h5 id="hahahugoshortcode2s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
 <br>
 <br>
-<p>Compiled on: 2024-08-20 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p>Compiled on: 2024-08-21 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
 </section><section>
 <h2 id="compiled-vs-interpreted-languages">Compiled vs Interpreted Languages</h2>
@@ -79,10 +79,9 @@
 
 <div style="
     max-width: 600px;
-    margin: 5px auto;
     background-color: #f5f5f5;
     border-radius: 5px;
-    white-space: pre-wrap;
+    white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;
 "><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>
@@ -103,10 +102,9 @@
 
 <div style="
     max-width: 600px;
-    margin: 5px auto;
     background-color: #f5f5f5;
     border-radius: 5px;
-    white-space: pre-wrap;
+    white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;
 "><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>
@@ -130,7 +128,7 @@
 <li>You can run the script by right-clicking on the file and selecting <code>Run</code>.</li>
 </ul>
 </section><section>
-<h1 id="variables-data-types-functions-and-more">Variables, data types, functions and more</h1>
+<h1 id="variables-data-types-functions">Variables, data types, functions</h1>
 </section><section>
 <h2 id="variables">Variables</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># In Python, you don't need to declare the type of a variable.</span>
@@ -170,7 +168,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#000">z</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">**</span> <span style="color:#000">y</span>  <span style="color:#8f5902;font-style:italic"># 25 (exponentiation)</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">z</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">//</span> <span style="color:#000">y</span>  <span style="color:#8f5902;font-style:italic"># 2 (integer division)</span>
 </span></span></code></pre></div><p>Why on Earth they decided to use <code>//</code> for integer division if <code>**</code> is for exponentiation?</p>
-<p>One would have expected <code>//</code> to be for root extraction, right?</p>
+<p>One would have expected <code>//</code> to be for root extraction, but it is not.</p>
 </section><section>
 <h2 id="comparison-and-logical-operators">Comparison and Logical Operators</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Python supports the usual comparison operators</span>
@@ -282,7 +280,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can also use list comprehensions with tuples</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">numbers</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">x</span> <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">x</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">range</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#0000cf;font-weight:bold">2</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># (0, 2, 4, 6, 8)</span>
 </span></span></code></pre></div></section><section>
-<h1 id="object-oriented-programming-in-python">Object-Oriented Programming in Python</h1>
+<h1 id="object-oriented-programming">Object-Oriented Programming</h1>
 </section><section>
 <h2 id="classes">Classes</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can define classes with the class keyword</span>
@@ -310,6 +308,128 @@
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can create instances of the subclass</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">student</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Student</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Giovanni"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">25</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">12345</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">study</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">student</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">study</span><span style="color:#000;font-weight:bold">()</span>  <span style="color:#8f5902;font-style:italic"># "Giovanni is studying!"</span>
+</span></span></code></pre></div></section><section>
+<h2 id="magic-methods-1">Magic Methods (1)</h2>
+<ul>
+<li>Python has many <em>magic methods</em> that you can implement or override.</li>
+<li>You can easily recognize them because they start and end with two underscores <code>__method__</code>.</li>
+<li>A good practice is to implement the <code>__repr__</code> method for debugging purposes.</li>
+<li>The <code>__str__</code> method is used when you want to print the object.</li>
+<li>The <code>__add__</code> method is used when you want to add two objects, and you can use the <code>+</code> operator.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Python has many magic methods that you can override</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Euro</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">amount</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">amount</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">amount</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__add__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">other</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Euro</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">amount</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">other</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">amount</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__str__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">"€"</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">amount</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__repr__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">"Euro("</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">amount</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#4e9a06">")"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the magic methods</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">euro1</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Euro</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">euro2</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Euro</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">20</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">euro3</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">euro1</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">euro2</span>  <span style="color:#8f5902;font-style:italic"># €30</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">euro3</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># €30</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">repr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">euro3</span><span style="color:#000;font-weight:bold">))</span>  <span style="color:#8f5902;font-style:italic"># Euro(30)</span>
+</span></span></code></pre></div></section><section>
+<h2 id="magic-methods-2">Magic Methods (2)</h2>
+<ul>
+<li>It is also good to implement the <code>__eq__</code> method to compare two objects.</li>
+<li>Of course, there are many other magic methods that you can implement (see the <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">official documentation</a>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Here an example of the __eq__ with the Car class</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Car</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">brand</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">model</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">plate</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">brand</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">brand</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">model</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">model</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__eq__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">other</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">brand</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">other</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">brand</span> <span style="color:#204a87;font-weight:bold">and</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">model</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">other</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">model</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the magic methods</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">car1</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Car</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Fiat"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"500"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">car2</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Car</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Fiat"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"500"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">car3</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Car</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Fiat"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"Panda"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">car1</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">car2</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># True</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">car1</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">car3</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># False</span>
+</span></span></code></pre></div></section><section>
+<h2 id="decorators">Decorators</h2>
+<ul>
+<li><em>Decorators</em> are a way to modify or extend the behavior of functions or methods.</li>
+<li>They are prefixed with the <code>@</code> symbol and are placed above the function definition.</li>
+<li>They can be used for logging, timing, caching, etc.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Here an example of a simple decorator</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">my_decorator</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">func</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">wrapper</span><span style="color:#000;font-weight:bold">():</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Something is happening before the function is called."</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">func</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Something is happening after the function is called."</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">wrapper</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#5c35cc;font-weight:bold">@my_decorator</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">say_hello</span><span style="color:#000;font-weight:bold">():</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Hello!"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">say_hello</span><span style="color:#000;font-weight:bold">()</span>
+</span></span></code></pre></div></section><section>
+<h2 id="decorators-for-getters-and-setters">Decorators for getters and setters</h2>
+<ul>
+<li>You can also use decorators for getters and setters.</li>
+<li>You can use the <code>@property</code> decorator for getters.</li>
+<li>You can use the <code>@property_name.setter</code> decorator for setters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Here an example of a property decorator</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Person</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">name</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">name</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#5c35cc;font-weight:bold">@property</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">name</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_name</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#5c35cc;font-weight:bold">@name.setter</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">name</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">value</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the property</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">person</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Person</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Andrea"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">name</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span>  <span style="color:#8f5902;font-style:italic"># "Andrea"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"Giovanni"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">name</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">name</span>  <span style="color:#8f5902;font-style:italic"># "Giovanni"</span>
+</span></span></code></pre></div></section><section>
+<h2 id="decorators-with-arguments">Decorators with Arguments</h2>
+<ul>
+<li>You can also define decorators with arguments.</li>
+<li>You need to define a function that returns the decorator.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Here an example of a decorator with arguments</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">my_decorator_with_args</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">number</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">decorator</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">func</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">wrapper</span><span style="color:#000;font-weight:bold">():</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Something is happening before the function is called."</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">func</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Something is happening after the function is called."</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"The number is:"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">number</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">wrapper</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">decorator</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#5c35cc;font-weight:bold">@my_decorator_with_args</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">42</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">say_hello</span><span style="color:#000;font-weight:bold">():</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Hello!"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">say_hello</span><span style="color:#000;font-weight:bold">()</span>
 </span></span></code></pre></div></section>
 
   
@@ -381,6 +501,8 @@
 
 
 
+
+  
 
   
 
