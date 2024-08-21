@@ -79,7 +79,7 @@
 
 <div style="
     max-width: 600px;
-    margin: 5px auto;
+    margin: auto;
     background-color: #f5f5f5;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -102,7 +102,7 @@
 
 <div style="
     max-width: 600px;
-    margin: 5px auto;
+    margin: auto;
     background-color: #f5f5f5;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -279,6 +279,59 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can also use list comprehensions with tuples</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">numbers</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">x</span> <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">x</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">range</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">%</span> <span style="color:#0000cf;font-weight:bold">2</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>  <span style="color:#8f5902;font-style:italic"># (0, 2, 4, 6, 8)</span>
+</span></span></code></pre></div></section><section>
+<h1 id="control-structures">Control Structures</h1>
+</section><section>
+<h2 id="if-else-statements">If-Else Statements</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the if-else statement</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">traffic_light</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"red"</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">traffic_light</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">"red"</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">action</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"stop"</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">elif</span> <span style="color:#000">traffic_light</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">"yellow"</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">action</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"slow down"</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">else</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">action</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"go"</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can also use the ternary operator</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">action</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"stop"</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">traffic_light</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">"red"</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#4e9a06">"go"</span>
+</span></span></code></pre></div><ul>
+<li>From Python 3.10, you can use the <code>match</code> statement, which is similar to the <code>switch</code> statement in other languages.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the match statement</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">traffic_light</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"red"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">action</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">match</span> <span style="color:#000">traffic_light</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"red"</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">"stop"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"yellow"</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">"slow down"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">"go"</span>
+</span></span></code></pre></div></section><section>
+<h2 id="loops">Loops</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the for loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">numbers</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">5</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">number</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">numbers</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">number</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can also use the range function</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">number</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">range</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">number</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can also use the enumerate function</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">number</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">enumerate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">numbers</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">number</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can also use the zip function</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">names</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"Andrea"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"Giovanni"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"Matteo"</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">ages</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">59</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">31</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">29</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">name</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">age</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">zip</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">names</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ages</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">age</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># You can use the while loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">while</span> <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">5</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">x</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#0000cf;font-weight:bold">1</span>
 </span></span></code></pre></div></section><section>
 <h1 id="object-oriented-programming">Object-Oriented Programming</h1>
 </section><section>
