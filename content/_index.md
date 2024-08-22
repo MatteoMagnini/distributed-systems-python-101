@@ -348,5 +348,6 @@ and must feature appropriate automation (build) and get published on official di
 
 1. [Introduction to the Python Language](language)
 2. [How to manage a Python Project](python-project)
-3. [QA, testing, TDD, reproducibility and replicability](qa-tdd)
-4. [Build automation, packaging, and release (examples with Poetry)](build)
+3. [A Python Project Example](example)
+4. [QA, testing, TDD, reproducibility and replicability](qa-tdd)
+5[Build automation, packaging, and release (examples with Poetry)](build)

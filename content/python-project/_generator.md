@@ -176,27 +176,17 @@ recall all the issues we had in previous lectures?
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-- You can create a new project with the following command:
-
 ```bash
-poetry new my_project 
-```
+# Create a new project
+poetry new my_project
 
-- You can add a dependency with the following command:
-
-```bash
+# Add a dependency
 poetry add numpy
-```
 
-- You can install all dependencies with the following command:
-
-```bash
+# Install dependencies
 poetry install
-```
 
-- You can run a script with the following command:
-
-```bash
+# Run a script
 poetry run python my_script.py
 ```
 
