@@ -1,3 +1,14 @@
++++
+
+title = "A Python Project Example"
+description = "A Python Project Example"
+outputs = ["Reveal"]
+
++++
+
+# A Python Project Example
+
+{{% import path="reusable/header.md" %}}
 
 ---
 
