@@ -113,6 +113,27 @@ outputs = ["Reveal"]
 
 ---
 
+## Useful hints (pt. 1)
+
+If you try to run the scripts defined in the `poetry.toml` file, you might get an error like this:
+
+```bash
+$ calculator-gui
+zsh: command not found: calculator-gui
+```
+
+This could be due to the fact that the `PATH` variable does not include the `.venv/bin` directory (where the scripts are installed).
+To solve this, you can do the following:
+- run `poetry env info --path` to get the path of the virtual environment
+- add the `bin` directory to the `PATH` variable
+  - on Unix-like systems, run `export PATH=$PATH:/path/to/.venv/bin`
+  - on Windows, `set PATH=%PATH%;C:\path\to\.venv\Scripts`
+- reload the terminal by running `source ~/.zshrc` (or `source ~/.bashrc`) on Unix-like systems, or `refreshenv` on Windows
+
+Now you should be able to run the scripts without any issues.
+
+---
+
 ## Dependency ranges and locking
 
 * A project can depend on a specific version of a library or on a *range* of versions
@@ -151,7 +172,7 @@ Expressing something like this is done via **dependency locking**:
 
 ---
 
-## Useful hints
+## Useful hints (pt. 2)
 
 1. So many Python environments in the shell... how to avoid mistakes?
 
