@@ -145,6 +145,24 @@
 </li>
 </ol>
 </section><section>
+<h2 id="useful-hints-pt-1">Useful hints (pt. 1)</h2>
+<p>If you try to run the scripts defined in the <code>poetry.toml</code> file, you might get an error like this:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>$ calculator-gui
+</span></span><span style="display:flex;"><span>zsh: <span style="color:#204a87">command</span> not found: calculator-gui
+</span></span></code></pre></div><p>This could be due to the fact that the <code>PATH</code> variable does not include the <code>.venv/bin</code> directory (where the scripts are installed).
+To solve this, you can do the following:</p>
+<ul>
+<li>run <code>poetry env info --path</code> to get the path of the virtual environment</li>
+<li>add the <code>bin</code> directory to the <code>PATH</code> variable
+<ul>
+<li>on Unix-like systems, run <code>export PATH=$PATH:/path/to/.venv/bin</code></li>
+<li>on Windows, <code>set PATH=%PATH%;C:\path\to\.venv\Scripts</code></li>
+</ul>
+</li>
+<li>reload the terminal by running <code>source ~/.zshrc</code> (or <code>source ~/.bashrc</code>) on Unix-like systems, or <code>refreshenv</code> on Windows</li>
+</ul>
+<p>Now you should be able to run the scripts without any issues.</p>
+</section><section>
 <h2 id="dependency-ranges-and-locking">Dependency ranges and locking</h2>
 <ul>
 <li>A project can depend on a specific version of a library or on a <em>range</em> of versions</li>
@@ -200,7 +218,7 @@
 </li>
 </ol>
 </section><section>
-<h2 id="useful-hints">Useful hints</h2>
+<h2 id="useful-hints-pt-2">Useful hints (pt. 2)</h2>
 <ol>
 <li>
 <p>So many Python environments in the shell… how to avoid mistakes?</p>
