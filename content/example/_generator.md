@@ -180,3 +180,7 @@ It supports publishing.
     + by running `pip install unibo-dtm-se-calculator`
 
 ---
+
+# A Python Project Example
+
+{{% import path="reusable/footer.md" %}}

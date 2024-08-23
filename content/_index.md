@@ -346,8 +346,8 @@ and must feature appropriate automation (build) and get published on official di
 
 # Module contents and action plan
 
-1. [Introduction to the Python Language](language)
-2. [How to manage a Python Project](python-project)
-3. [A Python Project Example](example)
-4. [QA, testing, TDD, reproducibility and replicability](qa-tdd)
-5. [Build automation, packaging, and release (examples with Poetry)](build)
+1. [Preliminary notions for Software Development](intro)
+2. [Introduction to the Python Language](language)
+3. [How to manage a Python Project](python-project)
+4. [A Python Project Example](example)
+5. [QA, testing, TDD, reproducibility and replicability](qa-tdd)

@@ -517,3 +517,9 @@ def say_hello():
 
 say_hello()
 ```
+
+---
+
+# Introduction to the Python programming language
+
+{{% import path="reusable/footer.md" %}}

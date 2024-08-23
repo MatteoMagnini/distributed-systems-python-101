@@ -214,3 +214,9 @@ poetry run python my_script.py
 ├── poetry.toml  # Poetry settings (we will see Poetry for dependency management)
 └── README.md  # don't forget to write a README file
 ```
+
+---
+
+# How to manage a Python Project
+
+{{% import path="reusable/footer.md" %}}
