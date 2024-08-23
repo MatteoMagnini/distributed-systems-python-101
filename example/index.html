@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>A Python Project Example</title>
+<meta name="description" content="A Python Project Example">
+<meta name="author" content="Danilo Pianini">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/distributed-systems-python-101/css/custom-theme.min.c0f7878dc8d1bf72f682bf675cb3aee36f75a07caeda734f3608c1221c238ecd.css" id="theme"><link rel="stylesheet" href="/distributed-systems-python-101/highlight-js/github.min.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script src="https://MatteoMagnini.github.io/distributed-systems-python-101//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="a-python-project-example">A Python Project Example</h1>
+<br>
+<h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
+<h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
+<h3 id="module-2">Module 2</h3>
+<h4 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h4>
+<h5 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
+<h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
+<br>
+<br>
+<p>Compiled on: 2024-08-23 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
+</section><section>
+<h1 id="example-pt-1">Example (pt. 1)</h1>
+<h2 id="the-calculator-repositoryhttpsgithubcomunibo-dtm-secalculator">The <a href="https://github.com/unibo-dtm-se/calculator"><code>calculator</code> repository</a></h2>
+<ol>
+<li>
+<p>Look at the <a href="https://github.com/unibo-dtm-se/calculator/blob/master/pyproject.toml"><code>pyproject.toml</code> file</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">tool</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">poetry</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># name of the package to be published</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">name</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"unibo-dtm-se-calculator"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># files to be included for publication</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">packages</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">include</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"calculator"</span> <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># various metadata for publication</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">version</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"0.1.1"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">description</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"A simple calculator toolkit written in Python, with several UIs. It is part of the Software Engineering course at the University of Bologna."</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">authors</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"Giovanni Ciatto &lt;giovanni.ciatto@unibo.it&gt;"</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">license</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"Apache 2.0"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">readme</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"README.md"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># dependencies (notice that Python is considered a dependency)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">tool</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">poetry</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">dependencies</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">python</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"^3.10.0"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Kivy</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"^2.3.0"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># development dependencies</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">tool</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">poetry</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">dev</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">dependencies</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">poetry</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"^1.7.0"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">pytest</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"^8.1.0"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">coverage</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"^7.4.0"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">mypy</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"^1.9.0"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># executable commands that will be created then installing this package</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">tool</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">poetry</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">scripts</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">calculator-gui</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"calculator.ui.gui:start_app"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">calculator</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"calculator.ui.cli:start_app"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># where to download the dependencies from</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[[</span><span style="color:#000">tool</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">poetry</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">source</span><span style="color:#000;font-weight:bold">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">name</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"PyPI"</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">priority</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"primary"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># packaging dependencies</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">build-system</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">requires</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">"poetry-core"</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">build-backend</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"poetry.core.masonry.api"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># mypy configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">tool</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">mypy</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">ignore_missing_imports</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">true</span>
+</span></span></code></pre></div><ul>
+<li>learn how to specify dependencies here <a href="https://python-poetry.org/docs/dependency-specification/">https://python-poetry.org/docs/dependency-specification/</a></li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="example-pt-2">Example (pt. 2)</h1>
+<h2 id="the-calculator-repositoryhttpsgithubcomunibo-dtm-secalculator-1">The <a href="https://github.com/unibo-dtm-se/calculator"><code>calculator</code> repository</a></h2>
+<ol start="2">
+<li>
+<p>Look at the <a href="https://github.com/unibo-dtm-se/calculator/blob/master/poetry.toml"><code>poetry.toml</code> file</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># the project-specific environment will be created in the local .venv folder</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">virtualenvs</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">in-project</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">true</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># packages produced by poetry may be published on the pypi-test repository</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">repositories</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">pypi-test</span><span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">url</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"https://test.pypi.org/legacy/"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># another implicit repository is always available, namely PyPI</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># at https://pypi.org/</span>
+</span></span></code></pre></div></li>
+</ol>
+</section><section>
+<h1 id="exercise-pt-1">Exercise (pt. 1)</h1>
+<h2 id="the-calculator-repositoryhttpsgithubcomunibo-dtm-secalculator-2">The <a href="https://github.com/unibo-dtm-se/calculator"><code>calculator</code> repository</a></h2>
+<ol>
+<li>
+<p>Ensure you have Poetry installed on your system</p>
+<ul>
+<li><a href="https://python-poetry.org/docs/#installing-with-the-official-installer">https://python-poetry.org/docs/#installing-with-the-official-installer</a></li>
+<li>run <code>poetry --version</code> to check</li>
+</ul>
+</li>
+<li>
+<p><em>Fork</em> the repository</p>
+</li>
+<li>
+<p><em>Clone</em> the repository on your system</p>
+<ul>
+<li><code>git clone https://github.com/unibo-dtm-se/calculator.git</code></li>
+<li>then, open the <code>calculator</code> folder into VS code</li>
+</ul>
+</li>
+<li>
+<p>Run <code>poetry install</code> in the terminal. This shall:</p>
+<ul>
+<li>create a <em>virtual environment</em> in the <code>.venv</code> directory
+<ul>
+<li>please ensure that a <code>.venv</code> directory <strong>exists</strong> in your project directory, after running this command</li>
+</ul>
+</li>
+<li><em>install</em> the <em>dependencies</em> declared in the <code>pyproject.toml</code> file</li>
+<li><em>lock</em> the dependencies in the <code>poetry.lock</code> file</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="dependency-ranges-and-locking">Dependency ranges and locking</h2>
+<ul>
+<li>A project can depend on a specific version of a library or on a <em>range</em> of versions</li>
+<li>We want to be able to specify ranges, but <em>retain the ability to use an exact version</em></li>
+</ul>
+<blockquote>
+<p>This software is compatible with <code>library</code> version 2.3. For our examples, we used version 2.3.<em>10</em></p>
+</blockquote>
+<p>Expressing something like this is done via <strong>dependency locking</strong>:</p>
+<ul>
+<li>Configure the build file with the range of supported versions</li>
+<li>Use the build tool to <em>lock</em> the dependencies (pinpoint their version)
+<ul>
+<li>In practice, create a lock file where the exact version is explicit</li>
+</ul>
+</li>
+<li>Locking usually also locks the <strong>transitive dependencies</strong>!
+<ul>
+<li>Once locked, we have a snapshot of a working environment</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://python-poetry.org/docs/dependency-specification/">Poetry allows range specifications and locks automatically</a></p>
+</section><section>
+<h1 id="exercise-pt-2">Exercise (pt. 2)</h1>
+<h2 id="the-calculator-repositoryhttpsgithubcomunibo-dtm-secalculator-3">The <a href="https://github.com/unibo-dtm-se/calculator"><code>calculator</code> repository</a></h2>
+<ol start="5">
+<li>
+<p>Let’s use a shell in the virtual environment created by Poetry</p>
+<ul>
+<li>run <code>poetry shell</code></li>
+<li>if this operation was fine, you should be able to run the command <code>calculator 1+1</code> to produce <code>2</code> as output
+<ul>
+<li>if you get an error, please let us know</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Make sure that <em>VS Code</em> is using the <em>same</em> environment as the one created by Poetry.</p>
+<ul>
+<li>Open the Command Palette (on <i class="fab fa-linux"></i>/<i class="fab fa-windows"></i> press <kbd>Ctrl</kbd>+<kbd>⇧</kbd>+<kbd>P</kbd>, use <kbd>⌘</kbd> instead of <kbd>Ctrl</kbd> on <i class="fab fa-apple"></i> )</li>
+<li>Type <code>Python: Select Interpreter</code></li>
+<li>Choose the local environment, i.e. the one having path <code>./.venv/bin/python</code></li>
+</ul>
+</li>
+<li>
+<p>This is an ordinary project, where you can operate <em>as usual</em></p>
+<ul>
+<li>run <code>python -m unittest discover -v -s tests</code> in the terminal</li>
+<li>try to run tests in the UI, too</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="useful-hints">Useful hints</h2>
+<ol>
+<li>
+<p>So many Python environments in the shell… how to avoid mistakes?</p>
+<blockquote>
+<p>If you want to be 100% you’re running commands in the <em>right</em> environment, you can prefix them with <code>poetry run</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry run python -m unittest discover -v -s tests
+</span></span></code></pre></div></blockquote>
+</li>
+<li>
+<p>Ok but what about VS Code’s environments?</p>
+<blockquote>
+<p>Get the habit of configuring the VS Code environment <em>manually</em> when working with Python projects</p>
+</blockquote>
+</li>
+</ol>
+</section><section>
+<h1 id="whats-the-value-added-of-poetry">What’s the value added of Poetry?</h1>
+<p>It supports publishing.</p>
+<blockquote>
+<p>Consider the following Web Page:
+<br> <a href="https://pypi.org/project/unibo-dtm-se-calculator">https://pypi.org/project/unibo-dtm-se-calculator</a></p>
+</blockquote>
+<ul>
+<li>
+<p>This is the <em>PyPI</em> page of the <code>unibo-dtm-se-calculator</code> package</p>
+<ul>
+<li>which we published by means of Poetry</li>
+</ul>
+</li>
+<li>
+<p>After the project is made available on PyPI, it can be installed by anyone</p>
+<ul>
+<li>by running <code>pip install unibo-dtm-se-calculator</code></li>
+</ul>
+</li>
+</ul>
+</section><section>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/distributed-systems-python-101/reveal-hugo/object-assign.js"></script>
+
+<a href="/distributed-systems-python-101/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"github","history":true,"mermaid":[{"gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"useMaxWidth":false}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/distributed-systems-python-101/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = { 
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+    if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+        var ytVideos = document.getElementsByTagName("iframe")
+        for (let i = 0; i < ytVideos.length; i++) {
+            var videoFrame = ytVideos[i]
+            var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+            if (isYouTube) {
+                console.log(`Removing ${videoFrame.src}`)
+                var parent = videoFrame.parentElement
+                videoFrame.remove()
+                var p = document.createElement('p')
+                p.append(
+                    document.createTextNode(
+                        "There was an embedded video here, but it is disabled in the printed version of the slides."
+                    )
+                )
+                p.append(document.createElement('br'))
+                p.append(
+                    document.createTextNode(
+                        `Visit instead ${
+                            videoFrame.src
+                        } or ${
+                            videoFrame.src.replace(
+                                /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                                "https://www.youtube.com/watch?v=$4"
+                            )
+                        }`
+                    )
+                )
+                parent.appendChild(p)
+            }
+        }
+    }
+</script>
+
+    
+  
+
+</body></html>

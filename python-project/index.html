@@ -33,7 +33,7 @@
 <h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
 <br>
 <br>
-<p>Compiled on: 2024-08-21 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p>Compiled on: 2024-08-23 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
 <p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
 </section><section>
 <h1 id="software-organization">Software Organization</h1>
@@ -256,22 +256,17 @@ multiple tools <em>proliferated</em></p>
 <li>You can install <code>Poetry</code> with the following command:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>curl -sSL https://install.python-poetry.org <span style="color:#000;font-weight:bold">|</span> python3 -
-</span></span></code></pre></div><ul>
-<li>You can create a new project with the following command:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry new my_project 
-</span></span></code></pre></div><ul>
-<li>You can add a dependency with the following command:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry add numpy
-</span></span></code></pre></div><ul>
-<li>You can install all dependencies with the following command:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry install
-</span></span></code></pre></div><ul>
-<li>You can run a script with the following command:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>poetry run python my_script.py
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Create a new project</span>
+</span></span><span style="display:flex;"><span>poetry new my_project
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Add a dependency</span>
+</span></span><span style="display:flex;"><span>poetry add numpy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Install dependencies</span>
+</span></span><span style="display:flex;"><span>poetry install
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Run a script</span>
+</span></span><span style="display:flex;"><span>poetry run python my_script.py
 </span></span></code></pre></div></section><section>
 <h2 id="poetrys-canonical-project-structure">(Poetry’s canonical) Project Structure</h2>
 <ul>
@@ -364,6 +359,8 @@ multiple tools <em>proliferated</em></p>
 
 
 
+
+  
 
   
 
