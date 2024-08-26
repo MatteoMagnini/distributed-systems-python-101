@@ -80,7 +80,7 @@ Students _must_ enroll
 - In the past years, we used __Java__ for this course
 - We switched to __Python__ for several reasons:
     + we cannot take for granted that you already know Java
-      + (students from our Bachelor's in Computer Science know Java but students from other Bachelor's may not)
+    + students from our Bachelor's in Computer Science know Java but students from other Bachelor's may not
     + __Python__ is one of the most __popular__ programming languages
     + __Python__ is arguably __easy__ to learn and __read__
     + __Python__ is __faster__ for prototyping than Java
@@ -88,19 +88,23 @@ Students _must_ enroll
 
 ---
 
-## Exam (overview)
+## Exam: overview (pt. 1)
 
 - The exam consists of a __project work__ to be _produced_ and _presented_ by students 
 
 - The project work consists of 
-    1. the _source code_ of a __software artifact__ and 
-    2. a _textual report_ describing the __design__ and __development processes__ of the artifact itself
+    1. the __source code__ of a _software artifact_ and 
+    2. a __textual report__ describing the _design_ and _development processes_ of the artifact itself
 
 - The __report is more important than the source code__
 
 - The project work can be done _individually_ or in _groups_ of __up to 3 students__ -- __4 students__ in exceptional and wee-motivated cases
 
-- Students are encouraged to __propose__ project works themes/topics/concepts
+---
+
+## Exam: overview (pt. 2)
+
+- Students are encouraged to _propose_ project works themes/topics/concepts
     + we may help in refining initial proposals
     + usually students propose project works that are _too ambitious_ (e.g., too many features for the time available)
     + considering that the course is __6 CFU__, we suggest to propose project works that can be _completed_ in __about 90 hours__ of work (per student)
@@ -111,7 +115,7 @@ Students _must_ enroll
 
 ---
 
-## Exam (workflow)
+## Exam: workflow (pt. 1)
 
 1. **Proposal**: students _propose_ a project theme/topic/concept on {{<vle>}}
     - in case of group project, the group members should be _declared_ here
@@ -125,6 +129,8 @@ Students _must_ enroll
     - the report should be written in [Latex](https://www.latex-project.org/) and stored in the repository (e.g. `README.md`)
     - the report should be written in _English_
     - you can use the [Latex template](https://github.com/pikalab-unibo/report-template)
+
+## Exam: workflow (pt. 2)
 
 5. **Submission**: students _submit_ the repository URL on {{<vle>}} and ask an _appointment_ for the discussion
     - submission is _not retractable_
