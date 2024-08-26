@@ -214,6 +214,7 @@ so that's what we will _mostly_ evaluate
     + e.g., a news aggregator (possibly scraping news from the web)
     <!-- + e.g., a social network client (possibily aggregating data from multiple sources) -->
 
+<!--
 2. A __startup__ _idea_, possibly involving some _remote service_
     + e.g., booking and managing appointments for professionals
     + e.g., general all-you-can-eat menus for restaurants
