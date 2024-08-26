@@ -457,7 +457,10 @@ Each terminal application is executing a <strong>shell</strong> program</p>
 </section><section>
 <h2 id="about-interactive-processes-pt-1">About interactive processes (pt. 1)</h2>
 <p>In the eyes of the OS, any process can be modelled as follows:</p>
-<p><img src="./process.png" alt="A process has three default streams: input, output, and error"></p>
+<!--![A process has three default streams: input, output, and error](./process.png)-->
+<p align="center">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/process.png" alt="drawing" style="width:400px;">
+</p>
 <ul>
 <li>
 <p>i.e. a black box</p>
@@ -480,7 +483,7 @@ Each terminal application is executing a <strong>shell</strong> program</p>
 </section><section>
 <h2 id="about-interactive-processes-pt-2">About interactive processes (pt. 2)</h2>
 <p>Most commonly, for <strong>interactive</strong> processes, the situation is as follows:</p>
-<!-- ![Default streams of each processes are connected to the terminal by default](./process-terminal.png) -->
+<!-- ![Default streams of each process are connected to the terminal by default](./process-terminal.png) -->
 <!-- <img src="./process-terminal.png" style='
     
     height: 30vh;
@@ -489,7 +492,9 @@ Each terminal application is executing a <strong>shell</strong> program</p>
     object-fit: contain;
 '>
  -->
-<p><img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/process-terminal.png" alt=""></p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/process-terminal.png" alt="drawing" style="width:400px;">
+</p>
 <ul>
 <li>all three streams are connected to the terminal by default
 <ul>
@@ -576,7 +581,6 @@ Each terminal application is executing a <strong>shell</strong> program</p>
 </ul>
 </section><section>
 <h1 id="code-and-code-organization">Code and code organization</h1>
-<p>(in Python)</p>
 </section><section>
 <h2 id="running-example-pt-1">Running example (pt. 1)</h2>
 <p>Let’s say we are going to build a simple <em>calculator</em> app, in Python</p>
@@ -610,7 +614,7 @@ Each terminal application is executing a <strong>shell</strong> program</p>
 <li><code>.python-version</code> (hidden on Unix) <em>textual</em> declaration of the <em>Python version</em> <strong>required</strong> by the application</li>
 <li><code>calculator.py</code>: the <em>source code</em> of the application</li>
 <li><code>requirements.txt</code>: a file containing the <em>dependencies</em> of the application</li>
-<li><code>README.md</code>: a file containing the some <em>notes</em> about of the application</li>
+<li><code>README.md</code>: a file containing some <em>notes</em> about of the application</li>
 </ul>
 </li>
 </ul>
@@ -720,133 +724,78 @@ ModuleNotFoundError: No module named 'kivy'
 </li>
 </ol>
 </section><section>
-<h2 id="compilation-vs-interpretation-of-programs">Compilation vs. Interpretation of Programs</h2>
-<ul>
-<li>
-<p>A program is a <strong>set of instructions</strong> that a <em>computer</em> can <strong>execute</strong></p>
-</li>
-<li>
-<p>Computers nowadays follow the <a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture">Von Neumann architecture</a></p>
-<ul>
-<li>put it simply, they follow a <em>list</em> of <strong>instructions</strong>, from some <strong>instruction language</strong>
-<ul>
-<li>modern CPU producers (Intel, AMD, ARM, etc.) constuct CPU which comply to well known instruction sets (e.g. <code>x86</code>, <code>amd64</code>, <code>arm</code>, etc.)
-— different architectures have different instruction sets</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Programming languages are meant to be <strong>understood</strong> by <em>humans</em> (<em>not</em> by computers)</p>
-</li>
-<li>
-<p>To make a <em>computer</em> understand a <em>program</em>, the <em>program</em> must be <strong>translated</strong> into <em>machine code</em></p>
-<ul>
-<li>i.e. a list of instructions in the <em>instruction language</em> of that computer’s <em>CPU</em></li>
-</ul>
-</li>
-<li>
-<p>The <strong>translation</strong> procedure is <em>hardware-dependent</em>, and it may vary <em>among OS</em></p>
-<ul>
-<li>to generalise, we say the translation procedure is <strong>platform-dependent</strong></li>
-</ul>
-</li>
-<li>
-<p>There are two main ways to <em>translate</em> a <em>program</em> into <em>machine code</em>:</p>
-<ol>
-<li><strong>compilation</strong>: the program is translated into an <em>executable</em>, via some <strong>compiler</strong>, and then executed</li>
-<li><strong>interpretation</strong>: the program is read by an <strong>interpreter</strong> (i.e. an <em>executable</em>), which <em>executes</em> it</li>
-</ol>
-</li>
-<li>
-<p>The result is the same (the program is executed, i.e. the computer follows the instructions)</p>
-<ul>
-<li>but the <em>implications</em> are different</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="compilation-vs-interpretation-of-programs-pt-2">Compilation vs. Interpretation of Programs (pt. 2)</h2>
-<ul>
-<li>
-<p>Compilation implies:</p>
-<ol>
-<li>a <strong>compiler</strong> should be created <em>for each</em> target platform</li>
-<li>each software project should be <strong>compiled</strong>, <em>for each</em> target platform, <em>before</em> being executed</li>
-<li>execution is potentially <em>faster</em>, as the <em>machine code</em> is <em>optimised</em> for the target CPU
-<ul>
-<li>but higher speed is not guaranteed, and it may be <em>negligible</em> in many cases</li>
-<li>but many application do not require high-speed execution</li>
-</ul>
-</li>
-<li>the compiler may spot some <em>errors</em> in the program <strong>before</strong> it is executed</li>
-</ol>
-</li>
-<li>
-<p>Interpretation implies:</p>
-<ol>
-<li>an <strong>interpreter</strong> should be created <em>for each</em> target platform</li>
-<li>the software can be executed <strong>as is</strong> on all supported platforms
-<ul>
-<li>one less step in the workflow!</li>
-</ul>
-</li>
-<li>execution is potentially <em>slower</em>, as the interpreter translates code <em>on the fly</em>
-<ul>
-<li>but the write-test-debug cycle is potentially <em>faster</em></li>
-</ul>
-</li>
-<li>the programmer may only spot <em>errors</em> in the program <strong>after</strong> it is executed</li>
-</ol>
-</li>
-<li>
-<p>Historically, <em>programming languages</em> have been <strong>categorised</strong> as <em>either compiled or interpreted</em></p>
-<ul>
-<li>C, C++, Rust, Go, etc. are <em>compiled</em> languages</li>
-<li>Ruby, JavaScript, etc. are <em>interpreted</em> languages</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="compilation-vs-interpretation-of-programs-pt-3">Compilation vs. Interpretation of Programs (pt. 3)</h2>
-<ul>
-<li>
-<p>Nowadays, the <em>distinction</em> is <em>blurred</em></p>
-<ul>
-<li>many languages are <em>both</em> compiled and interpreted, there including <em>Python</em>, and <em>Java</em>
-<ol>
-<li>on the surface, they are <em>interpreted</em></li>
-<li>but the interpreter <em>compiles</em> the code <em>on the fly</em>…</li>
-<li>and <strong>saves</strong> the compiled version for later <em>re-use</em></li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>As always, mixing opposite approaches may lead to the <em>best of both worlds</em></p>
-<ul>
-<li>e.g. the <em>interpreter</em> may spot errors in the program before it is executed</li>
-<li>e.g. in then interpretation and compilation are mixed, the <em>interpreter</em> can <em>optimise</em> the <em>machine code</em> in a very fine grained way</li>
-</ul>
-</li>
-<li>
-<p>The idea of <strong>saving</strong> a <em>hard-to-achieve</em> result for <em>later re-use</em> is called <strong>caching</strong></p>
-<ul>
-<li>and it is common trick in <em>software development</em></li>
-</ul>
-</li>
-<li>
-<p>The CPython interpreter (i.e. the <em>reference</em> Python implementaton) adopts a strategy of this sort</p>
-<ul>
-<li>the <strong>.pyc</strong> files you met before, are the <strong>cache files</strong> produced by the Python interpreter
-<ul>
-<li>upon <em>first</em> <strong>succesful</strong> execution of a script</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section><section>
+<!--
+## Compilation vs. Interpretation of Programs
+
+- A program is a __set of instructions__ that a _computer_ can __execute__
+
+- Computers nowadays follow the [Von Neumann architecture](https://en.wikipedia.org/wiki/Von_Neumann_architecture)
+    + put it simply, they follow a _list_ of __instructions__, from some __instruction language__
+        * modern CPU producers (Intel, AMD, ARM, etc.) constuct CPU which comply to well known instruction sets (e.g. `x86`, `amd64`, `arm`, etc.)
+        — different architectures have different instruction sets
+
+- Programming languages are meant to be __understood__ by _humans_ (_not_ by computers)
+
+- To make a _computer_ understand a _program_, the _program_ must be __translated__ into _machine code_
+    + i.e. a list of instructions in the _instruction language_ of that computer's _CPU_
+
+- The __translation__ procedure is _hardware-dependent_, and it may vary _among OS_
+    + to generalise, we say the translation procedure is __platform-dependent__
+
+- There are two main ways to _translate_ a _program_ into _machine code_:
+    1. __compilation__: the program is translated into an _executable_, via some __compiler__, and then executed
+    2. __interpretation__: the program is read by an __interpreter__ (i.e. an _executable_), which _executes_ it
+
+- The result is the same (the program is executed, i.e. the computer follows the instructions)
+    + but the _implications_ are different
+
+--- 
+
+## Compilation vs. Interpretation of Programs (pt. 2)
+    
+- Compilation implies:
+    1. a __compiler__ should be created _for each_ target platform
+    2. each software project should be __compiled__, _for each_ target platform, _before_ being executed
+    3. execution is potentially _faster_, as the _machine code_ is _optimised_ for the target CPU  
+        * but higher speed is not guaranteed, and it may be _negligible_ in many cases
+        * but many application do not require high-speed execution
+    4. the compiler may spot some _errors_ in the program __before__ it is executed
+
+- Interpretation implies:
+    1. an __interpreter__ should be created _for each_ target platform
+    2. the software can be executed __as is__ on all supported platforms
+        + one less step in the workflow!
+    3. execution is potentially _slower_, as the interpreter translates code _on the fly_
+        + but the write-test-debug cycle is potentially _faster_
+    4. the programmer may only spot _errors_ in the program __after__ it is executed
+
+- Historically, _programming languages_ have been __categorised__ as _either compiled or interpreted_
+    + C, C++, Rust, Go, etc. are _compiled_ languages
+    + Ruby, JavaScript, etc. are _interpreted_ languages
+
+--- 
+
+## Compilation vs. Interpretation of Programs (pt. 3)    
+
+- Nowadays, the _distinction_ is _blurred_
+    + many languages are _both_ compiled and interpreted, there including _Python_, and _Java_
+        1. on the surface, they are _interpreted_
+        2. but the interpreter _compiles_ the code _on the fly_...
+        3. and __saves__ the compiled version for later _re-use_
+
+- As always, mixing opposite approaches may lead to the _best of both worlds_
+    + e.g. the _interpreter_ may spot errors in the program before it is executed
+    + e.g. in then interpretation and compilation are mixed, the _interpreter_ can _optimise_ the _machine code_ in a very fine grained way
+
+- The idea of __saving__ a _hard-to-achieve_ result for _later re-use_ is called __caching__
+    + and it is common trick in _software development_
+
+- The CPython interpreter (i.e. the _reference_ Python implementaton) adopts a strategy of this sort
+    + the __.pyc__ files you met before, are the __cache files__ produced by the Python interpreter
+        + upon _first_ __succesful__ execution of a script
+
+---
+-->
 <h2 id="libraries-pt-1">Libraries (pt. 1)</h2>
 <ul>
 <li>
@@ -923,20 +872,10 @@ ModuleNotFoundError: No module named 'kivy'
 </section><section>
 <h2 id="runtime-pt-1">Runtime (pt. 1)</h2>
 <ul>
-<li>
-<p>The <strong>runtime</strong> is the <strong>environment</strong> in which a <em>piece</em> of software is <em>executed</em></p>
+<li>The <strong>runtime</strong> is the <strong>environment</strong> in which a <em>piece</em> of software is <em>executed</em>
 <ul>
 <li>not to be confused with <strong>run-time</strong>, which is the <em>time</em> when the <em>software</em> is <em>executed</em></li>
 </ul>
-  <!-- <img src="./fuck-logic.png" style='
-    
-    height: 10vh;
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
- -->
-<p><img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/fuck-logic.png" alt=""></p>
 </li>
 </ul>
 <blockquote>
@@ -1130,34 +1069,24 @@ ModuleNotFoundError: No module named 'kivy'
 </li>
 </ul>
 </section><section>
-<h2 id="about-release-and-deployment">About release and deployment</h2>
-<ul>
-<li>
-<p>Notice that private companies may have their own <em>private</em> package repositories</p>
-</li>
-<li>
-<p>Also notice that some private companies may want to <em>publish</em> their <em>software</em> to <em>public</em> repositories</p>
-<ul>
-<li>e.g. the <em>Play store</em> or the <em>App store</em> for mobile applications</li>
-</ul>
-</li>
-<li>
-<p>In all such cases, you may interpret the <em>release</em> and <em>deployment</em> activities as follows:</p>
-<ol>
-<li>
-<p><strong>Release</strong>: the activity of making a particular <strong>version</strong> of some <em>package</em> <strong>available</strong> on a package manager</p>
-</li>
-<li>
-<p><strong>Deployment</strong>: the process of <strong>installing</strong> a particular version of a system onto the <strong>production environment</strong></p>
-<ul>
-<li>i.e. either the machine(s) of the end users, or the servers the end users interact with</li>
-<li>this may be simple when the system is a <em>single package</em>, but it may be <em>complex</em> when the system is a <em>collection</em> of <em>interacting</em> packages</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</section><section>
+<!--
+## About release and deployment
+
+- Notice that private companies may have their own _private_ package repositories
+    
+- Also notice that some private companies may want to _publish_ their _software_ to _public_ repositories
+    + e.g. the _Play store_ or the _App store_ for mobile applications
+
+- In all such cases, you may interpret the _release_ and _deployment_ activities as follows:
+
+    1. __Release__: the activity of making a particular __version__ of some _package_ __available__ on a package manager
+
+    2. __Deployment__: the process of __installing__ a particular version of a system onto the __production environment__
+        + i.e. either the machine(s) of the end users, or the servers the end users interact with
+        + this may be simple when the system is a _single package_, but it may be _complex_ when the system is a _collection_ of _interacting_ packages
+
+---
+-->
 <h2 id="what-about-the-actual-code">What about the actual code?</h2>
 <p>Let’s delve into the <a href="https://github.com/unibo-dtm-se/compact-calculator/blob/master/calculator.py">actual code</a> of the <em>calculator</em> application</p>
 <p>(focus on the comments)</p>
@@ -1313,7 +1242,9 @@ ModuleNotFoundError: No module named 'kivy'
 </li>
 </ul>
 </section><section>
-<h2 id="a-good-way-to-decompose-code-pt-1">A good way to decompose code (pt. 1)</h2>
+<!--
+## A good way to decompose code (pt. 1)
+
 <!-- <img src="./view-model.svg" style='
     
     height: 40vh;
@@ -1321,339 +1252,303 @@ ModuleNotFoundError: No module named 'kivy'
     max-height: 80vh;
     object-fit: contain;
 '>
- -->
-<p><img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/view-model.png" alt=""></p>
-<ul>
-<li>
-<p>A good way to decompose code is to follow the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"><strong>Model-View-Controller</strong></a> (<strong>MVC</strong>) pattern</p>
-</li>
-<li>
-<p>Different <em>portions</em> of the code are <em>responsible</em> for <em>different</em> aspects of the application</p>
-<ul>
-<li>some code is responsible for <strong>modelling</strong> the (<em>admissible</em>) <em>functionalities</em> of the application</li>
-<li>some code is responsible for <strong>presenting</strong> the (<em>view</em> of the) application to the user</li>
-<li>some code is responsible for <strong>controlling</strong> the <em>interaction</em> between the <em>user</em> and the <em>application</em></li>
-<li>some code just <em>ties the pieces</em> together</li>
-</ul>
-</li>
-<li>
-<p>The desktop application is just one of many options</p>
-<ul>
-<li>as the GUI is just one of many possible views</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="a-good-way-to-decompose-code-pt-2">A good way to decompose code (pt. 2)</h2>
-<ul>
-<li>
-<p>The same <em>model</em> could be <strong>attached</strong> to several different <em>views</em>, via as many <em>controllers</em></p>
-<ul>
-<li>without needing to re-write, or re-test the <em>model</em> at all</li>
-</ul>
-</li>
-<li>
-<p>The code of each portion could be <em>developed</em> and <em>tested</em> <strong>independently</strong></p>
-<ul>
-<li>possibly, at different paces, by different teams</li>
-</ul>
-</li>
-<li>
-<p>A bug in one portion of the code may be noticed before it affects the others</p>
-</li>
-<li>
-<p>It allows managers, developers, and users to <em>reason</em> about</p>
-<ul>
-<li>what the <em>application</em> does (i.e. what functionalities it provides)</li>
-<li>how the <em>application</em> is <em>presented</em> to users (multiple options may apply)</li>
-<li>how the <em>user</em> interacts with the <em>application</em></li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="code-decomposition-and-modularity">Code decomposition and modularity</h2>
-<ul>
-<li>
-<p>The idea of <strong>decomposing</strong> code into smaller, simpler <em>units</em> is pervasive in SE</p>
-</li>
-<li>
-<p>Generally speaking, this idea is called <strong>modularity</strong></p>
-<ul>
-<li>the idea is design a software system as a <em>collection</em> of <em>composable</em> <strong>modules</strong>
-<ul>
-<li>a.k.a. <em>components</em>, <em>units</em>, <em>pieces</em>, etc.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Each module should have</p>
-<ol>
-<li>a single <strong>purspose</strong>, and clear <em>responsibilities</em></li>
-<li>a <em>well-defined</em> <strong>interface</strong> to the <em>outside world</em> (i.e. users and other modules)</li>
-<li>a number of <strong>formal parameters</strong> which make the module <em>adaptable</em> to many different instances of the same problem</li>
-</ol>
-</li>
-<li>
-<p>Two important notions here:</p>
-<ol>
-<li><strong>encapsulation</strong> $\approx$ whenever code is produced to solve a problem, let’s encapsulate it into a module for later reuse</li>
-<li><strong>information hiding</strong> $\approx$ whenever a module is produced, only its interface is important for users, the implementation is hidden, and to most extents, irrelevant</li>
-</ol>
-</li>
-<li>
-<p>Programming languages are plenty of <strong>mechanisms</strong> to support modularity, at different <em>levels</em></p>
-<ul>
-<li>e.g. <em>functions</em>, <em>classes</em>, <em>modules</em>, <em>packages</em>, etc.</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="code-decomposition-and-modularity-in-python">Code decomposition and modularity in Python</h2>
-<ol>
-<li>
-<p><strong>Functions</strong> are the most basic form of modularity in Python</p>
-<ul>
-<li>function <em>encapsulate</em> a piece of <em>code</em>, aimed at either <em>returning a value</em>, or <em>performing some action</em></li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">a</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">b</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">a</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">b</span>
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Classes</strong> are a way to <em>encapsulate</em> both <em>data</em> and <em>functions</em> into a single <em>unit</em></p>
-<ul>
-<li>syntactically, think of classes as <em>groups of related functions</em>, possibly operating on <em>shared variables</em></li>
-<li>semantically, classes are <em>templates</em> for <strong>objects</strong> (cf. <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Programming</a>)</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Pair</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fst</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">snd</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">first</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">fst</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">second</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">snd</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">first</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">second</span>
-</span></span></code></pre></div></li>
-</ol>
-</section><section>
-<h2 id="code-decomposition-and-modularity-in-python-pt-2">Code decomposition and modularity in Python (pt. 2)</h2>
-<ol start="3">
-<li>
-<p><strong>Modules</strong> are a way to <em>encapsulate</em> related <em>functions</em> and <em>classes</em> into a single <em>unit</em></p>
-<ul>
-<li>syntactically, a module is a <code>.py</code> <em>file</em> containing <em>Python code</em></li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># file: path/to/pair.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Pair</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fst</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">snd</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">first</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">fst</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">second</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">snd</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">first</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">second</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">p1</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Pair</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">p2</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Pair</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">)</span>
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Packages</strong> are a way to <em>organize</em> related <em>modules</em> in a <em>hierarchical</em> way</p>
-<ul>
-<li>syntactically, a package is a <em>directory</em> containing <em>modules</em> and <em>sub-packages</em></li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># another Python file in the same root directory</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">path.to.pair</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">p1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">p2</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">x1</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">p1</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sum</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># 3</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">x2</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">p2</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sum</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># 7</span>
-</span></span></code></pre></div></li>
-</ol>
-</section><section>
-<h2 id="code-decomposition-and-modularity-in-python-pt-3">Code decomposition and modularity in Python (pt. 3)</h2>
-<blockquote>
-<p><strong>Beware</strong>: Other programming languages may have similar mechanisms, but with different names,
-or they may have different mechanisms to achieve the same goals,
-or they may have a subset of the mechanisms available in Python</p>
-</blockquote>
-</section><section>
-<h2 id="about-code-organization">About code organization</h2>
-<p>As code is decomposed into smaller and smaller units…</p>
-<ul>
-<li>
-<p>It is important to <em>organize</em> the code in a <em>meaningful</em> way</p>
-<ul>
-<li>so that it is <em>easy</em> to <em>find</em> functionalities, hence easing their <em>reuse</em></li>
-</ul>
-</li>
-<li>
-<p>Recall that code is meant to be read by humans, and that</p>
-<ul>
-<li>development teams may change</li>
-<li>external developers using your code need to understand it</li>
-</ul>
-</li>
-<li>
-<p>As the software grows, a good <em>organization</em> of the code <em>mitigates</em> the following issues:</p>
-<ul>
-<li>it is <em>easier</em> to <em>get lost</em> in a <em>large</em> codebase</li>
-<li>it is <em>easier</em> to <em>forget</em> what a <em>piece</em> of code does, or how it works</li>
-<li>it is <em>easier</em> to <em>forget</em> whether some functionality is <em>already implemented</em>, or not</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="running-example-pt-5">Running example (pt. 5)</h2>
-<p>Let’s decompose the <em>calculator</em> application in such a way that</p>
-<ul>
-<li>it has <strong>two</strong> <em>user interfaces</em> (UI) …
-<ul>
-<li>namely, a <em>GUI</em>, and a <strong>command-line interface</strong> (<em>CLI</em>)</li>
-</ul>
-</li>
-<li>… both <em>attached</em> to the <strong>same</strong> <em>model</em></li>
-</ul>
+ 
+![](https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/view-model.png)
+
+- A good way to decompose code is to follow the [__Model-View-Controller__](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (__MVC__) pattern
+
+- Different _portions_ of the code are _responsible_ for _different_ aspects of the application
+    + some code is responsible for __modelling__ the (_admissible_) _functionalities_ of the application
+    + some code is responsible for __presenting__ the (_view_ of the) application to the user
+    + some code is responsible for __controlling__ the _interaction_ between the _user_ and the _application_
+    + some code just _ties the pieces_ together
+
+- The desktop application is just one of many options
+    + as the GUI is just one of many possible views
+
+---
+
+## A good way to decompose code (pt. 2)
+
+- The same _model_ could be __attached__ to several different _views_, via as many _controllers_
+    + without needing to re-write, or re-test the _model_ at all
+
+- The code of each portion could be _developed_ and _tested_ __independently__
+    + possibly, at different paces, by different teams
+
+- A bug in one portion of the code may be noticed before it affects the others
+
+- It allows managers, developers, and users to _reason_ about
+    + what the _application_ does (i.e. what functionalities it provides)
+    + how the _application_ is _presented_ to users (multiple options may apply)
+    + how the _user_ interacts with the _application_
+
+---
+
+## Code decomposition and modularity
+
+- The idea of __decomposing__ code into smaller, simpler _units_ is pervasive in SE
+
+- Generally speaking, this idea is called __modularity__
+    + the idea is design a software system as a _collection_ of _composable_ __modules__
+        * a.k.a. _components_, _units_, _pieces_, etc.
+
+- Each module should have 
+    1. a single __purspose__, and clear _responsibilities_
+    2. a _well-defined_ __interface__ to the _outside world_ (i.e. users and other modules)
+    3. a number of __formal parameters__ which make the module _adaptable_ to many different instances of the same problem
+
+- Two important notions here:
+    1. __encapsulation__ $\approx$ whenever code is produced to solve a problem, let's encapsulate it into a module for later reuse
+    2. __information hiding__ $\approx$ whenever a module is produced, only its interface is important for users, the implementation is hidden, and to most extents, irrelevant
+
+- Programming languages are plenty of __mechanisms__ to support modularity, at different _levels_
+    + e.g. _functions_, _classes_, _modules_, _packages_, etc.
+
+---
+
+## Code decomposition and modularity in Python
+
+1. __Functions__ are the most basic form of modularity in Python
+    + function _encapsulate_ a piece of _code_, aimed at either _returning a value_, or _performing some action_
+
+    ```python
+    def sum(a, b):
+        return a + b
+    ```
+
+2. __Classes__ are a way to _encapsulate_ both _data_ and _functions_ into a single _unit_
+    + syntactically, think of classes as _groups of related functions_, possibly operating on _shared variables_ 
+    + semantically, classes are _templates_ for __objects__ (cf. [Object Oriented Programming](https://en.wikipedia.org/wiki/Object-oriented_programming))
+
+    ```python
+    class Pair:
+        def __init__(self, fst, snd):
+            self.first = fst
+            self.second = snd
+
+        def sum(self):
+            return self.first + self.second
+    ```
+
+---
+
+## Code decomposition and modularity in Python (pt. 2)
+
+3. __Modules__ are a way to _encapsulate_ related _functions_ and _classes_ into a single _unit_
+    + syntactically, a module is a `.py` _file_ containing _Python code_
+
+    ```python
+    # file: path/to/pair.py
+    class Pair:
+        def __init__(self, fst, snd):
+            self.first = fst
+            self.second = snd
+
+        def sum(self):
+            return self.first + self.second
+
+    p1 = Pair(1, 2)
+    p2 = Pair(3, 4)
+    ```
+
+4. __Packages__ are a way to _organize_ related _modules_ in a _hierarchical_ way
+    + syntactically, a package is a _directory_ containing _modules_ and _sub-packages_
+
+    ```python
+    # another Python file in the same root directory
+    from path.to.pair import p1, p2
+    
+    x1 = p1.sum() # 3
+    x2 = p2.sum() # 7
+    ```
+
+---
+
+## Code decomposition and modularity in Python (pt. 3)
+
+> __Beware__: Other programming languages may have similar mechanisms, but with different names,
+> or they may have different mechanisms to achieve the same goals,
+> or they may have a subset of the mechanisms available in Python
+
+---
+
+## About code organization
+
+As code is decomposed into smaller and smaller units...
+
+- It is important to _organize_ the code in a _meaningful_ way
+    + so that it is _easy_ to _find_ functionalities, hence easing their _reuse_
+
+- Recall that code is meant to be read by humans, and that 
+    + development teams may change
+    + external developers using your code need to understand it
+
+- As the software grows, a good _organization_ of the code _mitigates_ the following issues:
+    + it is _easier_ to _get lost_ in a _large_ codebase
+    + it is _easier_ to _forget_ what a _piece_ of code does, or how it works
+    + it is _easier_ to _forget_ whether some functionality is _already implemented_, or not
+
+---
+
+## Running example (pt. 5)
+
+Let's decompose the _calculator_ application in such a way that 
+- it has __two__ _user interfaces_ (UI) ...
+    + namely, a _GUI_, and a __command-line interface__ (_CLI_)
+- ... both _attached_ to the __same__ _model_
+
+<p align="center">
 
 <div class="container w-100 m-0 p-0">
-    <div class="row ">
+    <div class='row '>
 
 
-<div class="col "><h3 id="the-gui">The GUI</h3>
-<p><img src="./calculator.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m calculator.ui.gui
-</span></span></code></pre></div></div>
+<div class='col '><h3 id="the-gui">The GUI</h3>
+<!--![](./calculator.png) ->
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/calculator.png" height="300">
+
+```bash
+python -m calculator.ui.gui
+```
+
+</div>
 
 
-<div class="col "><h3 id="the-cli">The CLI</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m calculator.ui.cli <span style="color:#4e9a06">"1 + 1"</span>
+<div class='col '><h3 id="the-cli">The CLI</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>python -m calculator.ui.cli <span style="color:#4e9a06">&#34;1 + 1&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">2</span>
-</span></span><span style="display:flex;"><span>python -m calculator.ui.cli <span style="color:#4e9a06">"2*3"</span>
+</span></span><span style="display:flex;"><span>python -m calculator.ui.cli <span style="color:#4e9a06">&#34;2*3&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">6</span>
 </span></span></code></pre></div></div>
 </div>
 </div>
-</section><section>
-<h2 id="running-example-pt-6">Running example (pt. 6)</h2>
-<p>The source code for such application is available here:</p>
-<p><a href="https://github.com/unibo-dtm-se/modular-calculator">https://github.com/unibo-dtm-se/modular-calculator</a></p>
-<h3 id="to-do-list-1">TO-DO list</h3>
-<ol>
-<li>Download the code by clicking on the <em>green “Code” button</em>, and then <strong>“Download ZIP”</strong></li>
-<li>Unpack the archive in a directory of your choice</li>
-<li>Open the directory in some lightweight IDE like <strong>VS Code</strong>
-<ul>
-<li>possibly exploit the <strong>integrated terminal</strong></li>
-</ul>
-</li>
-<li>Inspect the content of the directory (e.g. via the terminal, using the <code>tree</code> command)
-<ul>
-<li>you should note the following directories and files:
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>modular-calculator/     <span style="color:#8f5902;font-style:italic"># project root directory</span>
-</span></span><span style="display:flex;"><span>├── calculator/         <span style="color:#8f5902;font-style:italic"># the main package of the project (full name: calculator)</span>
-</span></span><span style="display:flex;"><span>│   ├── __init__.py     <span style="color:#8f5902;font-style:italic"># the package initialization content</span>
-</span></span><span style="display:flex;"><span>│   └── ui/             <span style="color:#8f5902;font-style:italic"># the user interface sub-package (full name: calculator.ui)</span>
-</span></span><span style="display:flex;"><span>│       ├── cli.py      <span style="color:#8f5902;font-style:italic"># the command-line interface module (full name: calculator.ui.cli)</span>
-</span></span><span style="display:flex;"><span>│       └── gui.py      <span style="color:#8f5902;font-style:italic"># the graphical user interface module (full name: calculator.ui.gui)</span>
-</span></span><span style="display:flex;"><span>├── .python-version     <span style="color:#8f5902;font-style:italic"># the Python version required by the project</span>
-</span></span><span style="display:flex;"><span>├── README.md           <span style="color:#8f5902;font-style:italic"># a file containing the some _notes_ about of the application</span>
-</span></span><span style="display:flex;"><span>├── requirements.txt    <span style="color:#8f5902;font-style:italic"># a file declaring the _dependencies_ of the application</span>
-</span></span><span style="display:flex;"><span>└── .vscode             <span style="color:#8f5902;font-style:italic"># a directory containing the VS Code configuration</span>
-</span></span><span style="display:flex;"><span>    └── launch.json     <span style="color:#8f5902;font-style:italic"># a file containing the VS Code launch configuration</span>
-</span></span></code></pre></div></li>
-</ul>
-</li>
-</ol>
-</section><section>
-<h2 id="running-example-pt-7">Running example (pt. 7)</h2>
-<ol start="5">
-<li>
-<p>Let’s try to run the GUI application</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m calculator.ui.gui
-</span></span></code></pre></div><p>the application should start, and you should see the calculator Window</p>
-</li>
-<li>
-<p>Let’s try to run the CLI application</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>python -m calculator.ui.cli
-</span></span></code></pre></div><p>you should get a hint about how to use the CLI application</p>
-</li>
-<li>
-<p>Let’s analyze how the code has been decomposed</p>
-<ol>
-<li>have a look to the <code>calculator</code> module
-<ul>
-<li>namely, the <code>calculator/__init__.py</code> file</li>
-</ul>
-</li>
-<li>have a look to the <code>calculator.ui.gui</code> module
-<ul>
-<li>namely, the <code>calculator/ui/gui.py</code> file</li>
-</ul>
-</li>
-<li>have a look to the <code>calculator.ui.cli</code> module
-<ul>
-<li>namely, the <code>calculator/ui/cli.py</code> file</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-</section><section>
-<h2 id="the-calculator-model-pt-1">The calculator model (pt. 1)</h2>
-<p>Code from <code>calculator/__init__.py</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">Number</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">int</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#204a87">float</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">""</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_ensure_is_digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">int</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87">isinstance</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">value</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">int</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">value</span> <span style="color:#204a87;font-weight:bold">not</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">range</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">raise</span> <span style="color:#c00;font-weight:bold">ValueError</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Value must a digit in [0, 9]: "</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">value</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87">int</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">value</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_ensure_is_digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">plus</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"+"</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">minus</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"-"</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">multiply</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"*"</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">divide</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"/"</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">dot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"."</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Number</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">eval</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87">isinstance</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Number</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">result</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">else</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">raise</span> <span style="color:#c00;font-weight:bold">ValueError</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Result is not a number: "</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">SyntaxError</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">""</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">raise</span> <span style="color:#c00;font-weight:bold">ValueError</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Invalid expression: "</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">e</span>
-</span></span></code></pre></div></section><section>
-<h2 id="the-calculator-model-pt-2">The calculator model (pt. 2)</h2>
+</p>
+
+---
+
+## Running example (pt. 6)
+
+The source code for such application is available here:
+
+<https://github.com/unibo-dtm-se/modular-calculator>
+
+### TO-DO list
+1. Download the code by clicking on the _green "Code" button_, and then __"Download ZIP"__
+2. Unpack the archive in a directory of your choice
+3. Open the directory in some lightweight IDE like __VS Code__
+    + possibly exploit the __integrated terminal__
+4. Inspect the content of the directory (e.g. via the terminal, using the `tree` command)
+    + you should note the following directories and files:
+        ```bash
+        modular-calculator/     # project root directory
+        ├── calculator/         # the main package of the project (full name: calculator)
+        │   ├── __init__.py     # the package initialization content
+        │   └── ui/             # the user interface sub-package (full name: calculator.ui)
+        │       ├── cli.py      # the command-line interface module (full name: calculator.ui.cli)
+        │       └── gui.py      # the graphical user interface module (full name: calculator.ui.gui)
+        ├── .python-version     # the Python version required by the project
+        ├── README.md           # a file containing the some _notes_ about of the application
+        ├── requirements.txt    # a file declaring the _dependencies_ of the application
+        └── .vscode             # a directory containing the VS Code configuration
+            └── launch.json     # a file containing the VS Code launch configuration
+        ```
+
+---
+
+## Running example (pt. 7)
+
+5. Let's try to run the GUI application
+    ```bash
+    python -m calculator.ui.gui
+    ```
+
+    the application should start, and you should see the calculator Window
+
+6. Let's try to run the CLI application
+    ```bash
+    python -m calculator.ui.cli
+    ```
+
+    you should get a hint about how to use the CLI application
+
+7. Let's analyze how the code has been decomposed
+    1. have a look to the `calculator` module
+        * namely, the `calculator/__init__.py` file
+    2. have a look to the `calculator.ui.gui` module
+        * namely, the `calculator/ui/gui.py` file
+    3. have a look to the `calculator.ui.cli` module
+        * namely, the `calculator/ui/cli.py` file
+
+---
+
+## The calculator model (pt. 1)
+
+Code from `calculator/__init__.py`:
+```python
+Number = int | float
+
+class Calculator:
+
+    def __init__(self):
+        self.expression = ""
+
+    def _ensure_is_digit(self, value: int | str):
+        if isinstance(value, str):
+            value = int(value)
+        if value not in range(10):
+            raise ValueError("Value must a digit in [0, 9]: " + value)
+        return value
+
+    def _append(self, value):
+        self.expression += str(value)
+    
+    def digit(self, value: int | str):
+        value = self._ensure_is_digit(value)
+        self._append(value)
+    
+    def plus(self):
+        self._append("+")
+
+    def minus(self):
+        self._append("-")
+    
+    def multiply(self):
+        self._append("*")
+    
+    def divide(self):
+        self._append("/")
+
+    def dot(self):
+        self._append(".")
+    
+    def compute_result(self) -> Number:
+        try:
+            result = eval(self.expression)
+            if isinstance(result, Number):
+                self.expression = str(result)
+                return result
+            else:
+                raise ValueError("Result is not a number: " + str(result))
+        except SyntaxError as e:
+            expression = self.expression
+            self.expression = ""
+            raise ValueError("Invalid expression: " + expression) from e
+```
+
+---
+
+## The calculator model (pt. 2)
+
 
 <div class="container w-100 m-0 p-0">
-    <div class="row ">
+    <div class='row '>
 
 
-<div class="col "><p>Class diagram:</p>
-<figure id="plantuml-figure-1724678056897829066" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<div class='col '><p>Class diagram:</p>
+<figure id="plantuml-figure-1724680983338735014" class="plantuml" 
+    alt=""
+    style="width: 100%;max-width: 95vw;max-height: 80vh;">
 <p>class Calculator {
 + expression: str
 - _ensure_is_digit(value: int | str) → int
@@ -1668,13 +1563,13 @@ or they may have a subset of the mechanisms available in Python</p>
 }</p>
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1724678056897829066");
+    handlePlantumlFigureByID("plantuml-figure-1724680983338735014");
 </script>
 </div>
 
 
-<div class="col "><p>Usage example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">calculator</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Calculator</span>
+<div class='col '><p>Usage example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">calculator</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Calculator</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># create a new calculator</span>
 </span></span><span style="display:flex;"><span>
@@ -1682,108 +1577,123 @@ or they may have a subset of the mechanisms available in Python</p>
 </span></span><span style="display:flex;"><span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># append the plus sign</span>
 </span></span><span style="display:flex;"><span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># append digit 2</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># "1+2"</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># &#34;1+2&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">())</span> <span style="color:#8f5902;font-style:italic"># 3</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># ""</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># &#34;&#34;</span>
 </span></span></code></pre></div></div>
 </div>
 </div>
-</section><section>
-<h2 id="the-calculator-gui">The calculator GUI</h2>
-<p>Code from <code>calculator/ui/gui.py</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">kivy.app</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">App</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">kivy.uix.boxlayout</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">BoxLayout</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">kivy.uix.button</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Button</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">kivy.uix.label</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Label</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">calculator</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Calculator</span> <span style="color:#8f5902;font-style:italic"># notice this line</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">BUTTONS_NAMES</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'7'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'8'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'9'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'/'</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'4'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'5'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'6'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'*'</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'1'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'2'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'3'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'-'</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">'.'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'0'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'='</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'+'</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CalculatorApp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">App</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">build</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># new entry here</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">grid</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">BoxLayout</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">orientation</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">'vertical'</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Label</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">text</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"0"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">font_size</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">24</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size_hint</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0.75</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">grid</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">add_widget</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">button_names_row</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">BUTTONS_NAMES</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">grid_row</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">BoxLayout</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">button_name</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">button_names_row</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#000">button</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">text</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">button_name</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">font_size</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">24</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">on_press</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">on_button_press</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#000">grid_row</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">add_widget</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">button</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">grid</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">add_widget</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">grid_row</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">grid</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">on_button_press</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">button</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#8f5902;font-style:italic"># completely rewritten</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">match</span> <span style="color:#000">button</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"="</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">ValueError</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"Error"</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"+"</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"-"</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">minus</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"*"</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">multiply</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"/"</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">divide</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#4e9a06">"."</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">dot</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">case</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">button</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">__name__</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">'__main__'</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">CalculatorApp</span><span style="color:#000;font-weight:bold">()</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">run</span><span style="color:#000;font-weight:bold">()</span>
-</span></span></code></pre></div></section><section>
-<h2 id="the-calculator-cli">The calculator CLI</h2>
-<p>Content of <code>calculator/ui/cli.py</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">calculator</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Calculator</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">sys</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CalculatorCLI</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">args</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_args</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">args</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">run</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87;font-weight:bold">not</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_args</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Usage: python -m calculator.ui.cli &lt;expression&gt;"</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">" "</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">join</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_args</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">try</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_calc</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">ValueError</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">e</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#204a87">print</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">e</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">__name__</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">'__main__'</span><span style="color:#000;font-weight:bold">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">CalculatorCLI</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sys</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">:])</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">run</span><span style="color:#000;font-weight:bold">()</span>
-</span></span></code></pre></div></section><section>
-<h2 id="overview-on-code-organization-pt-1">Overview on code organization (pt. 1)</h2>
 
-<figure id="plantuml-figure-1724678056900816528" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+---
+
+## The calculator GUI 
+
+Code from `calculator/ui/gui.py`:
+```python
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from calculator import Calculator # notice this line
+
+
+BUTTONS_NAMES = [
+    ['7', '8', '9', '/'],
+    ['4', '5', '6', '*'],
+    ['1', '2', '3', '-'],
+    ['.', '0', '=', '+'],
+]
+
+
+class CalculatorApp(App):
+    def build(self):
+        self._calc = Calculator() # new entry here
+
+        grid = BoxLayout(orientation='vertical')
+
+        self._display = Label(text="0", font_size=24, size_hint=(1, 0.75))
+        grid.add_widget(self._display)
+
+        for button_names_row in BUTTONS_NAMES:
+            grid_row = BoxLayout()
+            for button_name in button_names_row:
+                button = Button(text=button_name, font_size=24, on_press=self.on_button_press)
+                grid_row.add_widget(button)
+            grid.add_widget(grid_row)
+
+        return grid
+
+    def on_button_press(self, button): # completely rewritten
+        match button.text:
+            case "=":
+                try:
+                    result = self._calc.compute_result()
+                    self._display.text = str(result)
+                except ValueError as e:
+                    self._display.text = "Error"
+            case "+":
+                self._calc.plus()
+                self._display.text = self._calc.expression
+            case "-":
+                self._calc.minus()
+                self._display.text = self._calc.expression
+            case "*":
+                self._calc.multiply()
+                self._display.text = self._calc.expression
+            case "/":
+                self._calc.divide()
+                self._display.text = self._calc.expression
+            case ".":
+                self._calc.dot()
+                self._display.text = self._calc.expression
+            case _:
+                self._calc.digit(button.text)
+                self._display.text = self._calc.expression
+
+
+if __name__ == '__main__':
+    CalculatorApp().run()
+```
+
+---
+
+## The calculator CLI
+
+Content of `calculator/ui/cli.py`:
+```python
+from calculator import Calculator
+import sys
+
+
+class CalculatorCLI:
+    def __init__(self, args):
+        self._args = args
+        self._calc = Calculator()
+
+    def run(self):
+        if not self._args:
+            print("Usage: python -m calculator.ui.cli <expression>")
+            return
+        self._calc.expression = " ".join(self._args)
+        try:
+            result = self._calc.compute_result()
+            print(result)
+        except ValueError as e:
+            print(e)
+
+
+if __name__ == '__main__':
+    CalculatorCLI(sys.argv[1:]).run()
+```
+
+---
+
+## Overview on code organization (pt. 1)
+
+
+<figure id="plantuml-figure-1724680983340422108" class="plantuml" 
+    alt=""
+    style="width: 100%;max-width: 95vw;max-height: 80vh;">
     
 
 package calculator {
@@ -1825,13 +1735,19 @@ package calculator {
 
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1724678056900816528");
+    handlePlantumlFigureByID("plantuml-figure-1724680983340422108");
 </script>
-</section><section>
-<h2 id="overview-on-code-organization-pt-2">Overview on code organization (pt. 2)</h2>
-<p>(including dependencies from Python and Kivy)</p>
 
-<figure id="plantuml-figure-1724678056901006234" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+---
+
+## Overview on code organization (pt. 2)
+
+(including dependencies from Python and Kivy)
+
+
+<figure id="plantuml-figure-1724680983340454859" class="plantuml" 
+    alt=""
+    style="width: 100%;max-width: 95vw;max-height: 80vh;">
     
 
 package "Python Standard Library" as Python {
@@ -1896,575 +1812,398 @@ package kivy {
     }
 }
 
-CalculatorApp --|&gt; App: subtype of
+CalculatorApp --|> App: subtype of
 CalculatorApp *-- BoxLayout: composed by
 CalculatorApp *-- Button: composed by
 CalculatorApp *-- Label: composed by
-calculator .left.&gt; Python: uses extensively
+calculator .left.> Python: uses extensively
 
 
 </figure>
 <script>
-    handlePlantumlFigureByID("plantuml-figure-1724678056901006234");
+    handlePlantumlFigureByID("plantuml-figure-1724680983340454859");
 </script>
-</section><section>
-<h2 id="many-hidden-concepts-in-this-example-1">Many hidden concepts in this example</h2>
-<ol>
-<li>
-<p>the notion of <strong>software design</strong></p>
-<ul>
-<li>i.e. the activity of representing <em>relevant</em> <strong>concepts</strong> (and their <strong>relationships</strong>) from the <em>domain</em> at hand, into the <em>code</em>
-<ul>
-<li>or, the <em>result</em> of such activity (i.e. the representation itself)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>the notion of <strong>interface</strong>, and, most notably:</p>
-<ul>
-<li>the <strong>user</strong> <em>interface</em> (<strong>UI</strong>)
-<ul>
-<li>i.e. the means by which <em>users</em> interact with the <em>application</em> (in order to use it)</li>
-</ul>
-</li>
-<li>the <strong>application programming</strong> <em>interface</em> (<strong>API</strong>)
-<ul>
-<li>i.e. the means by which <em>developers</em> interact with the <em>application</em> (in order to write more software on top of it)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>the notion of <strong>project structure</strong></p>
-<ul>
-<li>i.e. how to <em>organize</em> files and directories in software project</li>
-</ul>
-</li>
-</ol>
-</section><section>
-<h2 id="about-the-project-structure">About the project structure</h2>
-<ul>
-<li>
-<p>It’s important to <strong>organize</strong> <em>files</em> and <em>directories</em> in software projects in a <em>clear</em> way</p>
-<ul>
-<li>this is important for both <em>humans</em> and <em>interpreters</em>/<em>compilers</em>
-<ul>
-<li>humans may <em>benefit</em> by getting more easily <em>oriented</em> when navigating the <em>source code</em></li>
-<li>tools most commonly <em>require</em> a <em>fixed structure</em> to <em>operate</em> correctly</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>For <em>Python</em> projects, the ultimate project structure will be clear along the way in the course…</p>
-</li>
-<li>
-<p>… for the time being, let’s stick to the following project structure:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>root-directory/
-</span></span><span style="display:flex;"><span>├── main_package/
-</span></span><span style="display:flex;"><span>│   ├── __init__.py
-</span></span><span style="display:flex;"><span>│   ├── sub_module.py
-</span></span><span style="display:flex;"><span>│   └── sub_package/ 
-</span></span><span style="display:flex;"><span>│       ├── __init__.py 
-</span></span><span style="display:flex;"><span>│       └── sub_sub_module.py 
-</span></span><span style="display:flex;"><span>├── .python-version
-</span></span><span style="display:flex;"><span>├── README.md
-</span></span><span style="display:flex;"><span>└── requirements.txt
-</span></span></code></pre></div></li>
-<li>
-<p>Further files/directories will pop-up in the next lectures</p>
-<ul>
-<li>e.g. for <em>automated tests</em></li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="about-user-interfaces-pt-1">About user interfaces (pt. 1)</h2>
-<ul>
-<li>
-<p>An application’s UI is any means by which <strong>human users</strong> interact with the application</p>
-<ul>
-<li>e.g. a <em>graphical</em> user interface (<strong>GUI</strong>), a <em>command-line</em> interface (<strong>CLI</strong>), a <em>web page</em>, a <em>voice user interface</em> (<strong>VUI</strong>), etc.</li>
-</ul>
-</li>
-<li>
-<p>Regardless of the <em>appearance</em>, the <strong>functioning</strong> of the UI can be summarised as follows:</p>
-<ol>
-<li><strong>present</strong> the <em>initial UI</em> to the user</li>
-<li><strong>wait</strong> for <em>inputs</em></li>
-<li><strong>process</strong> the <em>inputs</em></li>
-<li><strong>present</strong> the <em>output</em> / <em>effects</em> of the processing to the user
-<ul>
-<li>possibly, <strong>exit</strong> if the inputs says to do so</li>
-</ul>
-</li>
-<li><strong>go</strong> back to <em>2</em></li>
-</ol>
-</li>
-<li>
-<p>Engineering the UI is a <em>complex</em> task, as it involves <em>many</em> aspects of <em>human-computer interaction</em> (<strong>HCI</strong>)…</p>
-<ul>
-<li>e.g. <em>usability</em>, <em>accessibility</em>, <em>aesthetics</em>, <em>ergonomics</em>, etc.</li>
-</ul>
-</li>
-<li>
-<p>… and, of course, elciting the admissible <em>inputs</em> for the UI:</p>
-<ul>
-<li>and engineering how are being <strong>capture</strong> or <em>recognised</em></li>
-<li>and what <strong>processing</strong> means for each of them</li>
-<li>and how to <strong>present</strong> the corresponding <em>outputs</em> / <em>effects</em></li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="about-user-interfaces-pt-2">About user interfaces (pt. 2)</h2>
-<p>Disclaimer:</p>
-<blockquote>
-<p>While <strong>UI</strong> is very <em>important</em>, and <em>engineering UI</em> <strong>is part</strong> <em>of SE</em>, it is <em>not</em> the <em>only</em> part of SE.
-It is far <em>more important</em> in SE to take care about the <strong>API</strong></p>
-</blockquote>
+
+--- 
+
+## Many hidden concepts in this example
+
+1. the notion of __software design__
+    - i.e. the activity of representing _relevant_ __concepts__ (and their __relationships__) from the _domain_ at hand, into the _code_
+        + or, the _result_ of such activity (i.e. the representation itself)
+
+2. the notion of __interface__, and, most notably:
+    - the __user__ _interface_ (__UI__)
+        + i.e. the means by which _users_ interact with the _application_ (in order to use it)
+    - the __application programming__ _interface_ (__API__)
+        + i.e. the means by which _developers_ interact with the _application_ (in order to write more software on top of it)
+
+3. the notion of __project structure__
+    - i.e. how to _organize_ files and directories in software project
+
+---
+
+## About the project structure
+
+- It's important to __organize__ _files_ and _directories_ in software projects in a _clear_ way
+    + this is important for both _humans_ and _interpreters_/_compilers_
+        * humans may _benefit_ by getting more easily _oriented_ when navigating the _source code_
+        * tools most commonly _require_ a _fixed structure_ to _operate_ correctly
+
+- For _Python_ projects, the ultimate project structure will be clear along the way in the course...
+
+- ... for the time being, let's stick to the following project structure:
+
+    ```bash
+    root-directory/
+    ├── main_package/
+    │   ├── __init__.py
+    │   ├── sub_module.py
+    │   └── sub_package/ 
+    │       ├── __init__.py 
+    │       └── sub_sub_module.py 
+    ├── .python-version
+    ├── README.md
+    └── requirements.txt
+    ```
+
+- Further files/directories will pop-up in the next lectures
+    + e.g. for _automated tests_
+
+---
+
+## About user interfaces (pt. 1)
+
+- An application's UI is any means by which __human users__ interact with the application
+    + e.g. a _graphical_ user interface (__GUI__), a _command-line_ interface (__CLI__), a _web page_, a _voice user interface_ (__VUI__), etc.
+
+- Regardless of the _appearance_, the __functioning__ of the UI can be summarised as follows:
+    1. __present__ the _initial UI_ to the user
+    2. __wait__ for _inputs_
+    3. __process__ the _inputs_
+    4. __present__ the _output_ / _effects_ of the processing to the user
+        + possibly, __exit__ if the inputs says to do so
+    5. __go__ back to _2_
+
+- Engineering the UI is a _complex_ task, as it involves _many_ aspects of _human-computer interaction_ (__HCI__)...
+    + e.g. _usability_, _accessibility_, _aesthetics_, _ergonomics_, etc.
+
+- ... and, of course, elciting the admissible _inputs_ for the UI:
+    + and engineering how are being __capture__ or _recognised_
+    + and what __processing__ means for each of them
+    + and how to __present__ the corresponding _outputs_ / _effects_
+
+---
+
+## About user interfaces (pt. 2)
+
+Disclaimer:
+
+> While __UI__ is very _important_, and _engineering UI_ __is part__ _of SE_, it is _not_ the _only_ part of SE.
+> It is far _more important_ in SE to take care about the __API__
+
 <br>
-<p>The rationale is as follows:</p>
-<ul>
-<li>UI may change</li>
-<li>a good API allows to <em>change</em> the UI without <em>rewriting</em> the whole software</li>
-</ul>
-</section><section>
-<h2 id="about-application-programming-interfaces-pt-1">About application programming interfaces (pt. 1)</h2>
-<blockquote>
-<p>The <strong>application programming interface</strong> (<em>API</em>) of a software is:</p>
-<ol>
-<li>the set of <strong>functionalities</strong> the software <em>provides</em> to <strong>developers</strong> for building <em>other</em> software on top of it</li>
-<li>a (semi-)formal <strong>specification</strong> of 1, including, <em>for each functionality</em>:</li>
-</ol>
-<ul>
-<li>the <em>name</em> by which it is known / <em>referenced</em></li>
-<li>the <em>formal parameters</em> it accepts as <em>input</em></li>
-<li>the <em>return values</em> or <em>effects</em> it produces as <em>outcome</em></li>
-<li>the <em>pre-conditions</em> and <em>post-conditions</em> it satisfies/establishes</li>
-</ul>
-</blockquote>
-</section><section>
-<h2 id="about-application-programming-interfaces-pt-2">About application programming interfaces (pt. 2)</h2>
-<p>Recall that software is often <em>built</em> on top of <em>other</em> software, in a <strong>layered</strong> way:
-<img src="./layers.jpg" alt="Layers in a software system"></p>
-<ul>
-<li>
-<p>You can think of a piece of software as a <strong>provider</strong> of <em>services</em> to their users</p>
-<ul>
-<li>here users are, again, software</li>
-</ul>
-</li>
-<li>
-<p>At the same time, a piece of software could be a <strong>consumer</strong> of services from other software</p>
-</li>
-</ul>
-</section><section>
-<h2 id="about-application-programming-interfaces-pt-3">About application programming interfaces (pt. 3)</h2>
-<h3 id="useful-metaphor">Useful metaphor</h3>
-<ul>
-<li>
-<p>The <em>API</em> is the <strong>contract</strong> between the <em>provider</em> and the <em>consumer</em> of services</p>
-</li>
-<li>
-<p>The <em>provider</em> of the services knows <strong>how to provide</strong> the services</p>
-</li>
-<li>
-<p>The <em>consumer</em> of the services knows <strong>what</strong> the services do, and <strong>how to exploit</strong> them</p>
-</li>
-<li>
-<p>A <strong>change</strong> in the contract would <em>affect both</em> sides</p>
-</li>
-</ul>
-</section><section>
-<h2 id="application-programming-interfaces-in-practice-pt-1">Application programming interfaces in practice (pt. 1)</h2>
-<h3 id="rule-of-thumb-for-python-projects">Rule of thumb for Python projects</h3>
-<p>The <em>API</em> of a <em>Python project</em> consists of</p>
-<ol>
-<li>the set of all <em>public</em> <strong>modules</strong></li>
-<li>plus, the set of all <em>public</em> <strong>definitions</strong> in those modules
-<ul>
-<li>e.g. functions, classes, variables, constants</li>
-</ul>
-</li>
-<li>plus, the set of all <em>public</em> <strong>attributes</strong> of those definitions
-<ul>
-<li>e.g. methods, properties, fields</li>
-</ul>
-</li>
-</ol>
-<h3 id="what-does-public-means-here">What does “public” means here?</h3>
-<blockquote>
-<ul>
-<li>“<strong>Public</strong>” means “intended for <em>external</em> usage”
-<ul>
-<li>i.e. “to be used by <em>other</em> developers (other than the ones who wrote the current code)”</li>
-</ul>
-</li>
-<li>the opposite of “public” is “<strong>private</strong>”</li>
-</ul>
-</blockquote>
-</section><section>
-<h2 id="application-programming-interfaces-in-practice-pt-2">Application programming interfaces in practice (pt. 2)</h2>
-<ul>
-<li>
-<p>In Python, everything is <em>public</em> by convention</p>
-<ul>
-<li>except for the <em>names</em> starting with one or more <em>underscores</em> (<code>_</code>)</li>
-<li>yet, names wrapped by <em>double</em> underscores (<code>__example__</code>) are <a href="https://realpython.com/python-magic-methods/">magic methods</a>
-<ul>
-<li>they <strong>alter</strong> the <em>behaviour</em> of the <em>classes</em> / <em>modules</em> they belong to…</li>
-<li>… hence, you should consider them as <em>public</em> too</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Beware</strong> because Python adopts the <a href="https://stackoverflow.com/a/70736">“consenting adults”</a> convention</p>
-<ul>
-<li>nothing <em>prevents</em> you from using <em>private</em> names, or <em>magic</em> names, as if they were <em>public</em></li>
-<li>yet, in doing that you are opening yourself to a <strong>risk</strong>
-<ul>
-<li>i.e. the <em>private</em> functionality you’re using may <strong>change abruptly</strong> in some future version of the software</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+The rationale is as follows:
+- UI may change
+- a good API allows to _change_ the UI without _rewriting_ the whole software
+
+---
+
+## About application programming interfaces (pt. 1)
+
+> The __application programming interface__ (_API_) of a software is:
+> 1. the set of __functionalities__ the software _provides_ to __developers__ for building _other_ software on top of it
+> 2. a (semi-)formal __specification__ of 1, including, _for each functionality_:
+>   + the _name_ by which it is known / _referenced_
+>   + the _formal parameters_ it accepts as _input_
+>   + the _return values_ or _effects_ it produces as _outcome_
+>   + the _pre-conditions_ and _post-conditions_ it satisfies/establishes
+
+---
+
+## About application programming interfaces (pt. 2)
+
+Recall that software is often _built_ on top of _other_ software, in a __layered__ way:
+![Layers in a software system](./layers.jpg)
+
+- You can think of a piece of software as a __provider__ of _services_ to their users
+    + here users are, again, software
+
+- At the same time, a piece of software could be a __consumer__ of services from other software
+
+---
+
+## About application programming interfaces (pt. 3)
+
+### Useful metaphor
+
+- The _API_ is the __contract__ between the _provider_ and the _consumer_ of services
+
+- The _provider_ of the services knows __how to provide__ the services
+
+- The _consumer_ of the services knows __what__ the services do, and __how to exploit__ them
+
+- A __change__ in the contract would _affect both_ sides
+
+---
+
+## Application programming interfaces in practice (pt. 1)
+
+### Rule of thumb for Python projects
+
+The _API_ of a _Python project_ consists of
+1. the set of all _public_ __modules__
+2. plus, the set of all _public_ __definitions__ in those modules
+    + e.g. functions, classes, variables, constants
+3. plus, the set of all _public_ __attributes__ of those definitions
+    + e.g. methods, properties, fields
+
+### What does "public" means here?
+
+> - "__Public__" means "intended for _external_ usage"
+>   + i.e. "to be used by _other_ developers (other than the ones who wrote the current code)"
+> - the opposite of "public" is "__private__"
+
+---
+
+## Application programming interfaces in practice (pt. 2)
+
+- In Python, everything is _public_ by convention
+    + except for the _names_ starting with one or more _underscores_ (`_`)
+    + yet, names wrapped by _double_ underscores (`__example__`) are [magic methods](https://realpython.com/python-magic-methods/) 
+        * they __alter__ the _behaviour_ of the _classes_ / _modules_ they belong to...
+        * ... hence, you should consider them as _public_ too
+
+- __Beware__ because Python adopts the ["consenting adults"](https://stackoverflow.com/a/70736) convention
+    + nothing _prevents_ you from using _private_ names, or _magic_ names, as if they were _public_
+    + yet, in doing that you are opening yourself to a __risk__
+        * i.e. the _private_ functionality you're using may __change abruptly__ in some future version of the software
+
 <br>
-<p>Another way to think about <em>private</em> stuff in a software project is:</p>
-<blockquote>
-<p><em>private</em> stuff may change <strong>without notice</strong>, in any moment</p>
-</blockquote>
-</section><section>
-<h2 id="application-programming-interfaces-in-practice-pt-3">Application programming interfaces in practice (pt. 3)</h2>
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Class_diagram">Class diagrams</a> are a good way to represent the <em>API</em> (as well as the <em>structure</em>) of a <em>software project</em></p>
-<ul>
-<li>they show the <em>public</em> classes, and their <em>public</em> methods and attributes</li>
-<li>they show the <em>relationships</em> between the classes
-<ul>
-<li>e.g. the <strong>sub-typing</strong> and <strong>composition</strong> relationships, etc.</li>
-</ul>
-</li>
-<li>they show the <em>disposition</em> of the classes into <em>packages</em> and <em>modules</em></li>
-<li>they highlight <strong>public and private</strong> members of classes / modules</li>
-</ul>
-</li>
-<li>
-<p>I use <a href="https://plantuml.com/class-diagram">PlantUML</a> to draw class diagrams</p>
-<ul>
-<li>it is a <em>textual</em> way to represent class diagrams</li>
-<li>it is <em>easy</em> to <em>write</em> and <em>read</em></li>
-<li>it is <em>easy</em> to generate pictures from it</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Get used to:</p>
-<ol>
-<li><em>draw</em> class diagrams for your software projects</li>
-<li><em>read</em> class diagrams of other software projects</li>
-<li>reverse-engineer (or just imagine) the class diagrams of software projects you use</li>
-</ol>
-</blockquote>
-</section><section>
-<h1 id="exercise">Exercise</h1>
-<ol>
-<li>Let’s go back to the <em>class diagram</em> from <em>a few slides ago</em></li>
-<li>Try to <em>distinguish</em> among <em>public and private members</em> of the classes from <em>the diagram</em></li>
-<li>Then go back to the source code of the <em>calculator</em> application</li>
-<li>Finally, try to <em>identify</em> the <em>public and private members</em> of the classes from <em>the code</em></li>
-</ol>
-</section><section>
-<h2 id="is-cli-a-ui-or-an-api">Is CLI a UI or an API?</h2>
-<p>(spoiler: both)</p>
-<ul>
-<li>
-<p>A command line application can be seen as:</p>
-<ul>
-<li>a <strong>UI</strong> for <em>users</em> who interact with the application via the terminal</li>
-<li>part of the <strong>API</strong> for <em>developers</em> who write <strong>scripts</strong> for a given <em>shell</em></li>
-</ul>
-</li>
-<li>
-<p>Recall that a command-line application is just one more <strong>command</strong> for the <em>shell</em></p>
-</li>
-<li>
-<p>The <strong>API</strong> of a command line application is a description of</p>
-<ul>
-<li>the set of <strong>arguments</strong> it accepts when <em>invoked</em> as a command on a shell</li>
-<li>the <strong>output</strong> it prints on the shell after the command is <em>executed</em></li>
-<li>the <strong>exit code</strong> it returns to the shell after the command is <em>executed</em></li>
-<li>the <strong>side effects</strong> it produces on the system after the command is <em>executed</em>
-<ul>
-<li>e.g. file creation, file deletion, file modification, etc.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Most commonly, the <strong>API</strong> of a command line application can be inspected via the <code>--help</code> argument</p>
-</li>
-</ul>
-</section><section>
-<h2 id="sorts-of-software-projects-pt-1">Sorts of software projects (pt. 1)</h2>
-<ul>
-<li>
-<p>Depending on <em>which</em> and <em>how many</em> <strong>interfaces</strong> a software project <em>exposes</em>…</p>
-</li>
-<li>
-<p>… the <strong>aim</strong> of that software project is <em>different</em></p>
-</li>
-<li>
-<p>For instace:</p>
-<ul>
-<li>a <strong>library</strong> exposes an <em>API</em></li>
-<li>an <strong>application</strong> exposes a <em>UI</em>
-<ul>
-<li>a <strong>desktop application</strong> exposes a <em>GUI</em> (which is tailored for big screens, mouse, and keyboard)</li>
-<li>a <strong>mobile application</strong> exposes a <em>GUI</em> (which is tailored for small screens, touch, and gestures)</li>
-<li>a <strong>web application</strong> exposes a <em>GUI</em> (which is tailored for web browsers, and the Web)
-<ul>
-<li>most commonly, this works both on desktop and mobile devices</li>
-</ul>
-</li>
-<li>a <strong>command-line application</strong> exposes a
-<ol>
-<li>a <em>CLI</em> (which is tailored for terminals, and shells)</li>
-<li>an <em>API</em> (which is tailored for shell scripts)</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Further categories may appear along the way in the course:</p>
-<ul>
-<li>e.g. <em>services</em>, <em>frameworks</em>, <em>scripts</em>, <em>notebooks</em>, etc.</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="sorts-of-software-projects-pt-2">Sorts of software projects (pt. 2)</h2>
-<ul>
-<li>
-<p>Notice that the aforementioned categories are <strong>not</strong> <em>mutually exclusive</em></p>
-<ul>
-<li>e.g. one software product may <em>simultanoesly</em> be a <em>library</em> and an <em>application</em>
-<ul>
-<li>if properly engineered</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>For instance, in order for a software project to support <em>several UI</em>…</p>
-<ul>
-<li>… it is common to split it into:
-<ol>
-<li>one or more components acting as <em>libraries</em>, which <em>expose</em> <strong>API</strong></li>
-<li>one or more components acting as <strong>UI</strong>, hence making the whole project an <em>application</em></li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>We recommend to reason about the <strong>aim</strong> of the software since the <em>very beginning</em></p>
-<ul>
-<li>this will <em>guide</em> the <em>design</em> of the software</li>
-<li>and the <em>organization</em> of the code</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2 id="about-software-design-pt-1">About software design (pt. 1)</h2>
-<h3 id="just-to-give-you-an-insight">Just to give you an insight</h3>
-<ol>
-<li>
-<p>After understanding the <strong>requirements</strong>, and the <strong>domain</strong> at hand…</p>
-</li>
-<li>
-<p>… <em>software architects</em> will reason about the <strong>design</strong> of the software</p>
-<ul>
-<li>which <em>relevant</em> <strong>concepts</strong> from the domain must be represented in the software?</li>
-<li>how should those concepts be <em>related</em> to each other?</li>
-</ul>
-</li>
-<li>
-<p>the <em>result</em> of such reasoning is a <strong>model</strong> of the software</p>
-<ol>
-<li><strong>classes</strong> / <strong>functions</strong> are envisioned to <em>represent</em> each <em>concept</em>
-<ul>
-<li>possibly <strong>reusing</strong> existing stuff from <em>standard</em>, or <em>third-party</em> libraries</li>
-</ul>
-</li>
-<li><strong>relationships</strong> between classes / functions are described
-<ul>
-<li>e.g. <em>sub-typing</em>, <em>composition</em>, <em>aggregation</em>, <em>inheritance</em>, etc.</li>
-</ul>
-</li>
-<li>the <strong>behaviour</strong> of each class / function is described
-<ul>
-<li>e.g. <em>pre-conditions</em>, <em>post-conditions</em>, <em>invariants</em>, <em>state-transition</em>, etc.</li>
-</ul>
-</li>
-<li>the <strong>interactions</strong> between classes / functions are described
-<ul>
-<li>e.g. who calls what, when, and why</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-</section><section>
-<h2 id="about-software-design-pt-2">About software design (pt. 2)</h2>
-<h3 id="just-to-give-you-an-insight-continued">Just to give you an insight (continued)</h3>
-<ol start="4">
-<li>Focus is then directed torwards other <em>non-functional</em> or <em>trasversal</em> aspects of the software
-<ul>
-<li>e.g. classes / functions for <strong>UI</strong>, and their attachment to the <em>model</em>
-<ul>
-<li>how do <em>humans</em> <strong>use</strong> the software?</li>
-</ul>
-</li>
-<li>e.g. classes / functions for <strong>persistence</strong>, and their attachment to the <em>model</em>
-<ul>
-<li>do the software need to <strong>store</strong> or <strong>retrieve</strong> data? <em>which</em> data? <em>where</em>? <em>how</em>?</li>
-</ul>
-</li>
-<li>e.g. classes / functions for <strong>communication</strong> (over the <em>network</em>), and their attachment to the <em>model</em>
-<ul>
-<li>does the software need to <strong>talk</strong> to other software, located <strong>elsewhere</strong>?</li>
-<li><em>where</em> is “elsewhere”? what network? (Web? Internet? Bluetooth?)</li>
-<li>are <em>intermetiary</em> components involved? (e.g. <em>servers</em>, <em>message brokers</em>, etc.)</li>
-</ul>
-</li>
-<li>e.g. classes / functions for <strong>authentication</strong> and <strong>authorization</strong>, and their attachment to the <em>model</em>
-<ul>
-<li>how to <em>recognise</em> <strong>legitimate</strong> users? <em>who</em> can do <em>what</em>?</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</section><section>
-<h2 id="about-software-design-pt-3">About software design (pt. 3)</h2>
-<h3 id="example">Example</h3>
-<p>Let’s consider the <em>calculator</em> application</p>
-<ol>
-<li><em>Which</em> relevant concepts?
-<ul>
-<li><strong>Calculator</strong>: an object for <em>writing</em> arithmetic <em>expressions</em> (one symbol at a time), and <em>evaluating</em> them into <em>results</em>
-<ul>
-<li>repersented by ad-hoc class</li>
-</ul>
-</li>
-<li><strong>Expression</strong>: a combining <em>numbers</em> and <em>operators</em>
-<ul>
-<li>represented by strings (type <code>str</code> in Python)</li>
-</ul>
-</li>
-<li><strong>Writing</strong>: an expression should be created by appending digits or symbols, one by one
-<ul>
-<li>represented by methods of the <code>Calculator</code> class</li>
-</ul>
-</li>
-<li><strong>Evaluating</strong>: an expression should be evaluated into a <em>result</em>
-<ul>
-<li>represented by methods of the <code>Calculator</code> class</li>
-</ul>
-</li>
-<li><strong>Result</strong>: the outcome of evaluating an expression
-<ul>
-<li>represented by Python numbers (either <code>int</code> or <code>float</code>)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</section><section>
-<h2 id="about-software-design-pt-3-1">About software design (pt. 3)</h2>
-<h3 id="example-continued">Example (continued)</h3>
-<ol start="2">
-<li>
-<p>How should those concepts be <em>related</em> to each other?</p>
-<ul>
-<li>each <code>Calculator</code> object is composed by one (and only one) <code>Expression</code> object
-<ul>
-<li>the latter evolves over time</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>How should the <code>Calculator</code> class <em>behave</em>?</p>
-<ul>
-<li>methods of the <code>Calculator</code> class are responsible updating the <code>Expression</code>
-<ul>
-<li>by appending digits or symbols</li>
-</ul>
-</li>
-<li>one method is responsible for evaluating the <code>Expression</code> into a <code>Result</code>
-<ul>
-<li>and resetting the <code>Expression</code> to an empty one</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</section><section>
-<h1 id="exercises">Exercises</h1>
-<p>All exercises involve either analysing or editing the code of the (modular) <em>calculator</em> application</p>
-<p><a href="https://github.com/unibo-dtm-se/modular-calculator">https://github.com/unibo-dtm-se/modular-calculator</a></p>
-</section><section>
-<h2 id="exercise-1">Exercise 1</h2>
-<h3 id="the-impact-of-modularity-on-bug-detection--fixing">The impact of modularity on bug detection / fixing</h3>
-<blockquote>
-<p>The calculator has a <em>bug</em>: <strong>it does not properly handle division by zero</strong></p>
-</blockquote>
-<p>Is this a <em>presentation</em>, a <em>modelling</em>, or an <em>implementation</em> issue?</p>
-<ul>
-<li>do the software presents information poorly, or misinterprets inputs?</li>
-<li>are all views affected by the bug? or just one?</li>
-<li>did we miss something when designing the model?</li>
-<li>did the implementer make a mistake?</li>
-</ul>
-<h4 id="to-do-list-2">TO-DO List</h4>
-<ol>
-<li>
-<p>play with the software to understand the bug</p>
-<ul>
-<li>try to reproduce the bug in both the GUI and the CLI</li>
-<li>try to understand the root cause of the bug</li>
-</ul>
-</li>
-<li>
-<p>solve the bug (by doing some <em>minimal</em> change in the code)</p>
-</li>
-</ol>
-</section><section>
-<h2 id="exercise-2">Exercise 2</h2>
-<h3 id="new-feature-request">New feature request</h3>
-<blockquote>
-<p>The calculator GUI is missing a feature: <strong>it gives no way to the user to clear the current expression</strong></p>
-</blockquote>
-<p>We totally missed that functionality when designing the <em>model</em> and the <em>GUI</em></p>
-<ul>
-<li>what is missing in the model?</li>
-<li>what is missing in the GUI?</li>
-</ul>
-<h4 id="to-do-list-3">TO-DO List</h4>
-<p>While minimising changes in the code:</p>
-<ol>
-<li>extend the <em>model</em> to support the “clearing the current expression” <em>functionality</em></li>
-<li>extend the <em>layout</em> of the GUI to support one more <em>button</em></li>
-<li><em>attach</em> the new button to the new functionality from the model</li>
-</ol>
-</section><section>
+
+Another way to think about _private_ stuff in a software project is:
+> _private_ stuff may change __without notice__, in any moment
+
+---
+
+## Application programming interfaces in practice (pt. 3)
+
+- [Class diagrams](https://en.wikipedia.org/wiki/Class_diagram) are a good way to represent the _API_ (as well as the _structure_) of a _software project_
+    + they show the _public_ classes, and their _public_ methods and attributes
+    + they show the _relationships_ between the classes
+        * e.g. the __sub-typing__ and __composition__ relationships, etc.
+    + they show the _disposition_ of the classes into _packages_ and _modules_
+    + they highlight __public and private__ members of classes / modules
+
+- I use [PlantUML](https://plantuml.com/class-diagram) to draw class diagrams
+    + it is a _textual_ way to represent class diagrams
+    + it is _easy_ to _write_ and _read_
+    + it is _easy_ to generate pictures from it
+
+> Get used to:
+> 1. _draw_ class diagrams for your software projects
+> 2. _read_ class diagrams of other software projects
+> 3. reverse-engineer (or just imagine) the class diagrams of software projects you use
+
+---
+
+# Exercise
+
+1. Let's go back to the _class diagram_ from _a few slides ago_
+2. Try to _distinguish_ among _public and private members_ of the classes from _the diagram_
+3. Then go back to the source code of the _calculator_ application
+4. Finally, try to _identify_ the _public and private members_ of the classes from _the code_
+
+---
+
+## Is CLI a UI or an API?
+
+(spoiler: both)
+
+- A command line application can be seen as:
+    + a __UI__ for _users_ who interact with the application via the terminal
+    + part of the __API__ for _developers_ who write __scripts__ for a given _shell_
+
+
+- Recall that a command-line application is just one more __command__ for the _shell_
+
+- The __API__ of a command line application is a description of
+    + the set of __arguments__ it accepts when _invoked_ as a command on a shell
+    + the __output__ it prints on the shell after the command is _executed_
+    + the __exit code__ it returns to the shell after the command is _executed_
+    + the __side effects__ it produces on the system after the command is _executed_
+        - e.g. file creation, file deletion, file modification, etc.
+
+
+- Most commonly, the __API__ of a command line application can be inspected via the `--help` argument
+
+---
+
+## Sorts of software projects (pt. 1)
+
+- Depending on _which_ and _how many_ __interfaces__ a software project _exposes_...
+
+- ... the __aim__ of that software project is _different_
+
+- For instace:
+    + a __library__ exposes an _API_
+    + an __application__ exposes a _UI_
+        * a __desktop application__ exposes a _GUI_ (which is tailored for big screens, mouse, and keyboard)
+        * a __mobile application__ exposes a _GUI_ (which is tailored for small screens, touch, and gestures)
+        * a __web application__ exposes a _GUI_ (which is tailored for web browsers, and the Web)
+            - most commonly, this works both on desktop and mobile devices
+        * a __command-line application__ exposes a 
+            1. a _CLI_ (which is tailored for terminals, and shells) 
+            2. an _API_ (which is tailored for shell scripts)
+
+- Further categories may appear along the way in the course:
+    + e.g. _services_, _frameworks_, _scripts_, _notebooks_, etc.
+
+---
+
+## Sorts of software projects (pt. 2)
+
+- Notice that the aforementioned categories are __not__ _mutually exclusive_
+    + e.g. one software product may _simultanoesly_ be a _library_ and an _application_
+        * if properly engineered
+
+- For instance, in order for a software project to support _several UI_...
+    + ... it is common to split it into:
+        1. one or more components acting as _libraries_, which _expose_ __API__
+        2. one or more components acting as __UI__, hence making the whole project an _application_
+
+- We recommend to reason about the __aim__ of the software since the _very beginning_
+    + this will _guide_ the _design_ of the software
+    + and the _organization_ of the code
+
+---
+
+## About software design (pt. 1)
+
+### Just to give you an insight 
+
+1. After understanding the __requirements__, and the __domain__ at hand...
+
+2. ... _software architects_ will reason about the __design__ of the software
+    + which _relevant_ __concepts__ from the domain must be represented in the software?
+    + how should those concepts be _related_ to each other?
+
+3. the _result_ of such reasoning is a __model__ of the software
+    1. __classes__ / __functions__ are envisioned to _represent_ each _concept_ 
+        + possibly __reusing__ existing stuff from _standard_, or _third-party_ libraries
+    2. __relationships__ between classes / functions are described
+        + e.g. _sub-typing_, _composition_, _aggregation_, _inheritance_, etc.
+    3. the __behaviour__ of each class / function is described
+        + e.g. _pre-conditions_, _post-conditions_, _invariants_, _state-transition_, etc. 
+    4. the __interactions__ between classes / functions are described
+        + e.g. who calls what, when, and why
+
+---
+
+## About software design (pt. 2)
+
+### Just to give you an insight (continued)
+
+4. Focus is then directed torwards other _non-functional_ or _trasversal_ aspects of the software
+    + e.g. classes / functions for __UI__, and their attachment to the _model_
+        * how do _humans_ __use__ the software?
+    + e.g. classes / functions for __persistence__, and their attachment to the _model_
+        * do the software need to __store__ or __retrieve__ data? _which_ data? _where_? _how_?
+    + e.g. classes / functions for __communication__ (over the _network_), and their attachment to the _model_
+        * does the software need to __talk__ to other software, located __elsewhere__? 
+        * _where_ is "elsewhere"? what network? (Web? Internet? Bluetooth?)
+        * are _intermetiary_ components involved? (e.g. _servers_, _message brokers_, etc.)
+    + e.g. classes / functions for __authentication__ and __authorization__, and their attachment to the _model_
+        * how to _recognise_ __legitimate__ users? _who_ can do _what_?
+
+---
+
+## About software design (pt. 3)
+
+### Example
+
+Let's consider the _calculator_ application
+
+1. _Which_ relevant concepts?
+    + __Calculator__: an object for _writing_ arithmetic _expressions_ (one symbol at a time), and _evaluating_ them into _results_
+        * repersented by ad-hoc class
+    + __Expression__: a combining _numbers_ and _operators_
+        + represented by strings (type `str` in Python)
+    + __Writing__: an expression should be created by appending digits or symbols, one by one
+        + represented by methods of the `Calculator` class
+    + __Evaluating__: an expression should be evaluated into a _result_
+        + represented by methods of the `Calculator` class
+    + __Result__: the outcome of evaluating an expression
+        + represented by Python numbers (either `int` or `float`)
+
+---
+
+## About software design (pt. 3)
+
+### Example (continued)
+    
+2. How should those concepts be _related_ to each other?
+    + each `Calculator` object is composed by one (and only one) `Expression` object
+        + the latter evolves over time
+
+3. How should the `Calculator` class _behave_?
+    + methods of the `Calculator` class are responsible updating the `Expression`
+        + by appending digits or symbols
+    + one method is responsible for evaluating the `Expression` into a `Result`
+        + and resetting the `Expression` to an empty one
+
+---
+
+# Exercises
+
+All exercises involve either analysing or editing the code of the (modular) _calculator_ application
+
+<https://github.com/unibo-dtm-se/modular-calculator>
+
+---
+
+## Exercise 1 
+
+### The impact of modularity on bug detection / fixing
+
+> The calculator has a _bug_: __it does not properly handle division by zero__
+
+Is this a _presentation_, a _modelling_, or an _implementation_ issue?
++ do the software presents information poorly, or misinterprets inputs?
++ are all views affected by the bug? or just one?
++ did we miss something when designing the model?
++ did the implementer make a mistake?
+
+#### TO-DO List
+
+1. play with the software to understand the bug
+    + try to reproduce the bug in both the GUI and the CLI
+    + try to understand the root cause of the bug
+
+2. solve the bug (by doing some _minimal_ change in the code) 
+
+---
+
+## Exercise 2
+
+### New feature request
+
+> The calculator GUI is missing a feature: __it gives no way to the user to clear the current expression__
+
+We totally missed that functionality when designing the _model_ and the _GUI_
+- what is missing in the model?
+- what is missing in the GUI?
+
+#### TO-DO List
+
+While minimising changes in the code:
+1. extend the _model_ to support the "clearing the current expression" _functionality_
+2. extend the _layout_ of the GUI to support one more _button_
+3. _attach_ the new button to the new functionality from the model
+
+
+--->
 <h1 id="preliminary-notions-for-software-development-1">Preliminary notions for Software Development</h1>
 <h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
 <h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
