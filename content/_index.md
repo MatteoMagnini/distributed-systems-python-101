@@ -130,6 +130,8 @@ Students _must_ enroll
     - the report should be written in _English_
     - you can use the [Latex template](https://github.com/pikalab-unibo/report-template)
 
+---
+
 ## Exam: workflow (pt. 2)
 
 5. **Submission**: students _submit_ the repository URL on {{<vle>}} and ask an _appointment_ for the discussion
@@ -178,6 +180,7 @@ so that's what we will _mostly_ evaluate
 - Templates and guidelines for the report will be provided on {{<vle>}}
 
 ---
+
 <!--
 ## Exam (the evaluation)
 
@@ -226,8 +229,10 @@ so that's what we will _mostly_ evaluate
     + e.g., a tool for systematic literature reviews
     + e.g., a tool for automated document difference (possibly relying on third-party Web services)
     + e.g., a tool generating datasets via LLM
--->
+
 ---
+-->
+
 <!--
 ## Example proposal 1
 
