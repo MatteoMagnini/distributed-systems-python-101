@@ -275,7 +275,10 @@ You should not.
 
 In the eyes of the OS, any process can be modelled as follows:
 
-![A process has three default streams: input, output, and error](./process.png)
+<!--![A process has three default streams: input, output, and error](./process.png)-->
+<p align="center">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/process.png" alt="drawing" style="width:400px;"/>
+</p>
 
 - i.e. a black box
     + consuming a _stream_ of _input data_ from the __standard input__ channel (`stdin`)
@@ -294,10 +297,12 @@ In the eyes of the OS, any process can be modelled as follows:
 
 Most commonly, for __interactive__ processes, the situation is as follows:
 
-<!-- ![Default streams of each processes are connected to the terminal by default](./process-terminal.png) -->
+<!-- ![Default streams of each process are connected to the terminal by default](./process-terminal.png) -->
 
 <!-- {{<image height="30" src="./process-terminal.png">}} -->
-![](https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/process-terminal.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/process-terminal.png" alt="drawing" style="width:400px;"/>
+</p>
 
 + all three streams are connected to the terminal by default
     + so the process _reads_ input from the keyboard
@@ -354,8 +359,6 @@ Most commonly, for __interactive__ processes, the situation is as follows:
 
 # Code and code organization
 
-(in Python)
-
 ---
 
 ## Running example (pt. 1)
@@ -385,7 +388,7 @@ The source code for such application is available here:
         - `.python-version` (hidden on Unix) _textual_ declaration of the _Python version_ __required__ by the application
         - `calculator.py`: the _source code_ of the application
         - `requirements.txt`: a file containing the _dependencies_ of the application
-        - `README.md`: a file containing the some _notes_ about of the application
+        - `README.md`: a file containing some _notes_ about of the application
 
 ---
 
@@ -459,7 +462,7 @@ The source code for such application is available here:
     + i.e. the _process_ of _translating_ a _source code_ into a _machine code_ that can be _executed_
 
 --- 
-
+<!--
 ## Compilation vs. Interpretation of Programs
 
 - A program is a __set of instructions__ that a _computer_ can __execute__
@@ -530,7 +533,7 @@ The source code for such application is available here:
         + upon _first_ __succesful__ execution of a script
 
 ---
-
+-->
 ## Libraries (pt. 1)
 
 - Basically no programmer ever writes an entire application __from scratch__
@@ -576,9 +579,6 @@ The source code for such application is available here:
 
 - The __runtime__ is the __environment__ in which a _piece_ of software is _executed_
     + not to be confused with __run-time__, which is the _time_ when the _software_ is _executed_
-    
-    <!-- {{<image height="10" src="./fuck-logic.png">}} -->
-    ![](https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/fuck-logic.png)
 
 > __Runtime__ of a program $\approx$ jargon for "the _set of_ __libraries__ actually available for that program at run-time" 
 + this commonly includes:
@@ -712,7 +712,7 @@ Some definitions related to the notion of __dependency__:
 - On Windows, one can use _chocolatey_ or _scoop_ as package managers (not shipped with the OS)
 
 --- 
-
+<!--
 ## About release and deployment
 
 - Notice that private companies may have their own _private_ package repositories
@@ -729,7 +729,7 @@ Some definitions related to the notion of __dependency__:
         + this may be simple when the system is a _single package_, but it may be _complex_ when the system is a _collection_ of _interacting_ packages
 
 ---
-
+-->
 ## What about the actual code?
 
 Let's delve into the [actual code](https://github.com/unibo-dtm-se/compact-calculator/blob/master/calculator.py) of the _calculator_ application
@@ -859,9 +859,10 @@ if __name__ == '__main__':
 
 ---
 
+<!--
 ## A good way to decompose code (pt. 1)
 
-<!-- {{<image src="./view-model.svg" height="40">}} -->
+<!-- {{<image src="./view-model.svg" height="40">}} 
 ![](https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/view-model.png)
 
 - A good way to decompose code is to follow the [__Model-View-Controller__](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (__MVC__) pattern
@@ -1007,11 +1008,13 @@ Let's decompose the _calculator_ application in such a way that
     + namely, a _GUI_, and a __command-line interface__ (_CLI_)
 - ... both _attached_ to the __same__ _model_
 
+<p align="center">
 {{<multicol>}}
 {{%col%}}
 ### The GUI
 
-![](./calculator.png)
+<!--![](./calculator.png) ->
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/preliminaries/calculator.png" height="300">
 
 ```bash
 python -m calculator.ui.gui
@@ -1029,6 +1032,7 @@ python -m calculator.ui.cli "2*3"
 ```
 {{%/col%}}
 {{</multicol>}}
+</p>
 
 ---
 
@@ -1784,7 +1788,7 @@ While minimising changes in the code:
 3. _attach_ the new button to the new functionality from the model
 
 
----
+--->
 
 # Preliminary notions for Software Development
 
