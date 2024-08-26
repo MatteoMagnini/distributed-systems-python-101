@@ -48,9 +48,7 @@ Students _must_ enroll
 
 ## What is {{<course_name>}} about? (pt. 1)
 
-(Only insights here)
-
-- Put it simply, it is about __producing good quality software products__ (in Python)
+- Put it simply, it is about __learning python__ and __producing good quality software products__
     + not only writing code, but also 
         1. _understanding_ the _requirements_, 
         2. _designing_ the _product_, 
@@ -69,12 +67,24 @@ Students _must_ enroll
 
 - At the end of the course...
     + ... you shall have a clear understanding on the __whole process__ of software engineering
-    + ... you should be able to _set up_ and _design_ a __software project__
+    + ... you should be able to _set up_ and _design_ a __python software project__
     + ... you should be able to _reason_ about the __quality__ of a software project
     + ... you should have a clear understanding of brings __cost__ or __value__ in a software project
-    + ... you will _not_ be required to be an __expert developer__
 
 - To reach that goal, we shall follow a __learn-by-doing__ approach
+
+---
+
+## Why Python?
+
+- In the past years, we used __Java__ for this course
+- We switched to __Python__ for several reasons:
+    + we cannot take for granted that you already know Java
+      + (students from our Bachelor's in Computer Science know Java but students from other Bachelor's may not)
+    + __Python__ is one of the most __popular__ programming languages
+    + __Python__ is arguably __easy__ to learn and __read__
+    + __Python__ is __faster__ for prototyping than Java
+    + This semester you will also use __Python__ in the __Machine Learning__ course
 
 ---
 
@@ -87,18 +97,17 @@ Students _must_ enroll
     2. a _textual report_ describing the __design__ and __development processes__ of the artifact itself
 
 - The __report is more important than the source code__
-    + the code could be a simple, possibly incomplete, prototype or stub
 
-- The project work can be done _individually_ or in _groups_ of __up to 4 students__
-    + we _recommend_ doing it in _groups_, to practice with teamwork
-    + individual contributions will be assessed via DVCS
+- The project work can be done _individually_ or in _groups_ of __up to 3 students__ -- __4 students__ in exceptional and wee-motivated cases
 
 - Students are encouraged to __propose__ project works themes/topics/concepts
     + we may help in refining initial proposals
+    + usually students propose project works that are _too ambitious_ (e.g., too many features for the time available)
+    + considering that the course is __6 CFU__, we suggest to propose project works that can be _completed_ in __about 90 hours__ of work (per student)
 
 - We incentivise students to _complete_ their project work __as soon as possible__ 
-    + better if within _the next exam session_
-    + possibly within _the same academic year_
+    + better if within _the next exam session_ (i.e., we will positively consider early submissions until the beginning of the next semester)
+    + possibly within _the same academic year_ (i.e., next year that could be different rules, maybe more strict)
 
 ---
 
@@ -113,26 +122,30 @@ Students _must_ enroll
     - granting _admin_ access to the teachers' GitHub accounts (username: [`gciatto`](https://github.com/gciatto), [`MatteoMagnini`](https://github.com/MatteoMagnini))
 
 4. **Development**: students _develop_ the software artifact and _write_ the report
-    - the report should be written in [Markdown](https://www.markdownguide.org/) and stored in the repository (e.g. `README.md`)
+    - the report should be written in [Latex](https://www.latex-project.org/) and stored in the repository (e.g. `README.md`)
     - the report should be written in _English_
+    - you can use the [Latex template](https://github.com/pikalab-unibo/report-template)
 
 5. **Submission**: students _submit_ the repository URL on {{<vle>}} and ask an _appointment_ for the discussion
     - submission is _not retractable_
-    - appoitments may be scheduled in any moment of the academic year...
-    - ... of course taking the teachers' availability into account
+    - at this point we will read the report and evaluate the project work
+    - we can __ask for changes__ to the report or the software artifact
+    - or immediately _approve_ the project for the discussion
 
 6. **Discussion**: students _present_ and _discuss_ their project work with the teacher
-    - the discussion will be held _in English_
+    - appointments may be scheduled in any moment of the academic year taking the teachers' availability into account
+    - the discussion will be held either _in English_ or _in Italian_
     - remote discussion may be possible via [Microsoft Teams](https://teams.microsoft.com/), in case of well-justified needs
-    - the discussion will include _all the members_ of the group
+    - the discussion will include __all the members__ of the group
 
 ---
 
-## Exam (the software artifact)
+## Exam: the software artifact
 
-> We don't really require you to be expert developers
-
-- The software artifact can be a _simple_ prototype or stub
+- The software artifact must be a _working_ piece of software
+    + it must be _runnable_ and _testable_ on the teacher's machine
+    > _"it works on my machine"_ is not a valid excuse
+    + it must be _documented_ in the report
 
 - The software artifact can be developed in _any programming language_ of choice
     + we _recommend_ using __Python__
@@ -143,11 +156,9 @@ so that's what we will _mostly_ evaluate
 
 - Exploitation of Git, GitHub, and version control is __important__ to facilitate your own work
 
-- Templates and guidelines for the source code will be provided on {{<vle>}}
-
 ---
 
-## Exam (the report)
+## Exam: the report
 
 > The report is more important than the software artifact
 
