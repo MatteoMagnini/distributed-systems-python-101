@@ -47,12 +47,10 @@ outputs = ["Reveal"]
 
 - To run Python code interactively, you can use the Python command line.
 - Just type `python` in the terminal.
-
-{{<short_code "python">}}
->>> print("Hello, World!")
-Hello, World!
-{{</short_code>}}
-
+  ```bash
+  >>> print("Hello, World!")
+  Hello, World!
+  ```
 - To leave the Python command line, type `exit()` or press `Ctrl+D`.
 
 
@@ -63,11 +61,10 @@ Hello, World!
 - You can also write Python code in a file and run it.
 - Create a file with a `.py` extension (e.g. `hello.py`).
 - Write your Python code in the file.
-
-{{<short_code "python">}}
-# hello.py
-print("Hello, World!")
-{{</short_code>}}
+  ```python
+  # hello.py
+  print("Hello, World!")
+  ```
 
 - Run the script with `python hello.py`.
 
@@ -519,6 +516,103 @@ say_hello()
 ```
 
 ---
+
+## Static Methods and Class Methods
+
+- You can define _static methods_ with the `@staticmethod` decorator.
+- You can define _class methods_ with the `@classmethod` decorator.
+
+```python
+# Here an example of static and class methods
+
+class Math:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+    @classmethod
+    def multiply(cls, x, y):
+        return x * y
+    
+# You can use the static and class methods
+sum = Math.add(5, 2)  # 7
+product = Math.multiply(5, 2)  # 10
+```
+
+- the difference between static and class methods is that the class method has access to the class itself.
+
+---
+
+# Final Notes
+
+---
+
+## Exceptions
+
+- _Exceptions_ are a way to handle errors in Python.
+- You can use the `try`, `except`, `else`, and `finally` statements.
+- You can also raise exceptions with the `raise` statement.
+
+```python
+# Here an example of an exception
+try:
+    raise Exception("Something went wrong!")  # use the keyword raise to raise an exception
+except Exception as e:
+    print(e)  # "Something went wrong!"
+else:
+    print("Everything is fine!")
+finally:
+    print("This is always executed!")
+```
+
+---
+
+## Cyclic Imports
+
+- Python does not allow cyclic imports.
+- So, organize your code in a way that avoids cyclic imports.
+
+```python
+# Here an example of cyclic imports
+# file1.py
+from file2 import function2
+def function1():
+    return function2()
+    
+# file2.py
+from file1 import function1
+def function2():
+    return function1()
+```
+
+---
+
+## Recursion Limit
+
+- Python has a default recursion limit of 1000.
+
+```python
+# Here an example of recursion that will raise an exception
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+fibonacci(10)  # This will work
+fibonacci(1000)  # This will raise a RecursionError
+```
+
+- You can change the recursion limit with the `sys` module.
+
+```python
+# Here an example of recursion limit
+import sys
+sys.setrecursionlimit(10000)
+
+fibonacci(1000)  # This will work but it will take a lot of time
+# Do not run it, or just halt the execution
+```
+
 
 # Introduction to the Python programming language
 
