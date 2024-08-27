@@ -613,6 +613,7 @@ fibonacci(1000)  # This will work but it will take a lot of time
 # Do not run it, or just halt the execution
 ```
 
+---
 
 # Introduction to the Python programming language
 
