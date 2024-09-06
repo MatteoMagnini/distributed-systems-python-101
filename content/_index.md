@@ -79,12 +79,12 @@ Students _must_ enroll
 
 - In the past years, we used __Java__ for this course
 - We switched to __Python__ for several reasons:
-    + we cannot take for granted that you already know Java
-    + students from our Bachelor's in Computer Science know Java but students from other Bachelor's may not
-    + __Python__ is one of the most __popular__ programming languages
-    + __Python__ is arguably __easy__ to learn and __read__
-    + __Python__ is __faster__ for prototyping than Java
-    + This semester you will also use __Python__ in the __Machine Learning__ course
+    <!--+ we cannot take for granted that you already know Java
+    + students from our Bachelor's in Computer Science know Java but students from other Bachelor's may not-->
+    + Python is one of the most _popular_ programming languages
+    + Python is arguably _easy_ to learn and _read_
+    + Python is _faster_ for prototyping than Java
+    + This semester you will also use Python in the __Machine Learning__ course
 
 ---
 
@@ -126,7 +126,7 @@ Students _must_ enroll
     - granting _admin_ access to the teachers' GitHub accounts (username: [`gciatto`](https://github.com/gciatto), [`MatteoMagnini`](https://github.com/MatteoMagnini))
 
 4. **Development**: students _develop_ the software artifact and _write_ the report
-    - the report should be written in [Latex](https://www.latex-project.org/) and stored in the repository (e.g. `README.md`)
+    - the report should be written in [Latex](https://www.latex-project.org/)
     - the report should be written in _English_
     - you can use the [Latex template](https://github.com/pikalab-unibo/report-template)
 
@@ -135,9 +135,10 @@ Students _must_ enroll
 ## Exam: workflow (pt. 2)
 
 5. **Submission**: students _submit_ the repository URL on {{<vle>}} and ask an _appointment_ for the discussion
+    - the final __pdf__ version of the report must be uploaded as well
     - submission is _not retractable_
     - at this point we will read the report and evaluate the project work
-    - we can __ask for changes__ to the report or the software artifact
+    <!--- we can __ask for changes__ to the report or the software artifact-->
     - or immediately _approve_ the project for the discussion
 
 6. **Discussion**: students _present_ and _discuss_ their project work with the teacher

@@ -219,6 +219,13 @@ def greet(*names):
     return "Hello, " + ", ".join(names) + "!"
 
 greeting = greet("Andrea", "Giovanni", "Matteo")  # "Hello, Andrea, Giovanni, Matteo!"
+
+# Kwargs are used for named arguments
+def greet(**kwargs):
+    return "Hello, " + kwargs["name"] + "!"
+
+greeting = greet(name="Andrea")  # "Hello, Andrea!"
+
 ```
 
 ---
@@ -251,7 +258,7 @@ print(add_to_list(3))  # [3]
 
 ---
 
-## List Comprehensions
+## Comprehensions
 
 ```python
 # List comprehensions are a concise way to create lists
@@ -259,15 +266,30 @@ numbers = [1, 2, 3, 4, 5]
 squared_numbers = [x ** 2 for x in numbers]  # [1, 4, 9, 16, 25]
 even_numbers = [x for x in numbers if x % 2 == 0]  # [2, 4]
 
-# You can also use list comprehensions with dictionaries
+# Dictionary comprehensions are a concise way to create dictionaries
 teachers = ["Andrea Omicini", "Giovanni Ciatto", "Matteo Magnini"]
 emails = {teacher: teacher.lower().replace(" ", ".") + "@unibo.it" for teacher in teachers}
 
-# You can also use list comprehensions with sets
+# Set comprehensions are a concise way to create sets
 numbers = {x for x in range(10) if x % 2 == 0}  # {0, 2, 4, 6, 8}
 
-# You can also use list comprehensions with tuples
-numbers = (x for x in range(10) if x % 2 == 0)  # (0, 2, 4, 6, 8)
+# Tuple comprehensions are a concise way to create tuples
+numbers = tuple(x for x in range(10) if x % 2 == 0)  # (0, 2, 4, 6, 8)
+
+# If you forget the parentheses, you will create a generator
+numbers = (x for x in range(10) if x % 2 == 0)  # A generator is a lazy iterable
+```
+
+---
+
+## Advanced Comprehensions
+
+```python
+# Nested comprehensions
+chessboard = [(x, y) for x in range(8) for y in range(8)]
+
+# If statements in comprehensions
+black_squares = [(x, y) for x in range(8) for y in range(8) if (x + y) % 2 == 0]
 ```
 
 ---
@@ -411,16 +433,19 @@ print(repr(euro3))  # Euro(30)
 
 ## Magic Methods (2)
 
-- It is also good to implement the `__eq__` method to compare two objects.
+- It is also good to implement the `__eq__` method (and `__hash__`) to compare two objects.
 - Of course, there are many other magic methods that you can implement (see the [official documentation](https://docs.python.org/3/reference/datamodel.html#special-method-names)).
 
 ```python
 # Here an example of the __eq__ with the Car class
 
 class Car:
-    def __init__(self, brand, model, plate):
+    def __init__(self, brand, model):
         self.brand = brand
         self.model = model
+        
+    def __hash__(self):
+        return hash((self.brand, self.model))
 
     def __eq__(self, other):
         return self.brand == other.brand and self.model == other.model
@@ -432,6 +457,32 @@ car3 = Car("Fiat", "Panda")
 print(car1 == car2)  # True
 print(car1 == car3)  # False
 ``` 
+
+## Magic Methods (3)
+
+- Data classes are a new feature in Python 3.7.
+- They are used to create classes that are mostly used to store data.
+- They automatically implement the `__init__`, `__repr__`, `__eq__`, and `__hash__` methods.
+
+```python
+# Here an example of a data class
+
+class Number:
+    @classmethod
+    def parse(cls, s):
+        return cls(s)
+    
+    def __repr__(self):
+        return str(self.value)
+
+class Integer(Number):
+    def __init__(self, value):
+        self.value = int(value)
+
+class Float(Number):
+    def __init__(self, value):
+        self.value = float(value)
+
 
 ---
 
@@ -519,8 +570,8 @@ say_hello()
 
 ## Static Methods and Class Methods
 
-- You can define _static methods_ with the `@staticmethod` decorator.
-- You can define _class methods_ with the `@classmethod` decorator.
+- You can define _static methods_ with the `@staticmethod` decorator. Static methods do not have access to the class or instance.
+- You can define _class methods_ with the `@classmethod` decorator. Class methods have access to the class.
 
 ```python
 # Here an example of static and class methods
@@ -529,19 +580,89 @@ class Math:
     @staticmethod
     def add(x, y):
         return x + y
-
-    @classmethod
-    def multiply(cls, x, y):
+    
+    @staticmethod
+    def multiply(x, y):
         return x * y
     
-# You can use the static and class methods
-sum = Math.add(5, 2)  # 7
-product = Math.multiply(5, 2)  # 10
+class Number:
+    @classmethod
+    def parse(cls, s):
+        return cls(s)
+    
+    def __repr__(self):
+        return str(self.value)
+
+class Integer(Number):
+    def __init__(self, value):
+        self.value = int(value)
+
+class Float(Number):
+    def __init__(self, value):
+        self.value = float(value)
+    
+sum = Math.add(5, 2)
+product = Math.multiply(5, 2)
+
+integer = Integer.parse("5")
+float = Float.parse("5.5")
 ```
 
-- the difference between static and class methods is that the class method has access to the class itself.
-
 ---
+
+## Multiple Inheritance
+
+- Python supports multiple inheritance.
+- You can define a class that inherits from multiple classes.
+- You can use the `super()` function to call the methods of the parent classes.
+
+```python 
+# Here an example of multiple inheritance
+
+class Rectangle:
+    def __init__(self, length, width, **kwargs):
+        self.length = length
+        self.width = width
+        super().__init__(**kwargs)
+
+    def area(self):
+        return self.length * self.width
+
+    def perimeter(self):
+        return 2 * self.length + 2 * self.width
+
+class Square(Rectangle):
+    def __init__(self, length, **kwargs):
+        super().__init__(length=length, width=length, **kwargs)
+
+class Triangle:
+    def __init__(self, base, height, **kwargs):
+        self.base = base
+        self.height = height
+        super().__init__(**kwargs)
+
+    def tri_area(self):
+        return 0.5 * self.base * self.height
+
+class RightPyramid(Square, Triangle):
+    def __init__(self, base, slant_height, **kwargs):
+        self.base = base
+        self.slant_height = slant_height
+        kwargs["height"] = slant_height
+        kwargs["length"] = base
+        super().__init__(base=base, **kwargs)
+
+    def area(self):
+        base_area = super().area()
+        perimeter = super().perimeter()
+        return 0.5 * perimeter * self.slant_height + base_area
+
+    def area_2(self):
+        base_area = super().area()
+        triangle_area = super().tri_area()
+        return triangle_area * 4 + base_area
+```
+
 
 # Final Notes
 
