@@ -11,7 +11,7 @@
 
 ---
 
-### Table of Contents
+## Table of Contents
 
 0. [Course Overview](..)
 1. [Preliminary notions for Software Development](../intro)

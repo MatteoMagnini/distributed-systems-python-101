@@ -369,7 +369,7 @@ and must feature appropriate automation (build) and get published on official di
 
 ---
 
-# Module contents and action plan
+## Module contents and action plan
 
 0. [Course Overview](..)
 1. [Preliminary notions for Software Development](intro)

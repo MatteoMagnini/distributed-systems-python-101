@@ -20,4 +20,4 @@ Compiled on: {{< today >}} --- [<i class="fa fa-print" aria-hidden="true"></i> p
 
 [<i class="fa fa-undo" aria-hidden="true"></i> back](..)
 
-[<i class="fa fa-arrow-right" aria-hidden="true"></i> table of content](#module-contents-and-action-plan)
+[<i class="fa fa-arrow-right" aria-hidden="true"></i> table of content](#table-of-contents)
