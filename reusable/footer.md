@@ -9,6 +9,8 @@
 
 ##### {{<mm>}}
 
+---
+
 ### Table of Contents
 
 0. [Course Overview](..)

@@ -367,9 +367,11 @@ and must feature appropriate automation (build) and get published on official di
     + they are produced along the way, so they may not be available in advance
     + also, please re-download / re-load them before each class
 
+---
 
 # Module contents and action plan
 
+0. [Course Overview](..)
 1. [Preliminary notions for Software Development](intro)
 2. [Introduction to the Python Language](language)
 3. [How to manage a Python Project](python-project)
