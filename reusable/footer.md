@@ -20,3 +20,8 @@
 4. [A Python Project Example](../example)
 5. [QA, testing, TDD, reproducibility and replicability](../qa-tdd)
 
+
+[<i class="fa fa-arrow-up" aria-hidden="true"></i> top](.)
+
+[<i class="fa fa-undo" aria-hidden="true"></i> back](..)
+
