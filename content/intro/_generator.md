@@ -8,7 +8,7 @@ outputs = ["Reveal"]
 
 # Preliminary notions for Software Development
 
-{{% import path="reusable/header.md" %}}
+{{% import path="reusable/header-gc.md" %}}
 
 ---
 
