@@ -378,4 +378,6 @@ and must feature appropriate automation (build) and get published on official di
 4. [A Python Project Example](example)
 5. [QA, testing, TDD, reproducibility and replicability](qa-tdd)
 
+<br>
+
 [<i class="fa fa-arrow-up" aria-hidden="true"></i> top](.)
