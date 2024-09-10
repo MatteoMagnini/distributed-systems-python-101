@@ -7,12 +7,13 @@
 
 ####  {{<academic_year>}}
 
-##### {{<mm>}}
+##### {{<mm>}} (based on the material made by {{<gc>}})
 
 
 <br>
 
 <br>
+
 
 Compiled on: {{< today >}} --- [<i class="fa fa-print" aria-hidden="true"></i> printable version](?print-pdf&pdfSeparateFragments=false)
 

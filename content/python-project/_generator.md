@@ -8,7 +8,7 @@ outputs = ["Reveal"]
 
 # How to manage a Python Project
 
-{{% import path="reusable/header.md" %}}
+{{% import path="reusable/header-gc.md" %}}
 
 ---
 
