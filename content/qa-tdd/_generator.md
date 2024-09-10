@@ -155,7 +155,7 @@ As any engineering product, software can be tested at different levels of abstra
     * as well as different _versions_ of the _same_ system
 * Tests should be **self-contained** (they should not depend on the results of previous tests)
 * Testing procedures should be **deterministic** ($\approx$ no randomness)
-  * _unpredicable_ events / scenarios (e.g. user inputs, lack of Internet connection) should be __simulated__
+  * _unpredictable_ events / scenarios (e.g. user inputs, lack of Internet connection) should be __simulated__
     * one cannot predict _when_ events will occur, but one must predict _what sorts_ of events / scenarios _may_ occur
 
 ---
@@ -166,7 +166,7 @@ As any engineering product, software can be tested at different levels of abstra
 
 (we will focus on Python, but the concepts are general)
 
-1. the _source code_ can now be conceinved as composed by _two parts_:
+1. the _source code_ can now be conceived as composed by _two parts_:
     * the __main__ code: where the actual software is implemented
     * the __test__ code: where the tests for the actual software are implemented
 
@@ -405,7 +405,7 @@ class TestMySystemUnderSpecialConditions(unittest.TestCase):
 Before:
 
 <!--![VS Code before](vs-code-tests-pre.png)-->
-{{<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-pre.png" alt="VS Code before" style="width:400px;">}}
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-pre.png" alt="VS Code before" style="width:400px;">
 {{%/col%}}
 {{%col%}}
 {{%/col%}}
@@ -413,7 +413,7 @@ Before:
 After:
 
 <!--![VS Code after](vs-code-tests-post.png)-->
-{{<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-post.png" alt="VS Code after" style="width:400px;">}}
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-post.png" alt="VS Code after" style="width:400px;">
 {{%/col%}}
 {{</multicol>}}
 
@@ -425,7 +425,7 @@ After:
 
 <!--![Missing Test section in VS Code](./test-explorer-missing.png)-->
 
-{{<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-missing.png" alt="Missing Test section in VS Code" style="width:400px;">}}
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-missing.png" alt="Missing Test section in VS Code" style="width:400px;">
 
 You probably have and _old version_ of VS Code, and you should __update__ it
 
@@ -446,7 +446,7 @@ You probably have and _old version_ of VS Code, and you should __update__ it
 
         <!--![Extensions to install in VS Code](test-explorer-install-before.png)-->
 
-        {{<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-install-before.png" alt="Extensions to install in VS Code" style="width:400px;">}}
+        <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-install-before.png" alt="Extensions to install in VS Code" style="width:400px;">
 
 ---
 
@@ -457,7 +457,7 @@ You probably have and _old version_ of VS Code, and you should __update__ it
 
         <!--![Installing required extensions in VS Code](./test-explorer-installing.png)-->
 
-        {{<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installing.png" alt="Installing required extensions in VS Code" style="width:400px;">}}
+        <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installing.png" alt="Installing required extensions in VS Code" style="width:400px;">
 
 ---
 
@@ -466,7 +466,7 @@ You probably have and _old version_ of VS Code, and you should __update__ it
 4. Once the installation is complete, you should see the _Test_ section in the _Activity Bar_ on the side of the window
 
     <!--![Test section in VS Code](./test-explorer-installed.png)-->
-    {{<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installed.png" alt="Test section in VS Code" style="width:400px;">}}
+    <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installed.png" alt="Test section in VS Code" style="width:400px;">
 
 ---
 
