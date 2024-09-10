@@ -1,0 +1,1999 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>QA, reproducibility, TDD</title>
+<meta name="description" content="QA, reproducibility, TDD">
+<meta name="author" content="Danilo Pianini">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/distributed-systems-python-101/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/distributed-systems-python-101/css/custom-theme.min.c0f7878dc8d1bf72f682bf675cb3aee36f75a07caeda734f3608c1221c238ecd.css" id="theme"><link rel="stylesheet" href="/distributed-systems-python-101/highlight-js/github.min.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script src="https://MatteoMagnini.github.io/distributed-systems-python-101//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="qa-reproducibility-tdd">QA, reproducibility, TDD</h1>
+<br>
+<h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
+<h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
+<h3 id="module-2">Module 2</h3>
+<h4 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h4>
+<h5 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
+<h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
+<br>
+<br>
+<p>Compiled on: 2024-09-10 — <a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+<p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
+<p><a href="#table-of-contents"><i class="fa fa-arrow-down" aria-hidden="true"></i> table of content</a></p>
+</section><section>
+<h2 id="quality-assurance">Quality assurance</h2>
+<p>Would you drive a car that has <em>not</em> been successfully passed its <em>quality control</em>?</p>
+<br>
+<p>As any engineered product, software should be <em>subject to <strong>quality assurance</strong> control</em>.</p>
+<br>
+<blockquote>
+<p><strong>Quality assurance</strong> (in SE) is the set of activities and practices aimed at ensuring that a software product <em>works</em> and it is <em>of good quality</em>.</p>
+</blockquote>
+<ul>
+<li>what does <em>“works”</em> mean for software?</li>
+<li>what does <em>“good quality”</em> mean for software?</li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-works">Quality assurance: “works”</h2>
+<h3 id="what-does-_works_-mean-for-software">What does <em>“works”</em> mean for software?</h3>
+<blockquote>
+<p>Insight: software works when it <em>meets the requirements</em></p>
+</blockquote>
+<ul>
+<li>Recall that software requirements should come with clear <em>acceptance criteria</em>
+<ul>
+<li><strong>testing</strong> as the activity of <em>verifying</em> that the software meets the acceptance criteria</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-good-quality">Quality assurance: “good quality”</h2>
+<h3 id="what-does-_good-quality_-mean-for-software">What does <em>“good quality”</em> mean for software?</h3>
+<blockquote>
+<p>Insight: software is good when it is</p>
+<p><em>easy for developers to evolve or maintain it</em></p>
+</blockquote>
+<ul>
+<li>
+<p>Recall that good software should have many <em>quality attributes</em></p>
+<ul>
+<li><strong>reproducible</strong> $\approx$ repeatable, with <em>predictable</em> outcomes</li>
+<li><strong>sustainable</strong> $\approx$ it’s possible to <em>timely</em> satisfy requirements with <em>controllable</em> costs and efforts</li>
+<li><strong>evolvable</strong> $\approx$ it’s possible to <em>adapt</em> the product to <em>new</em> requirements in a sustainable way</li>
+<li><strong>maintainable</strong> $\approx$ it’s possible to <em>fix</em>, <em>improve</em>, or just keep the product <em>alive</em> in a sustainable way</li>
+<li><strong>scalable</strong> $\approx$ it’s possible to <em>grow</em> the product in terms of <em>size</em>, <em>complexity</em>, and <em>features</em> in a sustainable way</li>
+</ul>
+</li>
+<li>
+<p>How to translate these attributes into <em>quality assurance</em> practices?</p>
+<ul>
+<li>as we will see, <strong>testing</strong> may also serve this purpose</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="testing-criteria">Testing: criteria</h2>
+<p>Verify that the software meets quality criteria.</p>
+<ul>
+<li><strong>Functional</strong> criteria:
+<ul>
+<li>Does <em>what</em> we expect it to do?
+<ul>
+<li>Does the software produce the expected results?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Non-functional</strong> criteria:
+<ul>
+<li>Does it do it <em>how</em> we want it?
+<ul>
+<li>Is it secure?</li>
+<li>Are performance acceptable?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="automated-vs-manual">Automated vs. manual</h2>
+<p>Running an application manually is a form of testing: <em>exploratory testing</em>.</p>
+<ul>
+<li>Done <strong>without a plan</strong></li>
+</ul>
+<br>
+<p>If there is a plan that can be followed step-by-step, then <em>there is a program that can do it for you</em></p>
+<ul>
+<li>If a program can do it for you, then it <em>should</em> do it for you</li>
+</ul>
+</section><section>
+<h2 id="testing-scope-pt-1">Testing scope (pt. 1)</h2>
+<p>As any engineering product, software can be tested at different levels of abstraction</p>
+<ul>
+<li>
+<p><strong>Unit</strong> testing: test <em>single software components</em></p>
+<ul>
+<li>Is this <code>class</code> (or <code>function</code> or <code>module</code>) behavior the expected one?</li>
+<li>For a car: is the <em>tire</em> working correctly?
+<ul>
+<li>e.g. are shape, pression, etc. as expected?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Integration</strong> testing: test <em>an entire subsystem</em>, i.e. the interplay among <em>multiple components</em></p>
+<ul>
+<li>Class <code>A</code> uses class <code>B</code> and <code>C</code>. Are they working together as expected?</li>
+<li>For a car: if we attach the <em>wheels</em> to the <em>engine</em> via the <em>transmission</em>, does it work as expected?
+<ul>
+<li>e.g. we <em>turn on</em> the engine, does the wheel <em>spin</em>?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>End-to-end</strong> (or <strong>acceptance</strong>) testing: test <em>an entire system</em> (may involve <em>aesthetics</em>/<em>usability</em> criteria)</p>
+<ul>
+<li>Is this whole <strong>application</strong> functional, when used from the <strong>UI</strong>?
+<ul>
+<li>implies that <em>all</em> components are correctly integrated</li>
+</ul>
+</li>
+<li>For a car: is it usable by a person to drive in the real world?
+<ul>
+<li>e.g. we <em>turn on</em> the engine, does the car <em>move</em>?</li>
+<li>e.g. can the user <em>change direction</em> via the <em>steering wheel</em>?</li>
+<li>e.g. is the <em>speed indicator</em> reactive to the actual speed? is the <em>unit of measure</em> what the user expects?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="testing-scope-pt-2">Testing scope (pt. 2)</h2>
+<blockquote>
+<p>A well-maintained engineering product <em>must</em> have tests at <strong>all granularity levels</strong></p>
+</blockquote>
+<ul>
+<li>But why?
+<ul>
+<li>after all, if the <em>end-to-end</em> test passes…</li>
+<li>… then all the <em>unit</em> and <em>integration</em> tests should pass as well, right?</li>
+</ul>
+</li>
+</ul>
+<br>
+<ul>
+<li>Yes, but:
+<ul>
+<li>tests are not only about <em>verifying</em> that the software works</li>
+<li>they are particularly useful to <em>understand</em> <strong>why</strong> it <em>doesn’t</em> work</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="automated-tests-as-sentinels">Automated tests as sentinels</h2>
+<ul>
+<li>
+<p>Creating <em>automated</em> test procedures makes the activity of <em>testing</em> very <strong>cheap</strong> (in terms of effort)</p>
+<ul>
+<li>this allows developers to <em>test</em> the software <em>often</em> and <em>early</em></li>
+</ul>
+</li>
+<li>
+<p>Being cheap, automated tests can serve as <a href="https://en.wikipedia.org/wiki/Sentinel_species">canaries in cold mines</a></p>
+<ul>
+<li>i.e. <strong>sentinels</strong> for the (early) detection of <em>problems</em></li>
+</ul>
+</li>
+<li>
+<p>Test <strong>failures</strong> are <em>precious</em> during development</p>
+<ul>
+<li>they help in localising the <em>source</em> of the problem</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>The more granular the tests, the easier it is to spot and fix problems</p>
+</blockquote>
+</section><section>
+<h2 id="reproducibility">Reproducibility</h2>
+<blockquote>
+<p>Would you be comfortable with a car that passes the crash test <code>99.9%</code> of time, but on the <code>0.1%</code> of the cases fails <em>unexplicably</em>?</p>
+</blockquote>
+<p><strong>Reproducibility</strong> is <strong>central</strong> for testing</p>
+<p>(true for any engineering, but in particular for software)</p>
+<ul>
+<li><em>Tests should always provide the same results</em> when run on the same system
+<ul>
+<li>tests that <em>“work sometimes but sometimes not”</em> are called <strong>flaky tests</strong></li>
+<li>of course, running the same test procude on <em>different</em> systems may produce different results
+<ul>
+<li>as well as different <em>versions</em> of the <em>same</em> system</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tests should be <strong>self-contained</strong> (they should not depend on the results of previous tests)</li>
+<li>Testing procedures should be <strong>deterministic</strong> ($\approx$ no randomness)
+<ul>
+<li><em>unpredictable</em> events / scenarios (e.g. user inputs, lack of Internet connection) should be <strong>simulated</strong>
+<ul>
+<li>one cannot predict <em>when</em> events will occur, but one must predict <em>what sorts</em> of events / scenarios <em>may</em> occur</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="technicalities-of-writing-tests">Technicalities of writing tests</h2>
+<p>(we will focus on Python, but the concepts are general)</p>
+<ol>
+<li>
+<p>the <em>source code</em> can now be conceived as composed by <em>two parts</em>:</p>
+<ul>
+<li>the <strong>main</strong> code: where the actual software is implemented</li>
+<li>the <strong>test</strong> code: where the tests for the actual software are implemented</li>
+</ul>
+</li>
+<li>
+<p>the <strong>test</strong> code is usually placed in a separate folder, and it is usually named <code>tests/</code> (or <code>test/</code>)</p>
+</li>
+<li>
+<p>the <em>dependencies</em> of the project are now of <em>two sorts</em>:</p>
+<ul>
+<li>the <strong>main</strong> dependencies: the libraries required by the main code</li>
+<li>the <strong>development</strong> (<em>“dev”</em>) dependencies: the libraries required by the quality assurance procedures
+<ul>
+<li>there exist several libraries which support testing, e.g. <a href="https://docs.python.org/3/library/unittest.html"><code>unittest</code></a> (included in Python), or <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> (third-party)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>developers may now want to <em>launch</em> not only the software, but also <em>the tests</em></p>
+<ul>
+<li>ad-hoc <em>terminal commands</em> or <em>IDE plugins</em> are available for this purpose</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="updated-project-structure">Updated project structure</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>root_directory/
+</span></span><span style="display:flex;"><span>├── main_package/               <span style="color:#8f5902;font-style:italic"># main package (i.e. directory for the main code)</span>
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp; ├── __init__.py
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp; ├── sub_module.py
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp; └── sub_package/ 
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp;     ├── __init__.py 
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp;     └── sub_sub_module.py 
+</span></span><span style="display:flex;"><span>├── tests/                      <span style="color:#8f5902;font-style:italic"># directory for the test code</span>
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp; ├── test_module_1.py
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp; ├── ...
+</span></span><span style="display:flex;"><span>│&nbsp;&nbsp; └── test_module_N.py 
+</span></span><span style="display:flex;"><span>├── .python-version
+</span></span><span style="display:flex;"><span>├── README.md
+</span></span><span style="display:flex;"><span>├── requirements-dev.txt        <span style="color:#8f5902;font-style:italic"># file to list *development* dependencies</span>
+</span></span><span style="display:flex;"><span>└── requirements.txt            <span style="color:#8f5902;font-style:italic"># file to list *main* dependencies</span>
+</span></span></code></pre></div><br>
+<p>Important conventions:</p>
+<ol>
+<li>
+<p><strong>all</strong> the <em>test code</em> should be placed in a directory named <code>tests/</code> (or <code>test/</code>)</p>
+</li>
+<li>
+<p>the test code should be put into <code>.py</code> files whose name <em>starts with</em> <code>test_</code></p>
+</li>
+<li>
+<p><code>requirements.txt</code> is for the <em>main</em> dependencies, <code>requirements-dev.txt</code> is for the <em>dev</em> dependencies</p>
+</li>
+</ol>
+<div class="container w-100 m-0 p-0">
+    <div class="row ">
+<div class="col "><p><code>requirements.txt</code> example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>Kivy&gt;=2.3.0
+</span></span></code></pre></div></div>
+<div class="col "><p><code>requirements-dev.txt</code> example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>-r requirements.txt
+</span></span><span style="display:flex;"><span>pytest&gt;=8.1.0
+</span></span></code></pre></div></div>
+</div>
+</div>
+</section><section>
+<h2 id="nomenclature-about-testing">Nomenclature about testing</h2>
+<ul>
+<li>
+<p><strong>System under test</strong> (<em>SUT</em>): the component of the software that is being tested</p>
+<ul>
+<li>e.g. a <code>class</code>, a <code>function</code>, a <code>module</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Test case</strong>: a <em>class</em> that contains the <em>test functions</em> for a specific <em>SUT</em></p>
+<ul>
+<li>each test case corresponds to <em>one or more</em> testing procedures for the <em>same SUT</em></li>
+<li>in case of multiple procedures, all must <em>share</em> the same <strong>set up</strong> or <strong>tear down</strong> activities
+<ul>
+<li>i.e. activities to before or after <em>each</em> testing procedure from the same test case</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Test suite</strong>: a <em>collection</em> of <em>test cases</em>, commonly related to similar SUTs</p>
+<ul>
+<li>it commonly consists of a module, e.g. a <code>test_*.py</code> file</li>
+</ul>
+</li>
+<li>
+<p><strong>Assertion</strong>: a <em>boolean</em> (i.e. either <code>True</code> or <code>False</code>) <em>check</em> about the SUT</p>
+<ul>
+<li>if the assertion is <code>True</code>, the assertion <strong>passes</strong>, and the test <em>proceeds</em></li>
+<li>if the assertion is <code>False</code>, the test <strong>fails</strong>, and it is <em>interrupted</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Test procedure</strong>: a sequence of <em>actions</em> and <em>assertions</em> about some SUT</p>
+<ul>
+<li>it <em>succeeds</em> if <em>all</em> the assertions are <code>True</code> <strong>and no <em>unexpected</em> error occurs</strong></li>
+<li>it <em>fails</em> otherwise</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="writing-tests-in-python">Writing tests in Python</h2>
+<p>We adopt <a href="https://docs.python.org/3/library/unittest.html"><code>unittest</code></a>, a <em>built-in</em> library for writing tests in Python</p>
+<ul>
+<li>it is <em>inspired</em> by the <a href="https://junit.org"><code>JUnit</code></a> library for Java</li>
+<li>it is <em>not</em> the only one: <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> is a popular alternative (but it needs to be installed)</li>
+</ul>
+<h3 id="anatomy-of-a-test-suite-in-unittest">Anatomy of a test suite in <code>unittest</code></h3>
+<p>Let’s assume this is the <code>test_my_system.py</code> test suite (full code <a href="https://gist.github.com/gciatto/151182ff015df80df21e5d0a8a5e88b1">here</a>)</p>
+<p>⬇️</p>
+</section><section>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">unittest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># first test case</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestMySystemUnderOrdinaryConditions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># initialization activities (most commonly, just initialises the SUT)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">setUp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># activities to be performed BEFORE EACH test procedure</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">MySystem</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># sut instantiation</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># test procedure 1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_initial_condition</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEquals</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">my_attribute</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">123</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># assertion (my_attribute is initially 123)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEquals</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">other_attribute</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"foo"</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># assertion (other_attribute is initially "foo")</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertTrue</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">is_ready</span><span style="color:#000;font-weight:bold">())</span> <span style="color:#8f5902;font-style:italic"># assertion (function is_ready returns True)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># test procedure 2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_do_something</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">do_something</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># legitimate action</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEquals</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">my_attribute</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">124</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># assertion (my_attribute is 124 after do_something)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEquals</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">other_attribute</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"bar"</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># assertion (other_attribute is "bar" after do_something)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertFalse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">is_ready</span><span style="color:#000;font-weight:bold">())</span> <span style="color:#8f5902;font-style:italic"># assertion (function is_ready returns False after do_something)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># test procedure 3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_do_something_bad</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">with</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertRaises</span><span style="color:#000;font-weight:bold">(</span><span style="color:#c00;font-weight:bold">ValueError</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#8f5902;font-style:italic"># assertion (do_something_base raises ValueError)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">do_something_bad</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># illegitimate action</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># you can put as many test procedures as you want</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># cleaning up activities (most commonly omitted, i.e. nothing to do)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">tearDown</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8f5902;font-style:italic"># activities to be performed AFTER EACH test procedure</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">shutdown</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic"># legitimate action</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># second test case</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestMySystemUnderSpecialConditions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># put other test proceedures here</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># you can put as many test cases as you want</span>
+</span></span></code></pre></div></section><section>
+<h2 id="technicalities-of-unittest-tests-suites">Technicalities of <code>unittest</code> tests suites</h2>
+<ul>
+<li>
+<p>Many <em>assertion functions</em>, cf.: <a href="https://docs.python.org/3/library/unittest.html#assert-methods">https://docs.python.org/3/library/unittest.html#assert-methods</a></p>
+</li>
+<li>
+<p>Many options to <em>customise</em>/parametrise your test suites, cf. <a href="https://docs.python.org/3/library/unittest.html">https://docs.python.org/3/library/unittest.html</a></p>
+</li>
+<li>
+<p>How to run tests:</p>
+<ul>
+<li>from the terminal: <code>python -m unittest discover -v -s tests</code>
+<ul>
+<li>where <code>-v</code> stands for <em>verbose</em> (i.e. more detailed output)</li>
+<li>where <code>-s</code> stands for <em>start directory</em> (i.e. the directory where the tests are, in this case <code>tests</code>)</li>
+</ul>
+</li>
+<li>from an IDE: usually there is a dedicated button</li>
+<li>from <em>VS Code</em>: there is a <a href="https://code.visualstudio.com/docs/python/testing#_configure-tests">dedicated section</a> which requires configuration</li>
+</ul>
+</li>
+<li>
+<p>Effect of running all tests with subcommand <code>discover</code>:</p>
+<ul>
+<li>all the <code>test_*.py</code> <strong>files</strong> in the <code>tests/</code> directory (and its sub-directories) are <strong>loaded</strong>
+<ul>
+<li>all <em>sub</em>-<strong>classes</strong> of <code>unittest.TestCase</code> from those files are <strong>instantiated</strong>
+<ul>
+<li>all the <strong>functions</strong> from those classes that start with <code>test_</code> are <strong>executed</strong>
+<ol>
+<li>the <code>setUp</code> function is <strong>executed</strong> <em>before each</em> test function</li>
+<li>the <code>tearDown</code> function is <strong>executed</strong> <em>after each</em> test function</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="hands-on-pt-1">Hands-on (pt. 1)</h1>
+<h2 id="playing-a-bit-with-unittest">Playing a bit with <code>unittest</code></h2>
+<h3 id="restoring-dev-dependencies">Restoring dev dependencies</h3>
+<ol>
+<li>
+<p><strong>Fork</strong> the following repository: <a href="https://github.com/unibo-dtm-se/testable-calculator">https://github.com/unibo-dtm-se/testable-calculator</a></p>
+</li>
+<li>
+<p><strong>Clone</strong> the forked repository on your machine</p>
+<ul>
+<li>`git clone <a href="https://github.com/YOUR_GITHUB_USERNAME/testable-calculator">https://github.com/YOUR_GITHUB_USERNAME/testable-calculator</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Open VS Code</strong> into the <code>testable-calculator</code> directory</p>
+<ul>
+<li>let’s use VS Code’s <em>integrated terminal</em> from now on</li>
+</ul>
+</li>
+<li>
+<p><strong>Restore</strong> both dependencies and dev-dependencies</p>
+<ul>
+<li><code>pip install -r requirements-dev.txt</code></li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="hands-on-pt-2">Hands-on (pt. 2)</h1>
+<h2 id="playing-a-bit-with-unittest-1">Playing a bit with <code>unittest</code></h2>
+<h3 id="running-tests-via-the-terminal">Running tests via the terminal</h3>
+<ol start="5">
+<li><strong>Run</strong> the tests via the terminal
+<ul>
+<li>
+<p>Minimalistic: <code>python -m unittest discover -s tests</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>..............
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------- 
+</span></span><span style="display:flex;"><span>Ran 14 tests in 0.478s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OK
+</span></span></code></pre></div><p>(each dot represents a successful test procedure… not really clear, right?)</p>
+</li>
+<li>
+<p>Verbose: <code>python -m unittest discover -v -s tests</code> (notice option <code>-v</code>)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>test_cli_with_invalid_expression (test_cli.TestCalculatorCli.test_cli_with_invalid_expression) ... ok
+</span></span><span style="display:flex;"><span>test_cli_with_single_expression (test_cli.TestCalculatorCli.test_cli_with_single_expression) ... ok
+</span></span><span style="display:flex;"><span>test_cli_with_sliced_expression (test_cli.TestCalculatorCli.test_cli_with_sliced_expression) ... ok
+</span></span><span style="display:flex;"><span>[...]
+</span></span><span style="display:flex;"><span>test_expression_insertion (test_model.TestCalculatorUsage.test_expression_insertion) ... ok
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>----------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Ran 14 tests in 0.447s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OK
+</span></span></code></pre></div><p>(one test per line: clearer)</p>
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="hands-on-pt-3">Hands-on (pt. 3)</h1>
+<h2 id="playing-a-bit-with-unittest-2">Playing a bit with <code>unittest</code></h2>
+<h3 id="running-tests-via-vs-code">Running tests via VS Code</h3>
+<div class="container w-100 m-0 p-0">
+    <div class="row ">
+<div class="col "><p>Before:</p>
+<!--![VS Code before](vs-code-tests-pre.png)-->
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-pre.png" alt="VS Code before" style="width:400px;">
+</div>
+<div class="col "></div>
+<div class="col "><p>After:</p>
+<!--![VS Code after](vs-code-tests-post.png)-->
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-post.png" alt="VS Code after" style="width:400px;">
+</div>
+</div>
+</div>
+<p>(if you cannot find the <em>Test</em> section, look at the next slide)</p>
+</section><section>
+<h2 id="what-if-you-cannot-find-the-_test_-section-pt-1">What if you cannot find the <em>Test</em> section? (pt. 1)</h2>
+<!--![Missing Test section in VS Code](./test-explorer-missing.png)-->
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-missing.png" alt="Missing Test section in VS Code" style="width:400px;">
+<p>You probably have and <em>old version</em> of VS Code, and you should <strong>update</strong> it</p>
+<br>
+<p>⬇️ Meanwhile, you can follow this workaround ⬇️</p>
+</section><section>
+<h2 id="what-if-you-cannot-find-the-_test_-section-pt-2">What if you cannot find the <em>Test</em> section? (pt. 2)</h2>
+<ol>
+<li>
+<p>Go to the <em>Extensions</em> section of VS Code</p>
+<ul>
+<li>you can do this by clicking on the <em>Extensions</em> icon in the <em>Activity Bar</em> on the side of the window</li>
+</ul>
+</li>
+<li>
+<p>In the search bar of the <em>Extensions</em> section, type <code>python tests</code></p>
+<ul>
+<li>
+<p>the first result should be the <strong>Python</strong> extension by <em>Microsoft</em></p>
+</li>
+<li>
+<p>the second result should be the <strong>Python Test Explorer</strong> extension by <em>Little Fox Team</em></p>
+  <!--![Extensions to install in VS Code](test-explorer-install-before.png)-->
+  <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-install-before.png" alt="Extensions to install in VS Code" style="width:400px;">
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="what-if-you-cannot-find-the-_test_-section-pt-3">What if you cannot find the <em>Test</em> section? (pt. 3)</h2>
+<ol start="3">
+<li>Click on the <strong>Install</strong> button of both extensions
+<ul>
+<li>
+<p>while installing, VS Code may look like this</p>
+  <!--![Installing required extensions in VS Code](./test-explorer-installing.png)-->
+  <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installing.png" alt="Installing required extensions in VS Code" style="width:400px;">
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="what-if-you-cannot-find-the-_test_-section-pt-4">What if you cannot find the <em>Test</em> section? (pt. 4)</h2>
+<ol start="4">
+<li>
+<p>Once the installation is complete, you should see the <em>Test</em> section in the <em>Activity Bar</em> on the side of the window</p>
+ <!--![Test section in VS Code](./test-explorer-installed.png)-->
+ <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installed.png" alt="Test section in VS Code" style="width:400px;">
+</li>
+</ol>
+</section><section>
+<h1 id="hands-on-pt-4">Hands-on (pt. 4)</h1>
+<h2 id="playing-a-bit-with-unittest-3">Playing a bit with <code>unittest</code></h2>
+<h3 id="inspecting-a-real-unit-test">Inspecting a real unit test</h3>
+<ol start="6">
+<li>Have a look to the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/tests/test_model.py"><code>tests/test_model.py</code></a> file and listen to the teacher explanation
+<ul>
+<li>it contains a test suite for the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/calculator/__init__.py#L4"><code>Calculator</code> class</a></li>
+</ul>
+</li>
+</ol>
+<p>⬇️</p>
+</section><section>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">unittest</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">calculator</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">Calculator</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># test case testing what the effect of each method of the Calculator class is</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># when executed on a fresh new Calculator instance</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestCalculatorMethods</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">setUp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we create one "virgin" instance of the Calculator class (our SUT)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_initial_expression_is_empty</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we ensure the expression of a virgin Calculator is empty </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">""</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we ensure that the digit method effectively appends one digit to the Calculator expression</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_plus</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we ensure that the plus method effectively appends one "+" symbol to the Calculator expression</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"+"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_minus</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we ensure that the minus method effectively appends one "-" symbol to the Calculator expression</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">minus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"-"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_multiply</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we ensure that the multiply method effectively appends one "*" symbol to the Calculator expression</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">multiply</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"*"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_divide</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we ensure that the divide method effectively appends one "/" symbol to the Calculator expression</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">divide</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"/"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># test case testing the usage of the Calculator class</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestCalculatorUsage</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">setUp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we create one "virgin" instance of the Calculator class (our SUT)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_insertion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we simulate the insertion of a simple expression, one symbol at a time...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># ... and we ensure the expression is as expected</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1+2"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_compute_result</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we simulate the insertion of an expression "as a whole", </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># by setting the expression attribute of a virgin Calculator</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"1+2"</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># ... and we ansure the compute_result method evaluates the expression as expected</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_compute_result_with_invalid_expression</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># here we simulate the insertion of an invalid expression "as a whole"...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"1+"</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">with</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertRaises</span><span style="color:#000;font-weight:bold">(</span><span style="color:#c00;font-weight:bold">ValueError</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#8f5902;font-style:italic"># ... and we ensure the compute_result method raises a ValueError in such situation</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># ... and we also ensure that the exception message carries useful information</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"Invalid expression: 1+"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">exception</span><span style="color:#000;font-weight:bold">))</span>
+</span></span></code></pre></div></section><section>
+<h1 id="hands-on-pt-4-1">Hands-on (pt. 4)</h1>
+<h2 id="playing-a-bit-with-unittest-4">Playing a bit with <code>unittest</code></h2>
+<h3 id="failing-tests">Failing tests</h3>
+<ol start="7">
+<li>
+<p>Try to run tests via the terminal and via VS Code</p>
+<ul>
+<li>notice that in VS Code you can run tests <em>selectively</em></li>
+</ul>
+</li>
+<li>
+<p>Let’s now simulate the scenario where tests are <strong>failing</strong> (e.g. due to <em>buggy</em> code)</p>
+<ul>
+<li>edit the <code>Calculator</code> in file <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/calculator/__init__.py"><code>calculator/__init__.py</code></a> to introduce a bug
+<ul>
+<li>e.g. change the <code>__init__</code> function as follows:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">__init__</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">"0"</span> <span style="color:#8f5902;font-style:italic"># bug: the expression is not initially empty</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Run the tests again: many tests should now fail</p>
+<ul>
+<li>notice how the tests failure is <em>reported</em> in the terminal and in VS Code</li>
+<li>try to spot the <em>source</em> of the problem, from the error <em>reports</em></li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="hands-on-pt-5">Hands-on (pt. 5)</h1>
+<h2 id="playing-a-bit-with-unittest-5">Playing a bit with <code>unittest</code></h2>
+<h3 id="testing-the-gui--integration-with-model">Testing the GUI (+ integration with model)</h3>
+<ol start="6">
+<li>Have a look to the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/tests/test_gui.py"><code>tests/test_gui.py</code></a> file and listen to the teacher explanation:</li>
+</ol>
+<ul>
+<li>it contains a test suite for the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/calculator/ui/gui.py#L23"><code>CalculatorApp</code> class</a></li>
+</ul>
+<ol start="7">
+<li>Notice that tests are based on <strong>custom</strong> _base class _(<a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/tests/test_gui.py#L6">namely <code>CalculatorGUITestCase</code></a>),
+which adds
+<ul>
+<li>custom action (e.g. <code>press_button(button_name)</code>)</li>
+<li>custom assertions (e.g. <code>assert_display(expected_text)</code>)</li>
+<li>custom setup and teardown activities (showing / closing the GUI)</li>
+</ul>
+</li>
+</ol>
+<p>⬇️</p>
+</section><section>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">unittest</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">from</span> <span style="color:#000">calculator.ui.gui</span> <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">CalculatorApp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># this is not a test case! </span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># it is a way to add custom actions, assertions, initialisation/clean-up activities to other test cases</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CalculatorGUITestCase</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># default initialization activity (create &amp; start the GUI, i.e. our SUT)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">setUp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">app</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CalculatorApp</span><span style="color:#000;font-weight:bold">()</span>  <span style="color:#8f5902;font-style:italic"># create the GUI</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">app</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_run_prepare</span><span style="color:#000;font-weight:bold">()</span>     <span style="color:#8f5902;font-style:italic"># start the GUI</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># re-usable action: presses a button on the GUI, given the button's text</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">button_text</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">app</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">button_text</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># re-usable assertion: checks the text displayed on the GUI is equal to the provided one</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">expected_text</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">app</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">display</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">expected_text</span><span style="color:#000;font-weight:bold">)</span>   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># default cleaning-up activity (stop the GUI)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">tearDown</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">app</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">stop</span><span style="color:#000;font-weight:bold">()</span>
+</span></span></code></pre></div></section><section>
+<h1 id="hands-on-pt-5-1">Hands-on (pt. 5)</h1>
+<h2 id="playing-a-bit-with-unittest-6">Playing a bit with <code>unittest</code></h2>
+<h3 id="testing-the-gui--integration-with-model-1">Testing the GUI (+ integration with model)</h3>
+<ol start="6">
+<li>Have a look to the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/tests/test_gui.py"><code>tests/test_gui.py</code></a> file and listen to the teacher explanation:</li>
+</ol>
+<ul>
+<li>it contains a test suite for the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/9b3c7270696d1eae10b130120c53fb7eaa5342c5/calculator/ui/gui.py#L23"><code>CalculatorApp</code> class</a></li>
+</ul>
+<ol start="7">
+<li>
+<p>Notice that tests are based on <strong>custom</strong> _base class _(<a href="https://github.com/unibo-dtm-se/testable-calculator/blob/9b3c7270696d1eae10b130120c53fb7eaa5342c5/tests/test_gui.py#L6">namely <code>CalculatorGUITestCase</code></a>),
+which adds</p>
+<ul>
+<li>custom action (e.g. <code>press_button(button_name)</code>)</li>
+<li>custom assertions (e.g. <code>assert_display(expected_text)</code>)</li>
+<li>custom setup and teardown activities (showing / closing the GUI)</li>
+</ul>
+</li>
+<li>
+<p>In particular, have a look to the <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/9b3c7270696d1eae10b130120c53fb7eaa5342c5/tests/test_gui.py#L21"><code>TestExpressions</code></a>
+test case, and listen to the teacher explanation</p>
+</li>
+</ol>
+<p>⬇️</p>
+</section><section>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># this is a test case! (based upon the aforementioned base class)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestExpressions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">CalculatorGUITestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># test procedure: inserting and evaluating a simple integer expression</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_integer_expression</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># insert symbols "1", "+", "2"</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"+"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># check the display shows "1+2"</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1+2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># press the "=" button</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"="</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># check the display shows "3"</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"3"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># test procedure: inserting and evaluating a simple float expression</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_float_expression</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"."</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"+"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1.2+2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"="</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"3.2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div></section><section>
+<h2 id="interesting-things-to-notice-pt-1">Interesting things to notice (pt. 1)</h2>
+<ul>
+<li>To enable testing the GUI, the <code>CalculatorApp</code> class’s <strong>public API</strong> has been extended with further functionalities:
+<ul>
+<li><code>find_button_by(text)</code>: a function returning the button widget <em>with the given text</em></li>
+<li><code>display</code>: an attribute referencing the <em>display</em> widget (it’s now public)</li>
+</ul>
+</li>
+</ul>
+<div class="container w-100 m-0 p-0">
+    <div class="row ">
+<div class="col "><p>Before:</p>
+<figure id="plantuml-figure-1725955412137669885" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<p>class CalculatorApp {
+- _calc: Calculator
+- _display: Label
++ build(): BoxLayout
++ on_button_press(button: Button)
+}</p>
+</figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-1725955412137669885");
+</script>
+</div>
+<div class="col "><p>After:</p>
+<figure id="plantuml-figure-1725955412137942273" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<p>class CalculatorApp {
+- _calc: Calculator
++ display: Label
++ build(): BoxLayout
++ on_button_press(button: Button)
++ find_button_by(text: str): Button
+- _browse_children(container): Iterable[Widget]
+}</p>
+</figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-1725955412137942273");
+</script>
+</div>
+</div>
+</div>
+<h3 id="new-entries">New entries</h3>
+<ul>
+<li><code>find_button_by(text: str)</code>: is necessary to make <em>simulate</em> buttons pressure in the tests</li>
+<li><code>_browse_children(container)</code>: is a <em>private</em> functionality, necessary to implement <code>find_button_by</code></li>
+<li><code>display</code>: is necessary to make <em>assertions</em> about the <em>displayed text</em> in the tests</li>
+</ul>
+</section><section>
+<h2 id="interesting-things-to-notice-pt-2">Interesting things to notice (pt. 2)</h2>
+<p>How these novel functionalities are implemented in practice is not that relevant, but here it is:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CalculatorApp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">App</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># returns a sort of list of all the widgets directly or indirectly contained in the given container</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">_browse_children</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">container</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">yield</span> <span style="color:#000">container</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87">hasattr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">container</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'children'</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">child</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">container</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">children</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">yield from</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_browse_children</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">child</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># returns the first widget in the GUI which 1. is a button and 2. whose text is equal to the given one</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">text</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">Button</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">widget</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">_browse_children</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">root</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87">isinstance</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">widget</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Button</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">and</span> <span style="color:#000">widget</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">text</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">text</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">widget</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">build</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># ... (unchanged)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">display</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Label</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">text</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"0"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">font_size</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">24</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size_hint</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># ... (unchanged)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># the rest of the class is unchanged</span>
+</span></span></code></pre></div></section><section>
+<h2 id="interesting-things-to-notice-pt-3">Interesting things to notice (pt. 3)</h2>
+<blockquote>
+<p><strong>Take-away</strong>: when writing <em>post-hoc</em> tests (i.e., after the main code has been already written),
+it is often necessary to <em>extend</em> the <strong>public API</strong> of the <em>SUT</em> to make its internal state and functioning
+<em>observable</em> and <em>controllable</em> from the outside, and therefore <strong>testable</strong></p>
+</blockquote>
+<ul>
+<li>to avoid this situation, it’s paramount to <strong>write tests <em>before</em> the main code</strong> is written
+<ul>
+<li>we’ll see how</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="interesting-things-to-notice-pt-4">Interesting things to notice (pt. 4)</h2>
+<p>If you read them at the adequate abstraction level, each test case is <strong>telling a story</strong> about the SUT</p>
+<ul>
+<li>
+<p>e.g. <code>TestCalculatorMethods</code> is telling the story of the <code>Calculator</code> class</p>
+<ul>
+<li>it’s telling the story of how a <code>Calculator</code> object looks like when it is <em>freshly instantiated</em></li>
+<li>it’s telling the story of how a <code>Calculator</code> object behaves when it is <em>used</em> to <em>build</em> an <em>expression</em></li>
+<li>it’s telling the story of how a <code>Calculator</code> object behaves when it is <em>used</em> to <em>evaluate</em> an <em>expression</em></li>
+</ul>
+</li>
+<li>
+<p>e.g. <code>TestExpressions</code> is telling the story of the <code>CalculatorApp</code> class (i.e. the <em>GUI</em>)</p>
+<ul>
+<li>it’s telling the story of how the GUI looks like when it is <em>freshly instantiated</em></li>
+<li>it’s telling the story of how the GUI behaves when it is <em>used</em> to <em>build</em> an <em>expression</em></li>
+<li>it’s telling the story of how the GUI behaves when it is <em>used</em> to <em>evaluate</em> an <em>expression</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Take-away</strong>: the story you can picture in your mind when reading a test is a way to describe the <em>test plan</em>,
+the designer of the test suite was envisioning when writing the tests</p>
+</blockquote>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h1 id="exercise">Exercise</h1>
+<h2 id="write-your-own-test-suite">Write your own test suite</h2>
+<ol>
+<li>
+<p>Focus on the <code>test_gui.py</code> file</p>
+</li>
+<li>
+<p>Add one more test case for the GUI, say <code>TestLayout</code>, which ensures that:</p>
+<ul>
+<li>the GUI has a display, and its initial text is <code>0</code></li>
+<li>the GUI contains all the buttons for the digits, the operations, and the special commands
+<ul>
+<li>namely: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>=</code>, <code>C</code>, <code>.</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Hints</strong>:</p>
+<ul>
+<li>you may want to <em>reuse</em> the <code>CalculatorGUITestCase</code> class and its functionalities</li>
+<li>you may want to add one more <em>custom assertion</em>, say <code>assert_button_exists</code>, to <code>CalculatorGUITestCase</code>
+<ul>
+<li>in order to check that a button with a given text is present in the GUI</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<br>
+<p><em>One possible solution is in the next slide</em></p>
+<p>⬇️ (please <strong>resist the temptation</strong>, and try to solve the exercise before looking at the solution) ⬇️</p>
+</section><section>
+<h2 id="one-possible-solution">One possible solution</h2>
+<p>(also available on <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/exercises/01-test-layout/tests/test_gui.py#L44">branch <code>exercises/01-test-layout</code> of the <code>testable-calculator</code> repository</a>)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CalculatorGUITestCase</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># rest of the class is unchanged </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">assert_button_exists</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">button_text</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertIsNotNone</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">app</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">button_text</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestLayout</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">CalculatorGUITestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">buttons_to_test</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">'C'</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">'7'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'8'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'9'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'/'</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">'4'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'5'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'6'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'*'</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">'1'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'2'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'3'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'-'</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">'.'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'0'</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'='</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">'+'</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_initial_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"0"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_buttons</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">button_text</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">buttons_to_test</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">with</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">subTest</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">button</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">button_text</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_button_exists</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">button_text</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div><ul>
+<li>what’s the purpose of <code>subTest</code>?
+<ul>
+<li>it easies the <em>debugging</em> of the test suite, in case of <em>multiple</em> failures
+<ul>
+<li>try launching tests from VS Code’s UI</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</section>
+</section><section>
+<h2 id="test-plan">Test plan</h2>
+<ul>
+<li>
+<p>Testing should be <strong>planned for in advance</strong></p>
+</li>
+<li>
+<p>A good test plan can <em>guide the development</em>, and should be ready <em>early</em> in the project</p>
+</li>
+<li>
+<p>To plan a test, one might try to convert the <em>requirements</em>’s acceptance criteria into <em>test cases</em></p>
+<ul>
+<li>this is mostly true for <strong>system</strong> and, to some extent, <em>integration</em> tests</li>
+</ul>
+</li>
+<li>
+<p>To plan <em>unit</em> tests, one might try to create <em>test cases</em> covering <strong>each aspect of the public API</strong> of the <em>SUT</em></p>
+<ul>
+<li>e.g. for each <em>public</em> class, a test case may cover all <em>public</em> functions and attributes of that class</li>
+</ul>
+</li>
+</ul>
+<br>
+<blockquote>
+<p>When designing <em>cars</em>,
+the <strong>crash testing</strong> procedure,
+the <em>engine test</em> bench,
+and so on are prepared <em>well before</em> the car prototype is ready!</p>
+</blockquote>
+</section><section>
+<h2 id="test-driven-development-tdd">Test-Driven Development (TDD)</h2>
+<p>The practice of:</p>
+<ul>
+<li>converting <em>requirements to (executable) test</em> cases</li>
+<li><strong>preparing tests <em>before</em> development</strong></li>
+<li><strong>define the <em>expected behavior</em> via test cases</strong></li>
+<li>track all development by <em>always testing all cases</em></li>
+</ul>
+<blockquote>
+<p><strong>Key-point</strong>: in TDD, tests are not only a form of validation, but also a form of <strong>specification</strong></p>
+</blockquote>
+</section><section>
+<h2 id="development-cycle-in-tdd">Development cycle in TDD</h2>
+<ol>
+<li><em>Capture</em> a requirement into an executable <em>test</em></li>
+<li>Run the test suite, the <em>new test should <strong>fail</strong></em></li>
+<li>Fix the code so that the new test passes</li>
+<li>Re-run the whole test suite, <em>all tests should pass</em></li>
+<li>Improve the quality as needed (refactor, style, duplication…)</li>
+</ol>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h1 id="exercise">Exercise</h1>
+<h2 id="adding-features-to-the-calculator-via-tdd">Adding features to the Calculator via TDD</h2>
+<blockquote>
+<p>Customers ask for new features in the calculator:</p>
+<ol>
+<li>possibility to write expressions with <em>parentheses</em> (e.g. <code>(1+2)*3</code>)</li>
+<li>possibility to write expressions with the <em>square root</em> function (e.g. <code>sqrt(4)</code>)</li>
+<li>possibility to write expressions with the <em>power</em> function (e.g. <code>2**3</code>)</li>
+</ol>
+</blockquote>
+<ol>
+<li>
+<p>Extend the model’s test suite (i.e. file
+<a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/tests/test_model.py"><code>test_model.py</code></a>
+which aims at testing the
+<a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/calculator/__init__.py#L4"><code>Calculator</code> class</a>)</p>
+<ul>
+<li>this implies extensions for the <code>Calculator</code> class’s <em>public API</em> should be <strong>envisioned</strong> (<em>not realised</em>)</li>
+<li>use your imagination to <em>invent</em> reasonable extensions</li>
+</ul>
+</li>
+<li>
+<p>Extend the GUI’s test suite (i.e. file
+<a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/tests/test_gui.py"><code>test_gui.py</code></a>
+which aims at testing the
+<a href="https://github.com/unibo-dtm-se/testable-calculator/blob/master/calculator/ui/gui.py#L16"><code>CalculatorApp</code> class</a>, i.e. the GUI)</p>
+<ul>
+<li>this implies novel <em>buttons</em> and <em>actions</em> should be <strong>envisioned</strong> (<em>not realised</em>) for the <em>GUI</em></li>
+<li>use your imagination to <em>invent</em> reasonable buttons and their effects</li>
+</ul>
+</li>
+<li>
+<p><em>Launch your tests</em>: <strong>it’s OK if</strong> novel <strong>tests fail at this stage</strong></p>
+<ul>
+<li>let’s just ensure they fail for the correct reasons (missing methods, or missing buttons)</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="one-possible-solution">One possible solution</h2>
+<p>(also available on <a href="https://github.com/unibo-dtm-se/testable-calculator/commit/9b62a434a032677fba449324379fe07b2ac72f30">branch <code>exercises/02-tdd-before-impl</code> of the <code>testable-calculator</code>repository</a>)</p>
+<p>Test suite for the model (i.e. <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/exercises/02-tdd-before-impl/tests/test_model.py#L54"><code>test_model.py</code></a>)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># other test cases are unchanged</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestComplexExpressions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">unittest</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">TestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">setUp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Calculator</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_with_parentheses</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">open_parenthesis</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close_parenthesis</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">multiply</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"(1+2)*3"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">9</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_with_sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">square_root</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">open_parenthesis</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">minus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close_parenthesis</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1+sqrt(11-2)"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_with_pow</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">open_parenthesis</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">plus</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">close_parenthesis</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">power</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">digit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"(1+1)**3"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">expression</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assertEqual</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">8</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">calculator</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">compute_result</span><span style="color:#000;font-weight:bold">())</span>
+</span></span></code></pre></div></section><section>
+<h2 id="one-possible-solution-1">One possible solution</h2>
+<p>(also available on <a href="https://github.com/unibo-dtm-se/testable-calculator/commit/9b62a434a032677fba449324379fe07b2ac72f30">branch <code>exercises/02-tdd-before-impl</code> of the <code>testable-calculator</code>repository</a>)</p>
+<p>Test suite for the GUI (i.e. <a href="https://github.com/unibo-dtm-se/testable-calculator/blob/exercises/02-tdd-before-impl/tests/test_gui.py#L40"><code>test_gui.py</code></a>)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">TestExpressions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">CalculatorGUITestCase</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># other test methods are unchanged</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_with_parentheses</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"("</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"+"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">")"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"*"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"3"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"(1+2)*3"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"="</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"9"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_wit_sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"sqrt"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"4"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">")"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"sqrt(4)"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"="</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2.0"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_expression_with_pow</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"**"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"3"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2**3"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"="</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">assert_display</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"8"</span><span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></div>
+</section>
+</section><section>
+<h1 id="exercise-continued">Exercise (continued)</h1>
+<ol start="4">
+<li>
+<p>Now it’s time to implement the new features</p>
+<ul>
+<li>Goal: make the <strong>all</strong> tests pass</li>
+</ul>
+</li>
+<li>
+<p>In any case, <strong>once you are done</strong>, commit &amp; push</p>
+</li>
+</ol>
+<blockquote>
+<p>One possible solution is on the <a href="https://github.com/unibo-dtm-se/testable-calculator/commit/9cce0dc19f572a31567294085c8168951de75bd2"><code>exercises/02-tdd-after-impl</code> branch of the <code>testable-calculator</code> repository</a></p>
+</blockquote>
+<ul>
+<li>feel free to inspect it, after you attempted to produce your own solution</li>
+</ul>
+</section><section>
+<h2 id="on-the-cost-of-testing">On the cost of testing</h2>
+<p>Developing without testing is <em>unsustainable</em></p>
+<br>
+<p>Yet many software projects have no or minimal tests, as:</p>
+<blockquote>
+<p><strong>Common misconception</strong>: We do not have time (or money) for testing</p>
+</blockquote>
+<br>
+<p>Beware: <strong>testing saves times in the long run</strong>, not testing is a <em>cost</em>!</p>
+<ul>
+<li>Untested software components are likely sources of <em>technical debt</em></li>
+</ul>
+</section><section>
+<h2 id="important-notion">Important notion</h2>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Technical_debt">Technical debt</a> is a concept in software development that reflects the <em>implied</em> <strong>cost</strong> of additional rework caused by choosing an <em>easy</em> (limited) <em>solution now</em> <strong>instead of</strong> using a <em>better approach</em> that would take <em>longer</em>.</p>
+</blockquote>
+<ul>
+<li>
+<p>Not writing tests on <em>ASAP</em>, greatly increases the technical debt</p>
+<ul>
+<li>editing the code becomes harder and harder, as the codebase grows
+<ul>
+<li>because any new change may break something else, and without tests that break would go unnoticed</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Development is <em>never</em> really <strong>finished</strong> in real software projects</p>
+<ul>
+<li>(<em>short-sighted</em>) management will unlikely allocate time for <em>improving</em> the code, or <em>writing tests</em>
+<ul>
+<li>because that has no <strong>immediate</strong> <em>visible return</em> for the customer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>TDD practices help in keeping the technical debt under control</p>
+</li>
+</ul>
+</section><section>
+<h2 id="what-happens-when-theres-too-much-technical-debt">What happens when there’s too much technical debt?</h2>
+<blockquote>
+<p>we never have the money to do it <em>right</em> but somehow we always have the fucking money to do it <em>twice</em></p>
+</blockquote>
+<p>$—$ UserInputSucks (@UserInputSucks) <a href="https://twitter.com/UserInputSucks/status/1132904286415929345">May 27, 2019</a></p>
+</section><section>
+<h2 id="what-if-a-project-is-not-using-tdd-since-the-very-beginning">What if a project is not using TDD since the very beginning?</h2>
+<p>Decreasing preference order:</p>
+<ol>
+<li>
+<p><strong>Ideal situation</strong>: always writing tests during design, <em>before</em> implementation</p>
+</li>
+<li>
+<p><strong>Common situation</strong>: design and implement, then <em>write</em> tests</p>
+</li>
+<li>
+<p><strong>Barely tolerable situation</strong>: design and implement, <em>only</em> add tests upon bugs</p>
+<ul>
+<li>(see next slide)</li>
+</ul>
+</li>
+<li>
+<p><strong>Very bad situation</strong>: <em>never</em> write tests</p>
+</li>
+</ol>
+</section><section>
+<h2 id="tackling-bugs-and-regressions">Tackling bugs and regressions</h2>
+<p>When a new <strong>bug</strong> (or a <strong>regression</strong>, namely, a feature that was working and it is now compromised) is discovered,
+<em>resist the temptation to “fix” the issue right away</em></p>
+<ul>
+<li>A fix without a test could be <em>insufficient</em></li>
+<li>The “fix” could break another feature (create a <em>regression</em>)</li>
+</ul>
+<p>A more <strong>robust approach</strong>:</p>
+<ol>
+<li>Reproduce the issue in a <em>minimal context</em></li>
+<li>Create a new <em>test case</em> that <em>correctly fails</em></li>
+<li><em>Fix</em> the issue, and make sure that the test now <em>passes</em></li>
+<li>Ensure that <em>all other tests</em> still pass</li>
+</ol>
+<blockquote>
+<p>Motivations:</p>
+<ul>
+<li>the new test case <strong>prevents</strong> the issue from being <em>mistakenly re-introduced</em> <strong>again</strong></li>
+<li>develop the test case <em>before</em> the fix will help the <strong>debugging</strong> process</li>
+</ul>
+</blockquote>
+</section><section>
+<h2 id="testing-software-before-it-is-ready-_boundaries_">Testing software before it is ready: <em>boundaries</em></h2>
+<blockquote>
+<p><strong>Problem</strong>: how is it possible to test code that <em>does not exist</em>?</p>
+</blockquote>
+<ul>
+<li>More in general: how to design a testbed for an engineering product that is not prototypied yet?</li>
+</ul>
+<br>
+<ul>
+<li>
+<p><strong>Clean boundaries</strong>: the component must have a well-defined interface with the rest of the world.</p>
+<ul>
+<li>in software, it means that the component has a <em>well-defined Application Programming Interface</em> (API).</li>
+<li>our artifact must be <strong>modularized</strong> correctly
+<ul>
+<li>(this also helps with development, simplicity and maintenance)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Clear scope</strong>: well engineered (software) components usually <em>do one thing well</em>.</p>
+<ul>
+<li>test plans are conceived to test that the one thing is performed correctly.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="testing-software-before-it-is-ready-_missing_-components">Testing software before it is ready: <em>missing</em> components</h2>
+<ul>
+<li>We can now <em>design our tests</em>,
+<ul>
+<li>but how to <strong>run</strong> them if <em>the components surrounding the tested one are not ready</em>?</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>How to test a new suspension system if the “surrounding” car is not ready (not even fully designed) yet?</p>
+</li>
+<li>
+<p>How to test that our new rocket engine works as expected with no rocket?</p>
+</li>
+<li>
+<p>How to test that our multi-engine rocket works as expected without payload?</p>
+</li>
+</ul>
+<!-- ---
+
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/QMcj58TbsyU?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+
+---
+
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/kchq9AGXsyA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+ -->
+</section><section>
+<h2 id="testing-software-before-it-is-ready-_test-doubles_">Testing software before it is ready: <em>test doubles</em></h2>
+<p>The trick: <em>simulate components that are not ready yet</em>!</p>
+<p>When writing software, components required for the execution that are not ready yet can be simulated
+<strong>if their API has been clearly defined</strong></p>
+<p>The simulated component are called <em>test doubles</em></p>
+<ul>
+<li>
+<p><em>dummy</em>: a (usually unimplemented) placeholder (e.g., unused mandatory argument)</p>
+<ul>
+<li>a weight put on the suspension</li>
+</ul>
+</li>
+<li>
+<p><em>stub</em>: partly implemented dummy</p>
+<ul>
+<li>a system applying variable weight to the suspension</li>
+</ul>
+</li>
+<li>
+<p><em>spy</em>: a stub that tracks information of the way it is being used</p>
+<ul>
+<li>a dynamometer recording the suspension behavior under different conditions</li>
+</ul>
+</li>
+<li>
+<p><em>mock</em>: a spy that expects to be used in a certain way, and fails if the expectation is unmet</p>
+<ul>
+<li>a smart dynamometer that interrupts testing if the suspension behavior is not nominal</li>
+</ul>
+</li>
+<li>
+<p><em>fake</em>: a fully implemented version of the component unsuitable for production</p>
+<ul>
+<li>a car prototype</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="test-doubles-and-development-cost">Test doubles and development cost</h2>
+<blockquote>
+<p>Why should the team “waste” time creating doubles instead of just writing the thing?</p>
+</blockquote>
+<ul>
+<li>
+<p>doubles are <strong>cheaper</strong>: dedicated libraries make doubles <em>implementation extremely quick</em></p>
+<ul>
+<li>In Python, <a href="https://docs.python.org/3/library/unittest.mock.html"><code>unittest.mock</code></a> is included in the distribution, and <a href="https://doubles.readthedocs.io/en/latest/">Doubles</a> is a valid alternative.</li>
+</ul>
+</li>
+<li>
+<p>doubles are <strong>simpler</strong>: only encode the behavior required to check some part of the behaviour.</p>
+<ul>
+<li>The probability of them being bugged is lower.</li>
+<li><em>Debugging is easier</em>.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="takeaways">Takeaways</h2>
+<ul>
+<li>
+<p><strong>Test-driven development</strong> is a practice that can help in keeping the technical debt under control</p>
+<ul>
+<li>the idea is “design the testing procedure before development”</li>
+</ul>
+</li>
+<li>
+<p>Tests act as a form of <em>validation</em> (ex-post), <em>specification</em> (ex-ante), and as <em>sentinels</em> (along the way)</p>
+</li>
+<li>
+<p>Designing and implementing tests is a <strong>project-in-the-project</strong></p>
+<ul>
+<li>it requires <em>time</em> and <em>effort</em>, it is a <em>cost</em>, it adds <em>value</em> <strong>on the long run</strong>
+<ul>
+<li>but making / keeping development <strong>sustainable</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Patterns and strategies exists to design / implement tests, e.g. <em>test doubles</em></p>
+<ul>
+<li><strong>QA engineers</strong> / specialists are often dedicated to this task</li>
+</ul>
+</li>
+<li>
+<p><strong>Time</strong> for testing should be <em>allocated</em> in the project plan</p>
+<ul>
+<li>designing the test plans, and implementing the tests cases may take <strong>30-50%</strong> of the software development <strong>time</strong>
+<ul>
+<li>cf. <a href="https://devm.io/testing/time-estimation-for-software-testing-128078">Time estimation for software testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="checking-untested-components-coverage-pt-1">Checking (<strong>un</strong>)tested components: coverage (pt. 1)</h2>
+<p><em>Code coverage</em> is a set of <strong>metrics</strong> that measure how much of the source code of a program has been executed when testing.</p>
+<p>Common metrics:</p>
+<ul>
+<li><em>function coverage</em>: did the flow control get through this function?</li>
+<li><em>branch coverage</em>: did the flow control tried both branches of this condition?</li>
+<li><em>line-of-code coverage</em>: did the flow control get through this line during tests?
+<ul>
+<li><em>most common</em>, usually combined with <em>branch coverage</em></li>
+</ul>
+</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h1 id="exercise-pt-1">Exercise (pt. 1)</h1>
+<h2 id="compute-test-coverage-in-python">Compute test coverage in Python</h2>
+<ol start="0">
+<li>
+<p>Notice the <code>coverage</code> (dev) dependency in the <code>requirements-dev.txt</code> file</p>
+<ul>
+<li>it is a tool that measures <em>line-of-code coverage</em> in Python, <a href="https://coverage.readthedocs.io/en/latest/">documentation here</a></li>
+<li>you should have restored dependencies already, if not <code>pip install -r requirements-dev.txt</code></li>
+</ul>
+</li>
+<li>
+<p>Runs the tests <em>while measuring coverage</em>: <code>coverage run -m unittest discover -v -s tests/</code></p>
+<ul>
+<li>same command as for running tests, but with <code>coverage run</code> instead of <code>python</code></li>
+<li>if not working, try <code>python -m coverage run -m unittest discover -v -s tests/</code></li>
+</ul>
+</li>
+<li>
+<p>Check the coverage report <em>in the terminal</em> <code>coverage report -m</code></p>
+<ul>
+<li>
+<p>the output should be similar to the one below:</p>
+<pre tabindex="0"><code>Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+calculator\__init__.py      38      3    92%   13, 39, 48
+calculator\ui\cli.py        21      3    86%   16-17, 27
+calculator\ui\gui.py        57      8    86%   55-57, 61, 63, 65, 69, 76     
+tests\test_cli.py           15      0   100%
+tests\test_gui.py           30      0   100%
+tests\test_model.py         38      0   100%
+------------------------------------------------------
+TOTAL                      199     14    93%
+</code></pre><p>pretty <em>obscure</em>, isn’t it?</p>
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="exercise-pt-2">Exercise (pt. 2)</h1>
+<h2 id="compute-test-coverage-in-python-1">Compute test coverage in Python</h2>
+<ol start="3">
+<li>
+<p>Let’s try to create a more pleasant report, in HTML format: <code>coverage html</code></p>
+<ul>
+<li>this command will create a <code>htmlcov</code> folder in the current directory</li>
+<li>the <code>htmlcov/index.html</code> file is a static Web page, reporting the coverage of your project</li>
+</ul>
+</li>
+<li>
+<p>Open the <code>htmlcov/index.html</code> file in your browser (any of the following may work)</p>
+<ul>
+<li><i class="fab fa-windows"></i> <code>start .\htmlcov\index.html</code></li>
+<li><i class="fab fa-apple"></i> <code>open htmlcov/index.html</code></li>
+<li><i class="fab fa-linux"></i> <code>xdg-open htmlcov/index.html</code></li>
+<li><em>double click</em> on the <code>htmlcov/index.html</code> file in your
+Explorer <i class="fab fa-windows"></i> /
+Finder <i class="fab fa-apple"></i> /
+Dolphin or Nautilus etc <i class="fab fa-linux"></i></li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="exercise-pt-4">Exercise (pt. 4)</h1>
+<h2 id="compute-test-coverage-in-python-2">Compute test coverage in Python</h2>
+<ol start="5">
+<li>
+<p>You should see an overview similar to the terminal one</p>
+ <!--![HTML coverage report, overview](./coverage-report-overview.png)-->
+ <img src="https://unibo-dtm-se.github.io/course-slides/qa-tdd/coverage-report-overview.png" alt="HTML coverage report, overview" style="width: 400px">
+</li>
+</ol>
+</section><section>
+<h1 id="exercise-pt-5">Exercise (pt. 5)</h1>
+<h2 id="compute-test-coverage-in-python-3">Compute test coverage in Python</h2>
+<ol start="6">
+<li>
+<p>If you click on a file, you may get a <em>line-by-line</em> report of <strong>test coverage</strong></p>
+ <!--![HTML coverage report, line-by-line details](./coverage-report-detail.png)-->
+ <img src="https://unibo-dtm-se.github.io/course-slides/qa-tdd/coverage-report-detail.png" alt="HTML coverage report, line-by-line details" style="width: 400px">
+</li>
+</ol>
+
+</section>
+</section><section>
+<h1 id="beware">BEWARE</h1>
+<h2 id="about-test-coverage">About test coverage</h2>
+<ul>
+<li>
+<p>the actual information coverage provides is which code is <strong>partly tested</strong> or <strong>untested</strong>!</p>
+</li>
+<li>
+<p>we <em>know nothing of the testing quality</em> on the covered part, but that control flow goes through</p>
+</li>
+<li>
+<p><em>Useful</em> metric, but it cannot be the <em>only</em> metric to evaluate testing</p>
+<ul>
+<li>you may have 100% coverage and still have a very bad test suite (few requirements covered)</li>
+<li>you may have 80% coverage and still have a good test suite (all requirements covered)</li>
+<li>for sure, the lower the coverage the worst the test suite</li>
+</ul>
+</li>
+<li>
+<p>Use coverage as a <em>hint</em> for reasoning about what to test next</p>
+</li>
+</ul>
+</section><section>
+<h1 id="exercise">Exercise</h1>
+<ol>
+<li>
+<p>Use coverage to spot the <em>untested</em> parts of the <code>testable-calculator</code> project</p>
+</li>
+<li>
+<p>Add tests which cover the <em>untested</em> parts</p>
+</li>
+<li>
+<p>After your reach <strong>100%</strong> coverage (or close) as your-self:</p>
+<ul>
+<li>did I cover <em>all</em> the requirements?</li>
+<li>are there any <em>edge cases</em> I did not cover?</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="quality-assurance-1">Quality Assurance</h2>
+<p><em>“It works”</em> <strong>is <em>not</em> good enough</strong></p>
+<p>(besides, the very notion of “it works” is debatable)</p>
+<ul>
+<li>Software quality should be <em>continuously assessed</em></li>
+<li>The assessment should <em>automatic</em> whenever possible</li>
+<li><strong>QA should be integrated in the <em>workflow</em>!</strong>
+<ul>
+<li>Quality violations should be considered as <strong>errors</strong></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-levels">Quality Assurance: levels</h2>
+<ul>
+<li><strong>Syntactical correctness</strong></li>
+<li><em>Style</em> and <em>coherence</em></li>
+<li><em>Flawed programming</em> patterns</li>
+<li>Violations of the <em>DRY</em> principle</li>
+<li><strong>Runtime Testing</strong></li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="quality-assurance-_syntactical-correctness_">Quality Assurance: <em>syntactical correctness</em></h2>
+<blockquote>
+<p><strong>Syntactical correctness</strong> is the <em>first</em> level of quality assurance:</p>
+<p>“Is the code <strong>well-formed</strong>, i.e. <em>readable</em> for a computer?</p>
+</blockquote>
+<ul>
+<li>
+<p>In <em>compiled</em> languages, the compiler checks for <em>syntactical correctness</em></p>
+<ul>
+<li>raising an error if the code is <strong>not</strong> <em>syntactically correct</em></li>
+<li>most commonly <em>linking errors</em> are detected too by the compiler
+<ul>
+<li>e.g. calling a function which is not correctly imported</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Python is an <em>interpreted</em> language, so there is <em>no compiler</em></p>
+<ul>
+<li>but the CPython interpreter (the most frequently used) supports <strong>translation</strong> into <em>bytecode</em></li>
+<li>similarly to compiled languages, translation into bytecode implies <em>syntax</em> and <em>linking</em> checks</li>
+</ul>
+</li>
+<li>
+<p>Syntactical correctness can be checked in Python by means of:</p>
+<ul>
+<li>the <a href="https://docs.python.org/3/library/compileall.html"><code>compileall</code></a> <em>standard</em> ($\approx$ included in Python by default) module
+<ul>
+<li>triggered by <code>python -m compileall CODE_DIRECTORY_1 CODE_DIRECTORY_2 ...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="example">Example</h1>
+<h2 id="checking-for-syntactical-correctness-in-python">Checking for syntactical correctness in Python</h2>
+<ol>
+<li>
+<p>In the <code>testable-calculator</code> project, run <code>python -m compileall calculator tests</code></p>
+<ul>
+<li>
+<p>you may notice an output similar to the following one:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>Listing 'calculator'...
+</span></span><span style="display:flex;"><span>Listing 'calculator\\ui'...
+</span></span><span style="display:flex;"><span>Listing 'tests'...
+</span></span></code></pre></div><p>which means that all <code>.py</code> files in those directories were checked, and they are <em>syntactically correct</em></p>
+<ul>
+<li>if there were any errors, they would be listed here</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Try to artificially add some syntax error in some Python file</p>
+<ul>
+<li>e.g. remove a closing parenthesis, or a colon</li>
+</ul>
+</li>
+<li>
+<p>Run <code>python -m compileall calculator tests</code> again</p>
+<ul>
+<li>this time, the log should make you aware of where the error is</li>
+</ul>
+</li>
+</ol>
+
+</section>
+</section><section>
+<h2 id="quality-assurance-_static-analysis_">Quality Assurance: <em>static analysis</em></h2>
+<p>Code analysis without execution is called <em>static analysis</em>.</p>
+<p>Static analysis tools are often referred to as <em>linters</em>
+(especially those providing auto-formatting tools)</p>
+<p><strong>Idiomatic</strong> and <strong>standardized</strong> code:</p>
+<ul>
+<li>reduces <em>complexity</em></li>
+<li>improves <em>understandandability</em></li>
+<li>prevents <em>style-changing commits</em> with <em>unintelligible diffs</em></li>
+<li>lowers the <em>maintenance</em> burden and related <em>costs</em></li>
+<li>simplifies <em>code reviews</em></li>
+<li>improves <em>security</em></li>
+</ul>
+</section><section>
+<h2 id="_static-analysis_-flawed-programming-patterns"><em>Static analysis</em>: flawed programming patterns</h2>
+<p>Identification and reporting of <em>patterns</em> known to be <em>problematic</em></p>
+<ul>
+<li>Early-interception of <em>potential bugs</em></li>
+<li>Enforce <em>good programming principles</em></li>
+<li>Improves <em>performance</em></li>
+<li>Reduces <em>complexity</em></li>
+<li>Reduces <em>maintenance cost</em></li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-_static-analysis_-in-__python__">Quality Assurance: <em>static analysis</em> in <strong>Python</strong></h2>
+<ul>
+<li><a href="http://mypy-lang.org/">Mypy</a>: static analysis for bug detection (requires <a href="https://www.python.org/dev/peps/pep-0484/">annotations</a>)</li>
+<li><a href="https://github.com/PyCQA/pyflakes">Pyflakes</a>: effective programming, excluding style</li>
+<li><a href="https://pylint.org/">Pylint</a>: reverse engineering via <a href="https://www.logilab.org/blogentry/6883">Pyreverse</a>, style (enforces <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>), and effective programming</li>
+<li><a href="https://github.com/PyCQA/bandit">Bandit</a>: security scanner</li>
+<li><a href="https://prospector.landscape.io/en/master">Prospector</a>: tool collection. Includes Pylint and Pyflakes, adds <a href="https://www.python.org/dev/peps/pep-0257/">PEP27</a>-compliance checks for comments, complexity, packaging (via <a href="https://github.com/regebro/pyroma">pyroma</a>), secrets leaking (via <a href="https://github.com/landscapeio/dodgy">dodgy</a>), and unused code (via <a href="https://github.com/jendrikseipp/vulture">vulture</a>) checks.</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h1 id="example-pt-1">Example (pt. 1)</h1>
+<h2 id="static-analysis-in-python-with-mypy">Static analysis in Python with <code>mypy</code></h2>
+<ol>
+<li>
+<p>Notice the <code>mypy</code> (dev) dependency in the <code>requirements-dev.txt</code> file</p>
+<ul>
+<li>it is a static analysis tool for Python, <a href="http://mypy-lang.org/">documentation here</a></li>
+<li>you should have restored dependencies already, if not <code>pip install -r requirements-dev.txt</code></li>
+</ul>
+</li>
+<li>
+<p>Run <code>mypy</code> on the <code>testable-calculator</code> project</p>
+<ul>
+<li><code>mypy calculator tests</code></li>
+<li>you may notice an output similar to the following one:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>calculator\__init__.py:13: error: Unsupported operand types for + ("str" and "int")  [operator]
+</span></span><span style="display:flex;"><span>calculator\__init__.py:44: error: Parameterized generics cannot be used with class or instance checks  [misc]
+</span></span><span style="display:flex;"><span>calculator\__init__.py:44: error: Argument 2 to "isinstance" has incompatible type "&lt;typing special form&gt;"; expected "_ClassInfo"  [arg-type]
+</span></span><span style="display:flex;"><span>calculator\__init__.py:46: error: Returning Any from function declared to return "int | float"  [no-any-return]
+</span></span><span style="display:flex;"><span>Found 4 errors in 1 file (checked 6 source files)
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="example-pt-2">Example (pt. 2)</h1>
+<h2 id="static-analysis-in-python-with-mypy-1">Static analysis in Python with <code>mypy</code></h2>
+<ol start="3">
+<li>
+<p>What are those errors?</p>
+<ul>
+<li>the calculator works, and it passes tests, so they are not errors in the usual sense</li>
+<li>they are <em>flawed programming patterns</em>, i.e. <em>potential bugs</em>
+<ul>
+<li>or at least potential sources of headaches</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Listen to the teacher explanation about the meaning of those errors</p>
+<ul>
+<li>and how to fix them</li>
+</ul>
+</li>
+</ol>
+
+</section>
+</section><section>
+<h2 id="quality-assurance-violations-of-the-dry-principle">Quality Assurance: violations of the DRY principle</h2>
+<blockquote>
+<p><strong>DRY</strong>: <em>D</em>on’t <em>R</em>epeat <em>Y</em>ourself</p>
+</blockquote>
+<ul>
+<li>
+<p>General advice: <strong>never copy-paste</strong> your code</p>
+<ul>
+<li>if you need to copy-paste something, you probably need to <em>refactor</em> something</li>
+</ul>
+</li>
+<li>
+<p>Instead of <em>copy-pasting</em> code, write a <em>parametric</em> function/class/module which can be re-used</p>
+<ul>
+<li>improves <em>understandandability</em></li>
+<li>reduces <em>maintenance cost</em></li>
+<li>simplifies <em>code reviews</em></li>
+</ul>
+</li>
+</ul>
+
+<div class="container w-100 m-0 p-0">
+    <div class="row ">
+
+
+<div class="col "><p>Before (reliance on copy-paste):</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_my_gui</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"1"</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"2"</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"3"</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"4"</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"5"</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span></code></pre></div></div>
+
+
+<div class="col "><p>After refactor (no more duplication):</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">text</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">sut</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">find_button_by</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">text</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">trigger_action</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">def</span> <span style="color:#000">test_my_gui</span><span style="color:#000;font-weight:bold">(</span><span style="color:#3465a4">self</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">i</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#204a87">range</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">6</span><span style="color:#000;font-weight:bold">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#3465a4">self</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">press_button</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span><span style="color:#000;font-weight:bold">))</span>
+</span></span></code></pre></div></div>
+</div>
+</div>
+<br>
+<p>Multi-language tool: <a href="https://pmd.github.io/latest/pmd_userdocs_cpd.html">Copy/Paste Detector (CPD)</a> (part of PMD)</p>
+</section><section>
+<h2 id="additional-checks-and-reportings">Additional checks and reportings</h2>
+<p>There exist a number of recommended services that provide additional QA and reports.</p>
+<p>Non-exhaustive list:</p>
+<ul>
+<li>
+<p><a href="https://codecov.io/">Codecov.io</a></p>
+<ul>
+<li>Code coverage</li>
+<li>Supports Jacoco XML reports</li>
+<li>Nice data reporting system</li>
+</ul>
+</li>
+<li>
+<p><a href="https://sonarcloud.io/">Sonarcloud</a></p>
+<ul>
+<li>Multiple measures, covering reliability, security, maintainability, duplication, complexity…</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.codacy.com/">Codacy</a></p>
+<ul>
+<li>Automated software QA for several languages</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.codefactor.io/">Code Factor</a></p>
+<ul>
+<li>Automated software QA</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="qa-reproducibility-tdd-1">QA, reproducibility, TDD</h1>
+<h2 id="hahahugoshortcode1s0hbhb">Python 101</h2>
+<h3 id="for-distributed-systems"><strong>(for Distributed Systems)</strong></h3>
+<h3 id="module-2">Module 2</h3>
+<h4 id="hahahugoshortcode1s1hbhb">A.Y. 2024/2025</h4>
+<h5 id="hahahugoshortcode1s2hbhb"><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a></h5>
+<h5 id="hahahugoshortcode1s3hbhb"><a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a></h5>
+</section><section>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol start="0">
+<li><a href="..">Course Overview</a></li>
+<li><a href="../intro">Preliminary notions for Software Development</a></li>
+<li><a href="../language">Introduction to the Python Language</a></li>
+<li><a href="../python-project">How to manage a Python Project</a></li>
+<li><a href="../example">A Python Project Example</a></li>
+<li><a href="../qa-tdd">QA, testing, TDD, reproducibility and replicability</a></li>
+</ol>
+<br>
+<p><a href="."><i class="fa fa-arrow-up" aria-hidden="true"></i> top</a></p>
+<p><a href=".."><i class="fa fa-undo" aria-hidden="true"></i> back</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/distributed-systems-python-101/reveal-hugo/object-assign.js"></script>
+
+<a href="/distributed-systems-python-101/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"github","history":true,"mermaid":[{"gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"useMaxWidth":false}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/distributed-systems-python-101/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/distributed-systems-python-101/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = { 
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+    if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+        var ytVideos = document.getElementsByTagName("iframe")
+        for (let i = 0; i < ytVideos.length; i++) {
+            var videoFrame = ytVideos[i]
+            var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+            if (isYouTube) {
+                console.log(`Removing ${videoFrame.src}`)
+                var parent = videoFrame.parentElement
+                videoFrame.remove()
+                var p = document.createElement('p')
+                p.append(
+                    document.createTextNode(
+                        "There was an embedded video here, but it is disabled in the printed version of the slides."
+                    )
+                )
+                p.append(document.createElement('br'))
+                p.append(
+                    document.createTextNode(
+                        `Visit instead ${
+                            videoFrame.src
+                        } or ${
+                            videoFrame.src.replace(
+                                /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                                "https://www.youtube.com/watch?v=$4"
+                            )
+                        }`
+                    )
+                )
+                parent.appendChild(p)
+            }
+        }
+    }
+</script>
+
+    
+  
+
+</body></html>
