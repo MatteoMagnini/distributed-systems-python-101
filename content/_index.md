@@ -43,7 +43,7 @@ Students _must_ enroll
 
 - listen for announcements on the {{<forum_news>}}  
 - ask for help or provide feedback on the {{<forum_general>}}
-- propose project works on the {{<forum_projects>}}
+- propose project works on the {{<forum_project>}}
 
 ---
 
