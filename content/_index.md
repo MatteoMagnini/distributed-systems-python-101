@@ -37,12 +37,13 @@ aliases = [
 
 ## Virtuale
 
-### {{<vle_url>}} (old link!)  
+### {{<vle_url>}} 
 
 Students _must_ enroll
 
 - listen for announcements on the {{<forum_news>}}  
-- ask for help or provide feedback on the {{<forum_general>}} 
+- ask for help or provide feedback on the {{<forum_general>}}
+- propose project works on the {{<forum_projects>}}
 
 ---
 
@@ -117,7 +118,7 @@ Students _must_ enroll
 
 ## Exam: workflow (pt. 1)
 
-1. **Proposal**: students _propose_ a project theme/topic/concept on {{<vle>}}
+1. **Proposal**: students _propose_ a project theme/topic/concept on {{<forum_project>}}
     - in case of group project, the group members should be _declared_ here
 
 2. **Approval**: the teacher will provide feedback and possibly suggest changes/strategies or set requirements
@@ -134,11 +135,10 @@ Students _must_ enroll
 
 ## Exam: workflow (pt. 2)
 
-5. **Submission**: students _submit_ the repository URL on {{<vle>}} and ask an _appointment_ for the discussion
-    - the final __pdf__ version of the report must be uploaded as well
+5. **Submission**: students _submit_ the final __pdf__ version of the report on {{<forum_project>}} and ask an _appointment_ for the discussion
     - submission is _not retractable_
     - at this point we will read the report and evaluate the project work
-    <!--- we can __ask for changes__ to the report or the software artifact-->
+    - in very few scenarios we can __ask for changes__ to the report or the software artifact
     - or immediately _approve_ the project for the discussion
 
 6. **Discussion**: students _present_ and _discuss_ their project work with the teacher
