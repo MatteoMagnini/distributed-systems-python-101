@@ -469,21 +469,20 @@ print(car1 == car3)  # False
 ```python
 # Here an example of a data class
 
-class Number:
-    @classmethod
-    def parse(cls, s):
-        return cls(s)
+from dataclasses import dataclass
+
+@dataclass
+class StockItem:
+    name: str
+    price: float
+    quantity: int
     
-    def __repr__(self):
-        return str(self.value)
-
-class Integer(Number):
-    def __init__(self, value):
-        self.value = int(value)
-
-class Float(Number):
-    def __init__(self, value):
-        self.value = float(value)
+# You can use the data class
+stock_item1 = StockItem("Apple", 1.0, 10)
+stock_item2 = StockItem("Apple", 1.0, 10)
+stock_item3 = StockItem("Banana", 0.5, 20)
+print(stock_item1 == stock_item2)  # True
+print(stock_item1 == stock_item3)  # False
 ```
 
 ---
@@ -665,6 +664,7 @@ class RightPyramid(Square, Triangle):
         return triangle_area * 4 + base_area
 ```
 
+---
 
 # Final Notes
 
