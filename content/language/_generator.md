@@ -458,6 +458,8 @@ print(car1 == car2)  # True
 print(car1 == car3)  # False
 ``` 
 
+---
+
 ## Magic Methods (3)
 
 - Data classes are a new feature in Python 3.7.
