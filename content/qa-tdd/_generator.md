@@ -160,8 +160,6 @@ As any engineering product, software can be tested at different levels of abstra
 
 ---
 
-{{% section %}}
-
 ## Technicalities of writing tests
 
 (we will focus on Python, but the concepts are general)
@@ -783,11 +781,7 @@ If you read them at the adequate abstraction level, each test case is __telling 
 > the designer of the test suite was envisioning when writing the tests
 
 
-{{% /section %}}
-
 ---
-
-{{% section %}}
 
 # Exercise
 
@@ -847,8 +841,6 @@ class TestLayout(CalculatorGUITestCase):
     + it easies the _debugging_ of the test suite, in case of _multiple_ failures
         * try launching tests from VS Code's UI
 
-{{% /section %}}
-
 ---
 
 ## Test plan
@@ -893,8 +885,6 @@ The practice of:
 5. Improve the quality as needed (refactor, style, duplication...)
 
 ---
-
-{{% section %}}
 
 # Exercise
 
@@ -1012,8 +1002,6 @@ class TestExpressions(CalculatorGUITestCase):
         self.press_button("=")
         self.assert_display("8")
 ```
-
-{{% /section %}}
 
 ---
 
@@ -1214,8 +1202,6 @@ Common metrics:
 
 ---
 
-{{% section %}}
-
 # Exercise (pt. 1)
 
 ## Compute test coverage in Python
@@ -1284,7 +1270,7 @@ Common metrics:
 
     <!--![HTML coverage report, line-by-line details](./coverage-report-detail.png)-->
     <img src="https://unibo-dtm-se.github.io/course-slides/qa-tdd/coverage-report-detail.png" alt="HTML coverage report, line-by-line details" style="width: 400px">
-{{% /section %}}
+
 
 ---
 
@@ -1340,8 +1326,6 @@ Common metrics:
 
 ---
 
-{{% section %}}
-
 ## Quality Assurance: _syntactical correctness_
 
 > __Syntactical correctness__ is the _first_ level of quality assurance:
@@ -1384,9 +1368,6 @@ Common metrics:
 3. Run `python -m compileall calculator tests` again
     + this time, the log should make you aware of where the error is
 
-
-{{% /section %}}
-
 ---
 
 ## Quality Assurance: _static analysis_
@@ -1428,8 +1409,6 @@ Identification and reporting of *patterns* known to be *problematic*
 
 ---
 
-{{% section %}}
-
 # Example (pt. 1)
 
 ## Static analysis in Python with `mypy`
@@ -1462,8 +1441,6 @@ Identification and reporting of *patterns* known to be *problematic*
 
 4. Listen to the teacher explanation about the meaning of those errors
     + and how to fix them
-
-{{% /section %}}
 
 ---
 
