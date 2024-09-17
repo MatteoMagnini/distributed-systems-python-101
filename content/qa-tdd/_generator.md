@@ -403,7 +403,7 @@ class TestMySystemUnderSpecialConditions(unittest.TestCase):
 Before:
 
 <!--![VS Code before](vs-code-tests-pre.png)-->
-<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-pre.png" alt="VS Code before" style="width:400px;">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-pre.png" alt="VS Code before" style="width:600px;">
 {{%/col%}}
 {{%col%}}
 {{%/col%}}
@@ -411,7 +411,7 @@ Before:
 After:
 
 <!--![VS Code after](vs-code-tests-post.png)-->
-<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-post.png" alt="VS Code after" style="width:400px;">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/vs-code-tests-post.png" alt="VS Code after" style="width:600px;">
 {{%/col%}}
 {{</multicol>}}
 
@@ -423,7 +423,7 @@ After:
 
 <!--![Missing Test section in VS Code](./test-explorer-missing.png)-->
 
-<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-missing.png" alt="Missing Test section in VS Code" style="width:400px;">
+<img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-missing.png" alt="Missing Test section in VS Code" style="width:800px;">
 
 You probably have and _old version_ of VS Code, and you should __update__ it
 
@@ -444,7 +444,7 @@ You probably have and _old version_ of VS Code, and you should __update__ it
 
         <!--![Extensions to install in VS Code](test-explorer-install-before.png)-->
 
-        <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-install-before.png" alt="Extensions to install in VS Code" style="width:400px;">
+        <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-install-before.png" alt="Extensions to install in VS Code" style="width:800px;">
 
 ---
 
@@ -455,7 +455,7 @@ You probably have and _old version_ of VS Code, and you should __update__ it
 
         <!--![Installing required extensions in VS Code](./test-explorer-installing.png)-->
 
-        <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installing.png" alt="Installing required extensions in VS Code" style="width:400px;">
+        <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installing.png" alt="Installing required extensions in VS Code" style="width:800px;">
 
 ---
 
@@ -464,7 +464,7 @@ You probably have and _old version_ of VS Code, and you should __update__ it
 4. Once the installation is complete, you should see the _Test_ section in the _Activity Bar_ on the side of the window
 
     <!--![Test section in VS Code](./test-explorer-installed.png)-->
-    <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installed.png" alt="Test section in VS Code" style="width:400px;">
+    <img src="https://raw.githubusercontent.com/unibo-dtm-se/course-slides/master/content/qa-tdd/test-explorer-installed.png" alt="Test section in VS Code" style="width:800px;">
 
 ---
 
